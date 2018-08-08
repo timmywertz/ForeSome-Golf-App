@@ -58,7 +58,7 @@ const golfer = [
     type: "golfer",
     lastName: "Paulsen",
     firstName: "Josh",
-    handicap: 2,
+    handicap: 10,
     gender: "M",
     emailAddress: "joshua@dynepic.com"
   },
@@ -116,8 +116,14 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 881-0042",
     location: "1 Patriots Point Road, Mt Pleasant, SC 29464",
-    latitude: "32.7922° N",
-    longitude: "79.8953° W",
+    address: {
+      street: "1 Patriots Point Road",
+      city: "Mt Pleasant",
+      state: "SC",
+      zip: "29464"
+    },
+    latitude: 32.7922,
+    longitude: 79.8953,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -182,8 +188,14 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 795-6517",
     location: "2110 Maybank Hwy, Charleston, 29412",
-    latitude: "32.7577° N",
-    longitude: "79.9944° W",
+    address: {
+      street: "2110 Maybank Hwy",
+      city: "Charleston",
+      state: "SC",
+      zip: "29412"
+    },
+    latitude: 32.7577,
+    longitude: 79.9944,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -248,8 +260,14 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 768-2121",
     location: "1000 Ocean Course Drive, Johns Island, SC 29455",
-    latitudeLongitude: "32° 36.961 N",
-    longitude: "80° 1.3261 W",
+    address: {
+      street: "1000 Ocean Course Drive",
+      city: "Johns Island",
+      state: "SC",
+      zip: "29455"
+    },
+    latitude: 32.612,
+    longitude: 80.0233,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -314,8 +332,14 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 971-3555",
     location: "600 Island Park Drive, Charleston, SC 29492",
-    latitude: "32.8850° N",
-    longitude: "79.9064° W",
+    address: {
+      street: "600 Island Park Drive",
+      city: "Charleston",
+      state: "SC",
+      zip: "29492"
+    },
+    latitude: 32.885,
+    longitude: 79.9064,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -379,9 +403,15 @@ const golfCourse = [
     name: "Wild Dunes Links Golf Course",
     type: "course",
     phoneNumber: "(843) 886-2002",
-    location: "10001 Back Bay Dr, Isle of Palms, SC 29451",
-    latitude: "32.8139° N",
-    longitude: "79.7238° W",
+    location: "10001 Back Bay Drive, Isle of Palms, SC 29451",
+    address: {
+      street: "10001 Back Bay Drive",
+      city: "Isle of Palms",
+      state: "SC",
+      zip: "29451"
+    },
+    latitude: 32.8139,
+    longitude: 79.7238,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -445,9 +475,15 @@ const golfCourse = [
     name: "Shadowmoss Plantation Golf Club",
     type: "course",
     phoneNumber: "(843) 556-8251",
-    location: "20 Dunvegan Dr, Charleston, SC 29414",
-    latitude: "32.8426° N",
-    longitude: "80.0733° W",
+    location: "20 Dunvegan Drive, Charleston, SC 29414",
+    address: {
+      street: "20 Dunvegan Drive",
+      city: "Charleston",
+      state: "SC",
+      zip: "29414"
+    },
+    latitude: 32.8426,
+    longitude: 80.0733,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -511,9 +547,15 @@ const golfCourse = [
     name: "Links at Stono Ferry",
     type: "course",
     phoneNumber: "(843) 763-1817",
-    location: "4812 Stono Links Dr, Hollywood, SC 29449",
-    latitude: "32.7565° N",
-    longitude: "80.1612° W",
+    location: "4812 Stono Links Drive, Hollywood, SC 29449",
+    address: {
+      street: "4812 Stono Links Drive",
+      city: "Hollywood",
+      state: "SC",
+      zip: "29449"
+    },
+    latitude: 32.7565,
+    longitude: 80.1612,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -578,8 +620,14 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 764-4618",
     location: "300 Hamlet Cir, Goose Creek, SC 29445",
-    latitude: "33.0036° N",
-    longitude: "80.0774° W",
+    address: {
+      street: "300 Hamlet Circle",
+      city: "Goose Creek",
+      state: "SC",
+      zip: "29455"
+    },
+    latitude: 33.0036,
+    longitude: 80.0774,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -644,8 +692,14 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 856-9000",
     location: "3535 Wando Plantation Way, Mt Pleasant, SC 29466",
-    latitude: "32.9174° N",
-    longitude: "79.7994° W",
+    address: {
+      street: "3535 Wando Plantation Way",
+      city: "Mt Pleasant",
+      state: "SC",
+      zip: "29466"
+    },
+    latitude: 32.9174,
+    longitude: 79.7994,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -710,8 +764,14 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 821-4077",
     location: "118 Legend Oaks Way, Summerville, SC 29485",
-    latitude: "32.9463° N",
-    longitude: "80.2331° W",
+    address: {
+      street: "118 Legend Oaks Way",
+      city: "Summerville",
+      state: "SC",
+      zip: "29485"
+    },
+    latitude: 32.9463,
+    longitude: 80.2331,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -776,8 +836,14 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 849-2400",
     location: "1700 Rivertowne Country Club Dr, Mt Pleasant, SC 29466",
-    latitude: "32.8792° N",
-    longitude: "79.8244° W",
+    address: {
+      street: "1700 Rivertowne Country Club Drive",
+      city: "Mt Pleasant",
+      state: "SC",
+      zip: "29466"
+    },
+    latitude: 32.8792,
+    longitude: 79.8244,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -842,8 +908,14 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 886-2301",
     location: "5881 Palmetto Dr, Isle of Palms, SC 29451",
-    latitude: "32.8055° N",
-    longitude: "79.7388° W",
+    address: {
+      street: "5881 Palmetto Drive",
+      city: "Isle of Palms",
+      state: "SC",
+      zip: "29451"
+    },
+    latitude: 32.8055,
+    longitude: 79.7388,
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -906,14 +978,14 @@ const golfCourse = [
 
 const teeTimes = [
   {
-    _id: "teetimes_course_wild-dunes-harbor_2018-08-25T08:00",
+    _id: "teetime_course_wild-dunes-harbor_2018-08-25T08:00",
     date: "2018-08-25",
     time: "8:00 AM",
     courseId: "course_wild-dunes-harbor",
     type: "teetime",
     hcpRange: {
-      low: "",
-      high: ""
+      low: 0,
+      high: 36
     },
     foursome: [
       {
@@ -956,13 +1028,13 @@ const teeTimes = [
     primaryGolfer_id: "golfer_wertz_timmylwertz@gmail.com"
   },
   {
-    _id: "teetimes_course_wild-dunes-harbor_2018-08-25T10:00",
+    _id: "teetime_course_wild-dunes-harbor_2018-08-25T10:00",
     date: "2018-08-25",
     time: "10:00 AM",
     courseId: "course_wild-dunes-harbor",
     type: "teetime",
     hcpRange: {
-      low: 0,
+      low: 10,
       high: 20
     },
     foursome: [
@@ -989,7 +1061,7 @@ const teeTimes = [
         type: "golfer",
         lastName: "Paulsen",
         firstName: "Josh",
-        handicap: 2,
+        handicap: 10,
         gender: "M",
         emailAddress: "joshua@dynepic.com"
       },
@@ -1006,14 +1078,14 @@ const teeTimes = [
     primaryGolfer_id: "golfer_liotti_bliotti@protonmail.com"
   },
   {
-    _id: "teetimes_course_wild-dunes-harbor-2018-08-25T02:20",
+    _id: "teetime_course_wild-dunes-harbor-2018-08-25T02:20",
     date: "2018-08-25",
     time: "2:20 PM",
     courseId: "course_wild-dunes-harbor",
     type: "teetime",
     hcpRange: {
-      low: 0,
-      high: 20
+      low: 5,
+      high: 15
     },
     foursome: [
       {
@@ -1062,8 +1134,8 @@ const teeTimes = [
     courseId: "course_city-of-charleston-golf-course",
     type: "teetime",
     hcpRange: {
-      low: "",
-      high: ""
+      low: 0,
+      high: 36
     },
     foursome: [
       {
@@ -1112,7 +1184,7 @@ const teeTimes = [
     courseId: "course_city-of-charleston-golf-course",
     type: "teetime",
     hcpRange: {
-      low: 0,
+      low: 10,
       high: 20
     },
     foursome: [
@@ -1139,7 +1211,7 @@ const teeTimes = [
         type: "golfer",
         lastName: "Paulsen",
         firstName: "Josh",
-        handicap: 12,
+        handicap: 10,
         gender: "M",
         emailAddress: "joshua@dynepic.com"
       },
@@ -1162,7 +1234,7 @@ const teeTimes = [
     courseId: "course_city-of-charleston-golf-course",
     type: "teetime",
     hcpRange: {
-      low: 0,
+      low: 5,
       high: 15
     },
     foursome: [
@@ -1212,8 +1284,8 @@ const teeTimes = [
     courseId: "course_links-at-stono-ferry",
     type: "teetime",
     hcpRange: {
-      low: "",
-      high: ""
+      low: 0,
+      high: 36
     },
     foursome: [
       {
@@ -1262,7 +1334,7 @@ const teeTimes = [
     courseId: "course_links-at-stono-ferry",
     type: "teetime",
     hcpRange: {
-      low: 0,
+      low: 10,
       high: 20
     },
     foursome: [
@@ -1289,7 +1361,7 @@ const teeTimes = [
         type: "golfer",
         lastName: "Paulsen",
         firstName: "Josh",
-        handicap: 12,
+        handicap: 10,
         gender: "M",
         emailAddress: "joshua@dynepic.com"
       },
@@ -1312,7 +1384,7 @@ const teeTimes = [
     courseId: "course_links-at-stono-ferry",
     type: "teetime",
     hcpRange: {
-      low: 0,
+      low: 5,
       high: 15
     },
     foursome: [
