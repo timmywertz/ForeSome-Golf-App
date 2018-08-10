@@ -4,12 +4,14 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 20px;
+  padding: 20px;
 }
 
 .App-header {
   background-color: #222;
   height: 150px;
+  width: 20px;
   padding: 20px;
   color: white;
 }
@@ -23,6 +25,10 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

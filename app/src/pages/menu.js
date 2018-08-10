@@ -4,57 +4,53 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Component } from "react";
 import { Link } from "react-router-dom";
-//import "/the-golf-ball-3505303_1280.png" from "../../public/jpg-images";
+import Tracker from "../components/tracker";
 
-// const styles = theme => ({
-//   container: {
-//     display: "flex",
-//     flexWrap: "wrap"
-//   },
-//   button: {
-//     margin: theme.spacing.unit
-//   }
-// });
-
-const Home = () => (
+const Menu = () => (
   <div>
     <center>
-      <Typography style={{ marginTop: 50 }} variant="display3">
-        Welcome to ForeSome
-      </Typography>
+      <div>
+        <img
+          style={{ marginTop: 40, marginBottom: 5 }}
+          width="50"
+          height="200"
+          alt="line of golf balls"
+          src="/jpg-images/golf-2517685_340.jpg"
+        />
+      </div>
       <Button
-        style={{ marginTop: 60, padding: 30 }}
+        style={{ marginTop: 30, padding: 30 }}
         component={Link}
-        to="/menu"
+        to="/teetime/new/date"
         variant="contained"
         size="large"
         color="primary"
       >
-        Register Here!
+        Create a TeeTime
       </Button>
       <div>
         <img
-          style={{ marginTop: 20, padding: 0, marginBottom: 20 }}
+          style={{ marginTop: 10, marginBottom: 10 }}
           width="280"
           height="280"
-          alt="logo"
-          src="/png-images/golf-310994_1280.png"
+          alt="three golf balls"
+          src="/png-images/the-golf-ball-3505303_1280.png"
         />
       </div>
       <div>
         <Button
           component={Link}
-          style={{ marginTop: 0, padding: 30 }}
-          to="/login"
+          style={{ marginTop: -10, padding: 30 }}
+          to="/teetime/join/date"
           variant="contained"
           size="large"
           color="secondary"
         >
-          Login
+          Join a TeeTime
         </Button>
       </div>
     </center>
   </div>
 );
 
-export default Home;
+export default Menu;

@@ -1,4 +1,4 @@
-import { creatStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { courses, currentCourses } from "./reducers/courses";
 import { golfers, currentGolfers } from "./reducers/golfers";
