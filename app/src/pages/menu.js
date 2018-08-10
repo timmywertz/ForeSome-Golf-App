@@ -9,17 +9,17 @@ import Tracker from "../components/tracker";
 const Menu = () => (
   <div>
     <center>
-      <div>
+      {/* <div>
         <img
           style={{ marginTop: 40, marginBottom: 5 }}
-          width="50"
+          width="100"
           height="200"
           alt="line of golf balls"
-          src="/jpg-images/golf-2517685_340.jpg"
-        />
-      </div>
+          src="/jpg-images/golf-2517685_1919.jpg"
+         />
+       </div> */}
       <Button
-        style={{ marginTop: 30, padding: 30 }}
+        style={{ marginTop: 120, padding: 30 }}
         component={Link}
         to="/teetime/new/date"
         variant="contained"
@@ -30,7 +30,7 @@ const Menu = () => (
       </Button>
       <div>
         <img
-          style={{ marginTop: 10, marginBottom: 10 }}
+          style={{ marginTop: 0, marginBottom: 0 }}
           width="280"
           height="280"
           alt="three golf balls"
