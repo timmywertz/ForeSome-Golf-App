@@ -1,7 +1,7 @@
 const NodeHTTPError = require("node-http-error");
-const { getCourses } = require("../dal");
+const { getCourses, getCourse } = require("../dal");
 const bodyParser = require("body-parser");
-const { not } = require("ramda");
+const { not, pathOr } = require("ramda");
 
 // {
 //     _id: "course_patriots-point-links",
@@ -83,6 +83,7 @@ const reqFields = [
   "phoneNumber",
   "location",
   "address",
+  "image",
   "latitude",
   "longitude",
   "teeTimes"
@@ -95,6 +96,14 @@ const courseRoutes = app => {
   app.get("/courses", (req, res, next) => {
     getCourses()
       .then(courses => res.status(200).send(courses))
+      .catch(err => {
+        next(new NodeHTTPError(err.status, err.message, err));
+      });
+  });
+  app.get("/courses/:id", (req, res, next) => {
+    const courseId = pathOr("", ["params", "id"], req);
+    getCourse(courseId)
+      .then(course => res.status(200).send(course))
       .catch(err => {
         next(new NodeHTTPError(err.status, err.message, err));
       });

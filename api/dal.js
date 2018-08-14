@@ -8,7 +8,7 @@ const DB_URL = `${COUCHDB_SERVER}${COUCHDB_DBNAME}`;
 
 const db = new PouchDB(DB_URL);
 
-// const getGolfers = id => db.get(id)
+const getGolfer = id => db.get(id);
 
 const getGolfers = () =>
   db
@@ -19,7 +19,7 @@ const getGolfers = () =>
     })
     .then(docs => map(prop("doc"), docs.rows));
 
-// const getCourses = id => db.get(id)
+const getCourse = id => db.get(id);
 
 const getCourses = () =>
   db
@@ -30,7 +30,7 @@ const getCourses = () =>
     })
     .then(docs => map(prop("doc"), docs.rows));
 
-// const getTeeTimes = id => db.get(id)
+const getTeeTime = id => db.get(id);
 
 const getTeeTimes = () =>
   db
@@ -43,6 +43,9 @@ const getTeeTimes = () =>
 
 module.exports = {
   getGolfers,
+  getGolfer,
   getCourses,
-  getTeeTimes
+  getCourse,
+  getTeeTimes,
+  getTeeTime
 };

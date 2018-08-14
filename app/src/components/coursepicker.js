@@ -15,29 +15,10 @@ import Typography from "@material-ui/core/Typography";
 import grey from "@material-ui/core/colors/grey";
 import { GolfCourse } from "@material-ui/icons";
 import { connect } from "react-redux";
-import { getCourses } from "../action-creators/courses";
 
-//{Course.name}
-
-const courses = [
-  "Patriots Point Links",
-  "City of Charleston Golf Course",
-  "The Ocean Course, Kiawah Island Golf Resort",
-  "Daniel Island Club",
-  "Wild Dunes Links Golf Course",
-  "Shadowmoss Plantation Golf Club",
-  "Links at Stono Ferry",
-  "Crowfield Golf Club",
-  "Dunes West Golf and River Club",
-  "Legend Oaks Golf Club",
-  "RiverTowne Country Club",
-  "Wild Dunes Harbor"
-];
-// const li = courses => {
-//     return (
-
-//     )
-// }
+import { getCourses, getCurrentCourse } from "../action-creators/courses";
+import { currentCourse } from "../reducers/courses";
+import { map } from "ramda";
 
 const styles = {
   avatar: {
@@ -47,7 +28,6 @@ const styles = {
 };
 
 class CoursePicker extends React.Component {
-  //const CoursePicker = course => {
   handleClose = () => {
     this.props.onClose(this.props.selectedValue);
   };
@@ -57,7 +37,30 @@ class CoursePicker extends React.Component {
   };
 
   render() {
-    const { classes, onClose, selectedValue, ...other } = this.props;
+    const {
+      classes,
+      onClose,
+      selectedValue,
+      courses,
+      name,
+      currentCourse,
+      ...other
+    } = this.props;
+
+    const listCourses = course => (
+      <ListItem
+        button
+        onClick={() => this.handleListItemClick(course.name)}
+        key={course._id}
+      >
+        <ListItemAvatar>
+          <Avatar className={classes.avatar}>
+            <GolfCourse />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={course.name} />
+      </ListItem>
+    );
 
     return (
       <Dialog
@@ -68,20 +71,7 @@ class CoursePicker extends React.Component {
         <DialogTitle id="course-picker">Select Course</DialogTitle>
         <div>
           <List>
-            {courses.map(course => (
-              <ListItem
-                button
-                onClick={() => this.handleListItemClick(course)}
-                key={course}
-              >
-                <ListItemAvatar>
-                  <Avatar className={classes.avatar}>
-                    <GolfCourse />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={course} />
-              </ListItem>
-            ))}
+            {map(listCourses, courses)}
             <ListItem
               button
               onClick={() => this.handleListItemClick("addAccount")}
@@ -92,19 +82,26 @@ class CoursePicker extends React.Component {
     );
   }
 }
+const mapStateToPropsPicker = state => ({
+  courses: state.courses
+});
+
+const connectorPick = connect(mapStateToPropsPicker);
+
+const WrappedCoursePicker = connectorPick(withStyles(styles)(CoursePicker));
 
 CoursePicker.propTypes = {
   classes: PropTypes.object.isRequired,
   onClose: PropTypes.func,
-  selectedValue: PropTypes.string
+  selectedValue: PropTypes.string,
+  courses: PropTypes.object.isRequired,
+  name: PropTypes.string
 };
-
-const CoursePickerWrapped = withStyles(styles)(CoursePicker);
 
 class CourseSelector extends React.Component {
   state = {
     open: false,
-    selectedValue: courses[1]
+    selectedValue: this.props.courses[1]
   };
 
   handleClickOpen = () => {
@@ -125,7 +122,7 @@ class CourseSelector extends React.Component {
         </Typography>
         <br />
         <Button onClick={this.handleClickOpen}>Select Course</Button>
-        <CoursePickerWrapped
+        <WrappedCoursePicker
           selectedValue={this.state.selectedValue}
           open={this.state.open}
           onClose={this.handleClose}
@@ -135,9 +132,19 @@ class CourseSelector extends React.Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return { courses: state.courses };
-// };
+const mapStateToProps = state => ({
+  courses: state.courses,
+  name: state.courses.name,
+  selectedValue: state.selectedValue
+});
 
-//const connector = connect(mapStateToProps);
-export default CourseSelector;
+const mapActionsToProps = dispatch => ({
+  currentCourse: selectedValue => dispatch(currentCourse(selectedValue))
+});
+
+const connector = connect(
+  mapStateToProps,
+  mapActionsToProps
+);
+
+export default connector(CourseSelector);

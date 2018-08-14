@@ -1,7 +1,7 @@
 const NodeHTTPError = require("node-http-error");
-const { getTeeTimes } = require("../dal");
+const { getTeeTimes, getTeeTime } = require("../dal");
 const bodyParser = require("body-parser");
-const { not } = require("ramda");
+const { not, pathOr } = require("ramda");
 
 // {
 //     _id: "teetime_course_wild-dunes-harbor_2018-08-25T08:00",
@@ -72,6 +72,14 @@ const teeTimeRoutes = app => {
   app.get("/teetimes", (req, res, next) => {
     getTeeTimes()
       .then(teetimes => res.status(200).send(teetimes))
+      .catch(err => {
+        next(new NodeHTTPError(err.status, err.message, err));
+      });
+  });
+  app.get("/teetimes/:id", (req, res, next) => {
+    const teeTimeId = pathOr("", ["params", "id"], req);
+    getTeeTime(teeTimeId)
+      .then(teeTime => res.status(200).send(teeTime))
       .catch(err => {
         next(new NodeHTTPError(err.status, err.message, err));
       });

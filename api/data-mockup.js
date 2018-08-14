@@ -116,6 +116,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 881-0042",
     location: "1 Patriots Point Road, Mt Pleasant, SC 29464",
+    image: "patriotspointlinks.jpg",
     address: {
       street: "1 Patriots Point Road",
       city: "Mt Pleasant",
@@ -188,6 +189,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 795-6517",
     location: "2110 Maybank Hwy, Charleston, 29412",
+    image: "cityofcharlestongolfcourse.jpg",
     address: {
       street: "2110 Maybank Hwy",
       city: "Charleston",
@@ -260,6 +262,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 768-2121",
     location: "1000 Ocean Course Drive, Johns Island, SC 29455",
+    image: "oceancourse.jpg",
     address: {
       street: "1000 Ocean Course Drive",
       city: "Johns Island",
@@ -332,6 +335,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 971-3555",
     location: "600 Island Park Drive, Charleston, SC 29492",
+    image: "danielislandclub.jpg",
     address: {
       street: "600 Island Park Drive",
       city: "Charleston",
@@ -404,6 +408,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 886-2002",
     location: "10001 Back Bay Drive, Isle of Palms, SC 29451",
+    image: "wildduneslinks.jpg",
     address: {
       street: "10001 Back Bay Drive",
       city: "Isle of Palms",
@@ -476,6 +481,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 556-8251",
     location: "20 Dunvegan Drive, Charleston, SC 29414",
+    image: "shadowmossplantation.jpg",
     address: {
       street: "20 Dunvegan Drive",
       city: "Charleston",
@@ -548,6 +554,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 763-1817",
     location: "4812 Stono Links Drive, Hollywood, SC 29449",
+    image: "linksatstonoferry.jpg",
     address: {
       street: "4812 Stono Links Drive",
       city: "Hollywood",
@@ -620,6 +627,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 764-4618",
     location: "300 Hamlet Cir, Goose Creek, SC 29445",
+    image: "crowfield.jpg",
     address: {
       street: "300 Hamlet Circle",
       city: "Goose Creek",
@@ -692,6 +700,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 856-9000",
     location: "3535 Wando Plantation Way, Mt Pleasant, SC 29466",
+    image: "duneswest.jpg",
     address: {
       street: "3535 Wando Plantation Way",
       city: "Mt Pleasant",
@@ -764,6 +773,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 821-4077",
     location: "118 Legend Oaks Way, Summerville, SC 29485",
+    image: "legendoaks.jpg",
     address: {
       street: "118 Legend Oaks Way",
       city: "Summerville",
@@ -836,6 +846,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 849-2400",
     location: "1700 Rivertowne Country Club Dr, Mt Pleasant, SC 29466",
+    image: "rivertownecountryclub.jpg",
     address: {
       street: "1700 Rivertowne Country Club Drive",
       city: "Mt Pleasant",
@@ -908,6 +919,7 @@ const golfCourse = [
     type: "course",
     phoneNumber: "(843) 886-2301",
     location: "5881 Palmetto Dr, Isle of Palms, SC 29451",
+    image: "wilddunesharbor.jpg",
     address: {
       street: "5881 Palmetto Drive",
       city: "Isle of Palms",

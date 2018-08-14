@@ -6,8 +6,7 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import CourseSelector from "../components/coursepicker";
 import Select from "../components/select";
-import ControlledExpansionPanels from "../components/panels";
-import { map, propOr } from "ramda";
+import { map } from "ramda";
 import { connect } from "react-redux";
 import CourseCard from "../components/coursecard";
 
@@ -17,6 +16,7 @@ const tempCourse = {
   type: "course",
   phoneNumber: "(843) 768-2121",
   location: "1000 Ocean Course Drive, Johns Island, SC 29455",
+  image: "oceancourse.jpg",
   address: {
     street: "1000 Ocean Course Drive",
     city: "Johns Island",
@@ -25,8 +25,7 @@ const tempCourse = {
   },
   latitude: 32.612,
   longitude: 80.0233,
-  teeTimes: [],
-  img: "course1kiawia.png"
+  teeTimes: []
 };
 
 const styles = {
@@ -34,11 +33,11 @@ const styles = {
     maxWidth: 354
   }
 };
-// const li = course => <Panels foo={course} />;
+
 const li = course => <CourseSelector foo={course} />;
 
 const Location = props => {
-  const { coursesFromState } = props;
+  //const { coursesFromState } = props;
 
   return (
     <div>
@@ -50,7 +49,8 @@ const Location = props => {
           Select Your Golf Course
         </Typography>
         <CourseCard course={tempCourse} />
-        <ul>map(li, props)</ul>
+        <CourseSelector />
+        {/* <ul>{map(li, coursesFromState)} </ul> */}
         <Button
           style={{ marginRight: 20, marginTop: 30, padding: 20 }}
           component={Link}
@@ -77,14 +77,20 @@ const Location = props => {
 };
 
 const mapStateToProps = state => ({
-  coursesFromState: state.courses
+  coursesFromState: state.currentCourse,
+  selectedValue: state.currentCourse.selectedValue,
+  name: state.currentCourse.name
 });
 
-// const mapActionToProps = dispatch => {
-//     return { getCategory: id => dispatch(getCategory(id)) }
+// const mapActionsToProps = dispatch => {
+//   return {
+//     selectedValue: name => event => {
+//       dispatch({ type: GET_CURRENT_COURSE, payload: {<CourseCard />} })
+//       //this.setState({ [size]: event.target.checked })
+//     },
 //   }
+// }
 
-//
 const connector = connect(mapStateToProps);
 
 export default connector(withStyles(styles)(Location));

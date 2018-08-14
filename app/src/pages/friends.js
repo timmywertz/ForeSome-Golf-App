@@ -9,13 +9,26 @@ import IconTabs from "../components/tabs";
 const Friends = () => (
   <div>
     <center>
-      <Typography style={{ marginTop: 50 }} variant="display2">
-        New Friends
+      <Typography
+        style={{ marginTop: 20, marginBottom: 20 }}
+        variant="headline"
+      >
+        Select Your Group's:
       </Typography>
       <IconTabs />
       <Button
+        style={{ marginRight: 20, marginTop: 15, padding: 20 }}
         component={Link}
-        style={{ marginTop: 30, padding: 20 }}
+        to="/teetime/new/location"
+        variant="contained"
+        size="large"
+        color="primary"
+      >
+        Go Back
+      </Button>
+      <Button
+        component={Link}
+        style={{ marginTop: 15, padding: 20 }}
         to="/teetime/new/final"
         variant="contained"
         size="large"

@@ -1,7 +1,7 @@
 const NodeHTTPError = require("node-http-error");
-const { getGolfers } = require("../dal");
+const { getGolfers, getGolfer } = require("../dal");
 const bodyParser = require("body-parser");
-const { not } = require("ramda");
+const { not, pathOr } = require("ramda");
 
 // {
 //     _id: "golfer_wertz_timmylwertz@gmail.com",
@@ -22,6 +22,14 @@ const golferRoutes = app => {
   app.get("/golfers", (req, res, next) => {
     getGolfers()
       .then(golfers => res.status(200).send(golfers))
+      .catch(err => {
+        next(new NodeHTTPError(err.status, err.message, err));
+      });
+  });
+  app.get("/golfers/:id", (req, res, next) => {
+    const golferId = pathOr("", ["params", "id"], req);
+    getGolfer(golferId)
+      .then(golfer => res.status(200).send(golfer))
       .catch(err => {
         next(new NodeHTTPError(err.status, err.message, err));
       });

@@ -1,5 +1,5 @@
 export const SET_COURSES = "SET_COURSES";
-export const GET_CURRENT_COURSES = "GET_CURRENT_COURSES";
+export const GET_CURRENT_COURSE = "GET_CURRENT_COURSES";
 
 export const SET_GOLFERS = "SET_GOLFERS";
 export const GET_GOLFERS = "GET_GOLFERS";

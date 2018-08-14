@@ -24,6 +24,7 @@ const styles = {
 //     type: "course",
 //     phoneNumber: "(843) 768-2121",
 //     location: "1000 Ocean Course Drive, Johns Island, SC 29455",
+//     image: "/oceancourse.jpg",
 //     address: {
 //       street: "1000 Ocean Course Drive",
 //       city: "Johns Island",
@@ -43,7 +44,7 @@ function CourseCard(props) {
       <Card className={classes.card}>
         <CardMedia
           className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={`/course-images/${course.image}`}
           title={course.name}
         />
         <CardContent>
@@ -52,14 +53,7 @@ function CourseCard(props) {
           </Typography>
           <Typography component="p">{course.location}</Typography>
         </CardContent>
-        <CardActions>
-          <Button size="small" color="primary">
-            Share
-          </Button>
-          <Button size="small" color="primary">
-            Learn More
-          </Button>
-        </CardActions>
+        <CardActions />
       </Card>
     </div>
   );
