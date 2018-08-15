@@ -6,7 +6,7 @@ import registerServiceWorker from "./registerServiceWorker";
 
 import store from "./store";
 import { Provider } from "react-redux";
-import { getCourses } from "./action-creators/courses";
+import { getCourses, getCurrentCourse } from "./action-creators/courses";
 
 ReactDOM.render(
   <Provider store={store}>

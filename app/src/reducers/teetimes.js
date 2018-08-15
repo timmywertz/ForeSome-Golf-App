@@ -70,29 +70,29 @@ export const teeTimes = (state = [], action) => {
   }
 };
 
-const newInitialTeeTimeState = {};
+// const newInitialTeeTimeState = {};
 
-export const newTeeTime = (state = newInitialTeeTimeState, action) => {
-  switch (action.type) {
-    case NEW_TEETIME_FORM_UPDATED:
-      return mergeDeepRight(state, { data: action.payload });
-    case NEW_TEETIME_SAVE_FAILED:
-      return merge(state, {
-        isError: true,
-        isSaving: false,
-        errorMsg: action.payload
-      });
-    case NEW_TEETIME_SAVE_STARTED:
-      return merge(state, {
-        isError: false,
-        isSaving: true,
-        errorMsg: ""
-      });
-    case NEW_TEETIME_SAVE_SUCCEEDED:
-      return newInitialTeeTimeState;
-    case NEW_TEETIME_CLEARED:
-      return newInitialTeeTimeState;
-    default:
-      return state;
-  }
-};
+// export const newTeeTime = (state = newInitialTeeTimeState, action) => {
+//   switch (action.type) {
+//     case NEW_TEETIME_FORM_UPDATED:
+//       return mergeDeepRight(state, { data: action.payload });
+//     case NEW_TEETIME_SAVE_FAILED:
+//       return merge(state, {
+//         isError: true,
+//         isSaving: false,
+//         errorMsg: action.payload
+//       });
+//     case NEW_TEETIME_SAVE_STARTED:
+//       return merge(state, {
+//         isError: false,
+//         isSaving: true,
+//         errorMsg: ""
+//       });
+//     case NEW_TEETIME_SAVE_SUCCEEDED:
+//       return newInitialTeeTimeState;
+//     case NEW_TEETIME_CLEARED:
+//       return newInitialTeeTimeState;
+//     default:
+//       return state;
+//   }
+// };

@@ -1,5 +1,5 @@
 import { SET_COURSES, GET_CURRENT_COURSE } from "../constants";
-import { merge } from "ramda";
+import { contains, merge } from "ramda";
 
 // {
 //     _id: "course_patriots-point-links",
@@ -7,6 +7,7 @@ import { merge } from "ramda";
 //     type: "course",
 //     phoneNumber: "(843) 881-0042",
 //     location: "1 Patriots Point Road, Mt Pleasant, SC 29464",
+//     image: "/courses-images/patriotspointlinks.jpg"
 //     address: {
 //       street: "1 Patriots Point Road",
 //       city: "Mt Pleasant",
@@ -24,6 +25,7 @@ const initialCourseState = {
   type: "",
   phoneNumber: "",
   location: "",
+  image: "",
   address: {
     street: "",
     city: "",
@@ -39,39 +41,23 @@ export const courses = (state = [], action) => {
   switch (action.type) {
     case SET_COURSES:
       return action.payload;
-    default:
-      return state;
-  }
-};
-
-const initialCurrentCourse = {
-  name: "",
-  location: "",
-  phoneNumber: ""
-};
-
-export const currentCourse = (state = {}, action) => {
-  switch (action.type) {
     case GET_CURRENT_COURSE:
-      return merge(action.payload, state);
+      return contains(action.payload, state._id);
     default:
       return state;
   }
 };
 
 // const initialCurrentCourse = {
-//   _id: "",
 //   name: "",
-//   type: "",
-//   phoneNumber: "",
 //   location: "",
-//   address: {}
+//   phoneNumber: ""
 // };
 
-// export const currentCourses = (state = [], action) => {
+// export const currentCourse = (state = [], action) => {
 //   switch (action.type) {
-//     case SET_COURSES:
-//       return action.payload;
+//     case GET_CURRENT_COURSE:
+//       return merge(action.payload, state);
 //     default:
 //       return state;
 //   }

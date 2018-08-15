@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { connect } from "react-redux";
 
 const styles = theme => ({
   container: {
@@ -17,7 +18,7 @@ const styles = theme => ({
 });
 
 function DatePickers(props) {
-  const { classes } = props;
+  const { classes, teeTimes } = props;
 
   return (
     <form className={classes.container} noValidate>
@@ -36,7 +37,14 @@ function DatePickers(props) {
 }
 
 DatePickers.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  teeTimes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(DatePickers);
+const mapStateToProps = state => ({
+  teeTimes: state.teeTimes
+});
+
+const connector = connect(mapStateToProps);
+
+export default connector(withStyles(styles)(DatePickers));

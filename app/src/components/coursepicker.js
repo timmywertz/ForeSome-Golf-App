@@ -17,6 +17,7 @@ import { GolfCourse } from "@material-ui/icons";
 import { connect } from "react-redux";
 
 import { getCourses, getCurrentCourse } from "../action-creators/courses";
+import { GET_CURRENT_COURSE } from "../constants";
 import { currentCourse } from "../reducers/courses";
 import { map } from "ramda";
 
@@ -43,14 +44,19 @@ class CoursePicker extends React.Component {
       selectedValue,
       courses,
       name,
-      currentCourse,
+      // currentCourse,
+      getCurrentCourse,
+      handleListItemClick,
       ...other
     } = this.props;
 
     const listCourses = course => (
       <ListItem
         button
-        onClick={() => this.handleListItemClick(course.name)}
+        onClick={() => {
+          // this.props.getCurrentCourse("test");
+          this.handleListItemClick(course.name);
+        }}
         key={course._id}
       >
         <ListItemAvatar>
@@ -74,7 +80,10 @@ class CoursePicker extends React.Component {
             {map(listCourses, courses)}
             <ListItem
               button
-              onClick={() => this.handleListItemClick("addAccount")}
+              onClick={() => {
+                this.props.getCurrentCourse(courses._id);
+                this.handleListItemClick(courses._id);
+              }}
             />
           </List>
         </div>
@@ -86,7 +95,18 @@ const mapStateToPropsPicker = state => ({
   courses: state.courses
 });
 
-const connectorPick = connect(mapStateToPropsPicker);
+const mapActionsToPropsPicker = dispatch => {
+  return {
+    handleListItemClick: name => {
+      dispatch({ type: GET_CURRENT_COURSE, payload: name });
+    }
+  };
+};
+
+const connectorPick = connect(
+  mapStateToPropsPicker,
+  mapActionsToPropsPicker
+);
 
 const WrappedCoursePicker = connectorPick(withStyles(styles)(CoursePicker));
 
@@ -94,7 +114,7 @@ CoursePicker.propTypes = {
   classes: PropTypes.object.isRequired,
   onClose: PropTypes.func,
   selectedValue: PropTypes.string,
-  courses: PropTypes.object.isRequired,
+  // courses: PropTypes.object.isRequired,
   name: PropTypes.string
 };
 
@@ -138,9 +158,18 @@ const mapStateToProps = state => ({
   selectedValue: state.selectedValue
 });
 
-const mapActionsToProps = dispatch => ({
-  currentCourse: selectedValue => dispatch(currentCourse(selectedValue))
-});
+const mapActionsToProps = dispatch => {
+  return {
+    selectedValue: name => event => {
+      dispatch({ type: GET_CURRENT_COURSE, payload: name });
+    }
+  };
+};
+// const mapActionsToProps = dispatch => {
+//   return {
+//     getCurrentCourse: id => dispatch(getCurrentCourse(id))
+//   };
+// };
 
 const connector = connect(
   mapStateToProps,

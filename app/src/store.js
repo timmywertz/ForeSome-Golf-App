@@ -1,13 +1,13 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { courses, currentCourse } from "./reducers/courses";
+import { courses } from "./reducers/courses";
 //import { golfers, currentGolfers } from "./reducers/golfers";
 //import { teeTimes } from "./reducers/teetimes";
 
 const store = createStore(
   combineReducers({
-    courses,
-    currentCourse
+    courses
+    // currentCourse
   }),
   applyMiddleware(thunk)
 );

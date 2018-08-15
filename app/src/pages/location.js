@@ -9,6 +9,7 @@ import Select from "../components/select";
 import { map } from "ramda";
 import { connect } from "react-redux";
 import CourseCard from "../components/coursecard";
+import { GET_CURRENT_COURSE } from "../constants";
 
 const tempCourse = {
   _id: "course_the-ocean-couse-kiawah-island-golf-resort",
@@ -77,20 +78,38 @@ const Location = props => {
 };
 
 const mapStateToProps = state => ({
-  coursesFromState: state.currentCourse,
-  selectedValue: state.currentCourse.selectedValue,
-  name: state.currentCourse.name
+  coursesFromState: state.courses,
+  selectedValue: state.courses.selectedValue,
+  name: state.courses.name,
+  getCurrentCourse: state.getCurrentCourse
 });
-
+//1)
 // const mapActionsToProps = dispatch => {
 //   return {
 //     selectedValue: name => event => {
 //       dispatch({ type: GET_CURRENT_COURSE, payload: {<CourseCard />} })
-//       //this.setState({ [size]: event.target.checked })
+//
 //     },
 //   }
 // }
+//2)
+// const mapActionsToProps = dispatch => {
+//   return {
+//     getCurrentCourse: id => dispatch(getCurrentCourse(id))
+//   };
+// };
+//3)
+const mapActionsToProps = dispatch => {
+  return {
+    selectedValue: name => {
+      dispatch({ type: GET_CURRENT_COURSE, payload: name });
+    }
+  };
+};
 
-const connector = connect(mapStateToProps);
+const connector = connect(
+  mapStateToProps,
+  mapActionsToProps
+);
 
 export default connector(withStyles(styles)(Location));
