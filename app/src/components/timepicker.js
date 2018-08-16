@@ -15,16 +15,10 @@ import Typography from "@material-ui/core/Typography";
 import grey from "@material-ui/core/colors/grey";
 import { QueryBuilder } from "@material-ui/icons";
 
-const times = [
-  "8:00am - 10:00am",
-  "9:00am - 11:00am",
-  "10:00am - 12:00pm",
-  "11:00am - 1:00pm",
-  "12:00pm - 2:00pm",
-  "1:00pm - 3:00pm",
-  "2:00pm - 4:00pm",
-  "3:00pm - 5:00pm"
-];
+import { TEETIME_TIME_SELECTED } from "../constants";
+import { connect } from "react-redux";
+import { map } from "ramda";
+
 const styles = {
   avatar: {
     backgroundColor: grey[100],
@@ -42,7 +36,29 @@ class TimePicker extends React.Component {
   };
 
   render() {
-    const { classes, onClose, selectedValue, ...other } = this.props;
+    const {
+      classes,
+      onClose,
+      selectedValue,
+      teeTimeWindow,
+      currentTeeTimeWindow,
+      ...other
+    } = this.props;
+
+    const listTimes = time => (
+      <ListItem
+        button
+        onClick={() => this.handleListItemClick(time)}
+        key={time}
+      >
+        <ListItemAvatar>
+          <Avatar className={classes.avatar}>
+            <QueryBuilder />
+          </Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={time} />
+      </ListItem>
+    );
 
     return (
       <Dialog
@@ -53,20 +69,7 @@ class TimePicker extends React.Component {
         <DialogTitle id="time-picker">Select Time Window</DialogTitle>
         <div>
           <List>
-            {times.map(time => (
-              <ListItem
-                button
-                onClick={() => this.handleListItemClick(time)}
-                key={time}
-              >
-                <ListItemAvatar>
-                  <Avatar className={classes.avatar}>
-                    <QueryBuilder />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={time} />
-              </ListItem>
-            ))}
+            {map(listTimes, teeTimeWindow)}
             <ListItem
               button
               onClick={() => this.handleListItemClick("addAccount")}
@@ -84,12 +87,19 @@ TimePicker.propTypes = {
   selectedValue: PropTypes.string
 };
 
-const TimePickerWrapped = withStyles(styles)(TimePicker);
+const mapStateToPropsPicker = state => ({
+  currentTeeTimeWindow: state.courses.currentCourse.teeTimeWindow,
+  teeTimeWindow: state.courses.teeTimeWindow
+});
+
+const connectorPick = connect(mapStateToPropsPicker);
+
+const WrappedTimePicker = connectorPick(withStyles(styles)(TimePicker));
 
 class TimeSelector extends React.Component {
   state = {
     open: false,
-    selectedValue: times[1]
+    selectedTimeWindow: this.props.teeTimeWindow[1]
   };
 
   handleClickOpen = () => {
@@ -99,19 +109,21 @@ class TimeSelector extends React.Component {
   };
 
   handleClose = value => {
-    this.setState({ selectedValue: value, open: false });
+    console.log(value);
+    this.props.selectedTimeWindow(value);
+    this.setState({ selectedTimeWindow: value, open: false });
   };
 
   render() {
     return (
       <div>
         <Typography variant="subheading">
-          Selected: {this.state.selectedValue}
+          Selected: {this.state.selectedTimeWindow}
         </Typography>
         <br />
         <Button onClick={this.handleClickOpen}>Select Time</Button>
-        <TimePickerWrapped
-          selectedValue={this.state.selectedValue}
+        <WrappedTimePicker
+          selectedValue={this.state.selectedTimeWindow}
           open={this.state.open}
           onClose={this.handleClose}
         />
@@ -120,4 +132,27 @@ class TimeSelector extends React.Component {
   }
 }
 
-export default TimeSelector;
+const mapStateToProps = state => ({
+  courses: state.courses,
+  course: state.courses.currentCourse,
+  teeTimes: state.courses.currentCourse.teeTimes,
+  teeTimeWindow: state.courses.teeTimeWindow,
+  currentTeeTimeWindow: state.courses.currentCourse.teeTimeWindow,
+  selectedValue: state.selectedValue,
+  selectedTimeWindow: state.selectedTimeWindow
+});
+
+const mapActionsToProps = dispatch => {
+  return {
+    selectedTimeWindow: teetime => {
+      dispatch({ type: TEETIME_TIME_SELECTED, payload: teetime });
+    }
+  };
+};
+
+const connector = connect(
+  mapStateToProps,
+  mapActionsToProps
+);
+
+export default connector(TimeSelector);

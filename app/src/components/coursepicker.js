@@ -16,8 +16,8 @@ import grey from "@material-ui/core/colors/grey";
 import { GolfCourse } from "@material-ui/icons";
 import { connect } from "react-redux";
 
-import { getCourses, getCurrentCourse } from "../action-creators/courses";
-import { GET_CURRENT_COURSE } from "../constants";
+import { getCourses } from "../action-creators/courses";
+import { GET_CURRENT_COURSE, CURRENT_COURSE_SELECTED } from "../constants";
 import { currentCourse } from "../reducers/courses";
 import { map } from "ramda";
 
@@ -81,7 +81,7 @@ class CoursePicker extends React.Component {
             <ListItem
               button
               onClick={() => {
-                this.props.getCurrentCourse(courses._id);
+                // this.props.getCurrentCourse(courses._id);
                 this.handleListItemClick(courses._id);
               }}
             />
@@ -91,32 +91,17 @@ class CoursePicker extends React.Component {
     );
   }
 }
+
 const mapStateToPropsPicker = state => ({
-  courses: state.courses
+  courses: state.courses.courses
 });
 
-const mapActionsToPropsPicker = dispatch => {
-  return {
-    handleListItemClick: name => {
-      dispatch({ type: GET_CURRENT_COURSE, payload: name });
-    }
-  };
-};
-
 const connectorPick = connect(
-  mapStateToPropsPicker,
-  mapActionsToPropsPicker
+  mapStateToPropsPicker
+  //mapActionsToPropsPicker
 );
 
 const WrappedCoursePicker = connectorPick(withStyles(styles)(CoursePicker));
-
-CoursePicker.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onClose: PropTypes.func,
-  selectedValue: PropTypes.string,
-  // courses: PropTypes.object.isRequired,
-  name: PropTypes.string
-};
 
 class CourseSelector extends React.Component {
   state = {
@@ -131,6 +116,10 @@ class CourseSelector extends React.Component {
   };
 
   handleClose = value => {
+    console.log("value", value);
+
+    this.props.selectedValue(value);
+    // this.props.getCurrentCourse(value);
     this.setState({ selectedValue: value, open: false });
   };
 
@@ -153,23 +142,18 @@ class CourseSelector extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  courses: state.courses,
+  courses: state.courses.courses,
   name: state.courses.name,
   selectedValue: state.selectedValue
 });
 
 const mapActionsToProps = dispatch => {
   return {
-    selectedValue: name => event => {
-      dispatch({ type: GET_CURRENT_COURSE, payload: name });
+    selectedValue: name => {
+      dispatch({ type: CURRENT_COURSE_SELECTED, payload: name });
     }
   };
 };
-// const mapActionsToProps = dispatch => {
-//   return {
-//     getCurrentCourse: id => dispatch(getCurrentCourse(id))
-//   };
-// };
 
 const connector = connect(
   mapStateToProps,
@@ -177,3 +161,22 @@ const connector = connect(
 );
 
 export default connector(CourseSelector);
+
+// const initialCourseState = {
+//   currentCourse: null,
+//   courses: []
+// };
+
+// export const courses = (state = initialCourseState, action) => {
+//   switch (action.type) {
+//     case SET_COURSES:
+//       return merge(state, { courses: action.payload });
+//     case CURRENT_COURSE_SELECTED:
+//       console.log(state);
+//       console.log("action.payload", action.payload);
+//       //return find(propEq(`${action.payload}`, state.name))(state);
+//       return merge(state, { currentCourse: action.payload });
+//     default:
+//       return state;
+//   }
+// };

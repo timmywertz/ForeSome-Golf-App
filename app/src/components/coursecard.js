@@ -8,6 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { connect } from "react-redux";
+import { isEmpty } from "ramda";
 
 const styles = {
   card: {
@@ -38,24 +39,30 @@ const styles = {
 //      img: "course1kiawia.png"
 //   },
 
+const NoCourseSelected = () => <div />;
+
 function CourseCard(props) {
-  const { classes, course } = props;
+  const { classes, course, currentCourse } = props;
   return (
     <div>
-      <Card className={classes.card}>
-        <CardMedia
-          className={classes.media}
-          image={`/course-images/${course.image}`}
-          title={course.name}
-        />
-        <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
-            {course.name}
-          </Typography>
-          <Typography component="p">{course.location}</Typography>
-        </CardContent>
-        <CardActions />
-      </Card>
+      {isEmpty(props.currentCourse) ? (
+        <NoCourseSelected />
+      ) : (
+        <Card className={classes.card}>
+          <CardMedia
+            className={classes.media}
+            image={`/course-images/${currentCourse.image}`}
+            title={currentCourse.name}
+          />
+          <CardContent>
+            <Typography gutterBottom variant="headline" component="h2">
+              {currentCourse.name}
+            </Typography>
+            <Typography component="p">{currentCourse.location}</Typography>
+          </CardContent>
+          <CardActions />
+        </Card>
+      )}
     </div>
   );
 }
@@ -66,7 +73,8 @@ CourseCard.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  courses: state.courses,
+  courses: state.courses.courses,
+  currentCourse: state.courses.currentCourse,
   selectedValue: state.courses.selectedValue
 });
 

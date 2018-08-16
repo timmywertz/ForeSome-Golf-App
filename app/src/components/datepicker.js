@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
+import { TEETIME_DATE_SELECTED } from "../constants";
 
 const styles = theme => ({
   container: {
@@ -17,34 +18,59 @@ const styles = theme => ({
   }
 });
 
-function DatePickers(props) {
-  const { classes, teeTimes } = props;
+class DatePicker extends React.Component {
+  state = {
+    open: false,
+    selectedDate: this.props.datePicked
+  };
 
-  return (
-    <form className={classes.container} noValidate>
-      <TextField
-        id="date"
-        label="Select Date"
-        type="date"
-        defaultValue="2018-08-26"
-        className={classes.textField}
-        InputLabelProps={{
-          shrink: true
-        }}
-      />
-    </form>
-  );
+  handleDate = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  render() {
+    const { classes, courses, teeTimes, onChange, value } = this.props;
+
+    console.log(value);
+
+    return (
+      <form className={classes.container}>
+        <TextField
+          onChange={e => onChange(e.target.value)}
+          value={value}
+          id="date"
+          label="Select Date"
+          type="date"
+          className={classes.textField}
+          InputLabelProps={{
+            shrink: true
+          }}
+        />
+      </form>
+    );
+  }
 }
 
-DatePickers.propTypes = {
-  classes: PropTypes.object.isRequired,
-  teeTimes: PropTypes.object.isRequired
+DatePicker.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  teeTimes: state.teeTimes
+  teeTimes: state.courses.currentCourse.teeTimes,
+  course: state.courses.currentCourse
 });
 
-const connector = connect(mapStateToProps);
+const mapActionsToProps = dispatch => {
+  return {
+    datePicked: date => {
+      dispatch({ type: TEETIME_DATE_SELECTED, payload: date });
+    }
+  };
+};
 
-export default connector(withStyles(styles)(DatePickers));
+const connector = connect(
+  mapStateToProps,
+  mapActionsToProps
+);
+
+export default connector(withStyles(styles)(DatePicker));

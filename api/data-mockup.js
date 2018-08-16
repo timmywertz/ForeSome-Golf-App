@@ -125,6 +125,16 @@ const golfCourse = [
     },
     latitude: 32.7922,
     longitude: 79.8953,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -198,6 +208,16 @@ const golfCourse = [
     },
     latitude: 32.7577,
     longitude: 79.9944,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -271,6 +291,16 @@ const golfCourse = [
     },
     latitude: 32.612,
     longitude: 80.0233,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -344,6 +374,16 @@ const golfCourse = [
     },
     latitude: 32.885,
     longitude: 79.9064,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -417,6 +457,16 @@ const golfCourse = [
     },
     latitude: 32.8139,
     longitude: 79.7238,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -490,6 +540,16 @@ const golfCourse = [
     },
     latitude: 32.8426,
     longitude: 80.0733,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -563,6 +623,16 @@ const golfCourse = [
     },
     latitude: 32.7565,
     longitude: 80.1612,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -636,6 +706,16 @@ const golfCourse = [
     },
     latitude: 33.0036,
     longitude: 80.0774,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -709,6 +789,16 @@ const golfCourse = [
     },
     latitude: 32.9174,
     longitude: 79.7994,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -782,6 +872,16 @@ const golfCourse = [
     },
     latitude: 32.9463,
     longitude: 80.2331,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -855,6 +955,16 @@ const golfCourse = [
     },
     latitude: 32.8792,
     longitude: 79.8244,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -928,6 +1038,16 @@ const golfCourse = [
     },
     latitude: 32.8055,
     longitude: 79.7388,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -995,6 +1115,7 @@ const teeTimes = [
     time: "8:00 AM",
     courseId: "course_wild-dunes-harbor",
     type: "teetime",
+    size: 4,
     hcpRange: {
       low: 0,
       high: 36
@@ -1045,6 +1166,7 @@ const teeTimes = [
     time: "10:00 AM",
     courseId: "course_wild-dunes-harbor",
     type: "teetime",
+    size: 4,
     hcpRange: {
       low: 10,
       high: 20
@@ -1095,6 +1217,7 @@ const teeTimes = [
     time: "2:20 PM",
     courseId: "course_wild-dunes-harbor",
     type: "teetime",
+    size: 4,
     hcpRange: {
       low: 5,
       high: 15
@@ -1145,6 +1268,7 @@ const teeTimes = [
     time: "8:40 AM",
     courseId: "course_city-of-charleston-golf-course",
     type: "teetime",
+    size: 4,
     hcpRange: {
       low: 0,
       high: 36
@@ -1195,6 +1319,7 @@ const teeTimes = [
     time: "1:20 PM",
     courseId: "course_city-of-charleston-golf-course",
     type: "teetime",
+    size: 4,
     hcpRange: {
       low: 10,
       high: 20
@@ -1245,6 +1370,7 @@ const teeTimes = [
     time: "3:20 PM",
     courseId: "course_city-of-charleston-golf-course",
     type: "teetime",
+    size: 4,
     hcpRange: {
       low: 5,
       high: 15
@@ -1295,6 +1421,7 @@ const teeTimes = [
     time: "11:00 AM",
     courseId: "course_links-at-stono-ferry",
     type: "teetime",
+    size: 4,
     hcpRange: {
       low: 0,
       high: 36
@@ -1345,6 +1472,7 @@ const teeTimes = [
     time: "1:20 PM",
     courseId: "course_links-at-stono-ferry",
     type: "teetime",
+    size: 4,
     hcpRange: {
       low: 10,
       high: 20
@@ -1380,6 +1508,7 @@ const teeTimes = [
       {
         _id: "golfer_wertz_jackie.wertz@gmail.com",
         type: "golfer",
+        size: 4,
         lastName: "Wertz",
         firstName: "Jackie",
         handicap: 20,
@@ -1395,6 +1524,7 @@ const teeTimes = [
     time: "2:00 PM",
     courseId: "course_links-at-stono-ferry",
     type: "teetime",
+    size: 4,
     hcpRange: {
       low: 5,
       high: 15

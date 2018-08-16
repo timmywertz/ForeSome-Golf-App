@@ -34,6 +34,16 @@ db.bulkDocs([
     },
     latitude: 32.7922,
     longitude: 79.8953,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -107,6 +117,16 @@ db.bulkDocs([
     },
     latitude: 32.7577,
     longitude: 79.9944,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -180,6 +200,16 @@ db.bulkDocs([
     },
     latitude: 32.612,
     longitude: 80.0233,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -253,6 +283,16 @@ db.bulkDocs([
     },
     latitude: 32.885,
     longitude: 79.9064,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -326,6 +366,16 @@ db.bulkDocs([
     },
     latitude: 32.8139,
     longitude: 79.7238,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -399,6 +449,16 @@ db.bulkDocs([
     },
     latitude: 32.8426,
     longitude: 80.0733,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -472,6 +532,16 @@ db.bulkDocs([
     },
     latitude: 32.7565,
     longitude: 80.1612,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -545,6 +615,16 @@ db.bulkDocs([
     },
     latitude: 33.0036,
     longitude: 80.0774,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -618,6 +698,16 @@ db.bulkDocs([
     },
     latitude: 32.9174,
     longitude: 79.7994,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -691,6 +781,16 @@ db.bulkDocs([
     },
     latitude: 32.9463,
     longitude: 80.2331,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -764,6 +864,16 @@ db.bulkDocs([
     },
     latitude: 32.8792,
     longitude: 79.8244,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },
@@ -837,6 +947,16 @@ db.bulkDocs([
     },
     latitude: 32.8055,
     longitude: 79.7388,
+    teeTimeWindow: [
+      "8:00am - 10:00am",
+      "9:00am - 11:00am",
+      "10:00am - 12:00pm",
+      "11:00am - 1:00pm",
+      "12:00pm - 2:00pm",
+      "1:00pm - 3:00pm",
+      "2:00pm - 4:00pm",
+      "3:00pm - 5:00pm"
+    ],
     teeTimes: [
       { time: "8:00 AM", isAvail: true },
       { time: "8:10 AM", isAvail: true },

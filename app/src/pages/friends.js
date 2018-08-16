@@ -19,7 +19,7 @@ const Friends = () => (
       <Button
         style={{ marginRight: 20, marginTop: 15, padding: 20 }}
         component={Link}
-        to="/teetime/new/location"
+        to="/teetime/new/date"
         variant="contained"
         size="large"
         color="primary"

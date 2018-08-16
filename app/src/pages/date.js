@@ -4,17 +4,20 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import DatePickers from "../components/datepicker";
-import SimpleDialogDemo from "../components/timepicker";
+import DatePicker from "../components/datepicker";
+import TimeSelector from "../components/timepicker";
+import { TEETIME_DATE_SELECTED, TEETIME_TIME_SELECTED } from "../constants";
+import { connect } from "react-redux";
+import { isEmpty } from "ramda";
 
-const Date = () => (
+const Date = props => (
   <div>
     <center>
       <Typography style={{ marginTop: 50 }} variant="display1">
         What day would you like to play?
       </Typography>
 
-      <DatePickers />
+      <DatePicker onChange={props.onChange} value={props.teeTimeDate} />
       <div>
         <img
           style={{ marginTop: 30, marginBottom: 0 }}
@@ -24,12 +27,12 @@ const Date = () => (
           src="/png-images/clock-42655_1280.png"
         />
       </div>
-      <SimpleDialogDemo />
+      <TimeSelector />
       <div>
         <Button
           style={{ marginRight: 20, marginTop: 30, padding: 20 }}
           component={Link}
-          to="/menu"
+          to="/teetime/new/location"
           variant="contained"
           size="large"
           color="primary"
@@ -39,7 +42,7 @@ const Date = () => (
         <Button
           component={Link}
           style={{ marginLeft: 20, marginTop: 30, padding: 20 }}
-          to="/teetime/new/location"
+          to="/teetime/new/friends"
           variant="contained"
           size="large"
           color="secondary"
@@ -51,4 +54,26 @@ const Date = () => (
   </div>
 );
 
-export default Date;
+const mapStateToProps = state => ({
+  coursesFromState: state.courses,
+  currentCourse: state.courses.currentCourse,
+  teeTimeWindow: state.courses.teeTimeWindow,
+  teeTimes: state.courses.currentCourse.teeTimes,
+  teeTimeDate: state.courses.teeTimeDate
+});
+
+const mapActionsToProps = dispatch => {
+  return {
+    selectedTimeWindow: teetime => {
+      dispatch({ type: TEETIME_TIME_SELECTED, payload: teetime });
+    },
+    onChange: value => dispatch({ type: TEETIME_DATE_SELECTED, payload: value })
+  };
+};
+
+const connector = connect(
+  mapStateToProps,
+  mapActionsToProps
+);
+
+export default connector(Date);

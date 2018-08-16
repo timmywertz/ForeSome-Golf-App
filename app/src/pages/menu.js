@@ -21,7 +21,7 @@ const Menu = () => (
       <Button
         style={{ marginTop: 120, padding: 30 }}
         component={Link}
-        to="/teetime/new/date"
+        to="/teetime/new/location"
         variant="contained"
         size="large"
         color="primary"
@@ -41,7 +41,7 @@ const Menu = () => (
         <Button
           component={Link}
           style={{ marginTop: -10, padding: 30 }}
-          to="/teetime/join/date"
+          to="/teetime/join/location"
           variant="contained"
           size="large"
           color="secondary"

@@ -9,7 +9,7 @@ import Select from "../components/select";
 import { map } from "ramda";
 import { connect } from "react-redux";
 import CourseCard from "../components/coursecard";
-import { GET_CURRENT_COURSE } from "../constants";
+import { GET_CURRENT_COURSE, CURRENT_COURSE_SELECTED } from "../constants";
 
 const tempCourse = {
   _id: "course_the-ocean-couse-kiawah-island-golf-resort",
@@ -37,6 +37,8 @@ const styles = {
 
 const li = course => <CourseSelector foo={course} />;
 
+//const cardShow = selectedValue => <CourseCard selectedValue={selectedValue} />;
+
 const Location = props => {
   //const { coursesFromState } = props;
 
@@ -47,15 +49,15 @@ const Location = props => {
           style={{ marginTop: 50, marginBottom: 30 }}
           variant="display1"
         >
-          Select Your Golf Course
+          Destination
         </Typography>
-        <CourseCard course={tempCourse} />
+        <CourseCard />
         <CourseSelector />
         {/* <ul>{map(li, coursesFromState)} </ul> */}
         <Button
           style={{ marginRight: 20, marginTop: 30, padding: 20 }}
           component={Link}
-          to="/teetime/new/date"
+          to="/menu"
           variant="contained"
           size="large"
           color="primary"
@@ -65,7 +67,7 @@ const Location = props => {
         <Button
           component={Link}
           style={{ marginTop: 30, padding: 20 }}
-          to="/teetime/new/friends"
+          to="/teetime/new/date"
           variant="contained"
           size="large"
           color="secondary"
@@ -79,30 +81,15 @@ const Location = props => {
 
 const mapStateToProps = state => ({
   coursesFromState: state.courses,
-  selectedValue: state.courses.selectedValue,
-  name: state.courses.name,
-  getCurrentCourse: state.getCurrentCourse
+  currentCourse: state.courses.currentCourse
+  // name: state.courses.name
+  // getCurrentCourse: state.courses.currentCourse
 });
-//1)
-// const mapActionsToProps = dispatch => {
-//   return {
-//     selectedValue: name => event => {
-//       dispatch({ type: GET_CURRENT_COURSE, payload: {<CourseCard />} })
-//
-//     },
-//   }
-// }
-//2)
-// const mapActionsToProps = dispatch => {
-//   return {
-//     getCurrentCourse: id => dispatch(getCurrentCourse(id))
-//   };
-// };
-//3)
+
 const mapActionsToProps = dispatch => {
   return {
     selectedValue: name => {
-      dispatch({ type: GET_CURRENT_COURSE, payload: name });
+      dispatch({ type: CURRENT_COURSE_SELECTED, payload: name });
     }
   };
 };

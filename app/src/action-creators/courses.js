@@ -10,12 +10,3 @@ export const getCourses = async (dispatch, getState) => {
 
   dispatch({ type: SET_COURSES, payload: courses });
 };
-
-// export const getCurrentCourse = id => (dispatch, getState) => {
-//   console.log("calledgetCurrentCourse");
-//   // const course = await fetch(url + "/" + id)
-//   //   .then(res => res.json())
-//   //   .catch(err => console.log(err));
-
-//   dispatch({ type: GET_CURRENT_COURSE, payload: id });
-// };
