@@ -20,6 +20,7 @@ import { getCourses } from "../action-creators/courses";
 import { GET_CURRENT_COURSE, CURRENT_COURSE_SELECTED } from "../constants";
 import { currentCourse } from "../reducers/courses";
 import { map } from "ramda";
+const uuid = require("uuid");
 
 const styles = {
   avatar: {
@@ -57,7 +58,7 @@ class CoursePicker extends React.Component {
           // this.props.getCurrentCourse("test");
           this.handleListItemClick(course.name);
         }}
-        key={course._id}
+        key={uuid.v4()}
       >
         <ListItemAvatar>
           <Avatar className={classes.avatar}>
@@ -161,22 +162,3 @@ const connector = connect(
 );
 
 export default connector(CourseSelector);
-
-// const initialCourseState = {
-//   currentCourse: null,
-//   courses: []
-// };
-
-// export const courses = (state = initialCourseState, action) => {
-//   switch (action.type) {
-//     case SET_COURSES:
-//       return merge(state, { courses: action.payload });
-//     case CURRENT_COURSE_SELECTED:
-//       console.log(state);
-//       console.log("action.payload", action.payload);
-//       //return find(propEq(`${action.payload}`, state.name))(state);
-//       return merge(state, { currentCourse: action.payload });
-//     default:
-//       return state;
-//   }
-// };

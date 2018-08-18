@@ -14,6 +14,16 @@ const Final = () => (
       </Typography>
       <Select />
       <Button
+        style={{ marginRight: 20, marginTop: 15, padding: 20 }}
+        component={Link}
+        to="/teetime/new/friends"
+        variant="contained"
+        size="large"
+        color="primary"
+      >
+        Go Back
+      </Button>
+      <Button
         component={Link}
         style={{ marginTop: 0, padding: 20 }}
         to="/thankyou"

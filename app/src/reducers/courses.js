@@ -4,9 +4,12 @@ import {
   CURRENT_COURSE_SELECTED,
   TEETIME_DATE_SELECTED,
   TEETIME_TIME_SELECTED,
+  GROUP_SIZE_SELECTED,
+  GENDER_SELECTED,
+  HANDICAP_RANGE_SELECTED,
   NEW_TEETIME_CREATED
 } from "../constants";
-import { contains, find, merge, propEq } from "ramda";
+import { contains, find, filter, merge, propEq } from "ramda";
 
 // {
 //     _id: "course_patriots-point-links",
@@ -45,81 +48,75 @@ const initialCourseState = {
     "2:00pm - 4:00pm",
     "3:00pm - 5:00pm"
   ],
-  teeTimeDate: stringDate,
+  selectedTeeTimeDate: stringDate,
   teeTimeDateAndTime: {}, //{time: "some time", date: "some date"  }
-  join: true, //if true, player is joining, if false, player is creating a new foursome
-  NumberPlayers: 1, //range 1-4,
+  join: false, //if true, player is joining, if false, player is creating a new foursome
   availableTeeTimes: {}, //once you know window, players, and join/create, loop trhough currentCourse and save in here the available tee times
-  selectedTeeTime: {} //{course, numberplayers, final_tee_time,etc....} basically all the info u will show in confirmation page
+  selectedTeeTime: {}, //{course, numberplayers, final_tee_time,etc....} basically all the info u will show in confirmation page
+  groupSize: "foursome",
+  //selectedGroupSize: {}, //range 1-4,
+  gender: "both",
+  //selectedGenderPreferences: {},
+  hcpRangeOptions: [],
+  // [
+  //   "10 and Lower",
+  //   "5 - 15",
+  //   "10 - 20",
+  //   "15 - 25",
+  //   "25 and Above",
+  //   "Any Ability"
+  // ],
+  hcpRange: "any"
 };
 
 export const courses = (state = initialCourseState, action) => {
   switch (action.type) {
     case SET_COURSES:
       console.log(action.payload);
-      // return merge(state, { courses: action.payload });
       return merge(state, { courses: action.payload });
     case GET_CURRENT_COURSE:
-      // console.log(state);
-      // console.log("action.payload", action.payload);
-      // let courseObj = {};
-      // const courseName = action.payload;
-      // for (let course of state.courses) {
-      //   if (course.name === courseName) {
-      //     courseObj = course;
-      //   }
-      // }
-      // console.log(courseObj);
-      //return find(propEq(`${action.payload}`, state.name))(state);
       return state;
     case CURRENT_COURSE_SELECTED:
       console.log(state);
       console.log("action.payload", action.payload);
 
-      let courseObj = {};
-      const courseName = action.payload;
-      for (let course of state.courses) {
-        if (course.name === courseName) {
-          courseObj = course;
+      const selectedCourse = course => {
+        if (course.name === action.payload) {
+          return true;
         }
-      }
-      console.log(courseObj);
+      };
+
+      const courseObj = find(selectedCourse, state.courses);
+
+      console.log("courseObj", courseObj);
+      // return merge(state, {
+      //   courses: find(course => course.name === action.payload, state.courses)
+      // });
+      //find(courseName => course.name === action.payload, state.CURRENT_COURSE_SELECTED)
+
       //return find(propEq(`${action.payload}`, state.name))(state);
-      return { ...state, currentCourse: courseObj };
+      return merge(state, { currentCourse: courseObj });
     case TEETIME_DATE_SELECTED:
-      console.log("in reducer", action.payload);
+      console.log("in reducer TEETIME DATE SELECTED", action.payload);
+      console.log("state", state);
       return merge(state, { teeTimeDate: action.payload });
     case TEETIME_TIME_SELECTED:
-      return merge(state, { courses: action.payload });
+      console.log("inReducerTEETIMESELECTED", action.payload);
+      console.log("stateTEETIMESELECT", state);
+      return merge(state, { selectedTeeTime: action.payload });
+    case GROUP_SIZE_SELECTED:
+      console.log("GROUP_SIZE_SELECTED action.payload", action.payload);
+      console.log("stateGroupSizeReducer", state);
+      // return merge(state, { selectedGroupSize: action.payload });
+      return merge(state, { groupSize: action.payload });
+    case GENDER_SELECTED:
+      console.log("GENDER_SELECTED", action.payload);
+      return merge(state, { gender: action.payload });
+    case HANDICAP_RANGE_SELECTED:
+      console.log("HANDICAP_RANGE_REDUCER", action.payload);
+      return merge(state, { hcpRange: action.payload });
+
     default:
       return state;
   }
 };
-
-// const initialCourseState = {
-//   currentCourse: null,
-//   courses: []
-// };
-
-// export const courses = (state = initialCourseState, action) => {
-//   switch (action.type) {
-//     case SET_COURSES:
-//       return merge(state, { courses: action.payload });
-//     case CURRENT_COURSE_SELECTED:
-//       console.log(state);
-//       console.log("action.payload", action.payload);
-//       //return find(propEq(`${action.payload}`, state.name))(state);
-//       return merge(state, { currentCourse: action.payload });
-//     default:
-//       return state;
-//   }
-// };
-
-// export const currentCourse = (state = [], action) => {
-//   switch (action.type) {
-//     case GET_CURRENT_COURSE:
-//       return merge(action.payload, state);
-//     default:
-//       return state;
-//   }
-// };

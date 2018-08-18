@@ -68,8 +68,8 @@ function CourseCard(props) {
 }
 
 CourseCard.propTypes = {
-  classes: PropTypes.object.isRequired,
-  course: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired
+  //course: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

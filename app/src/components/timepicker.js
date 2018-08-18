@@ -18,6 +18,7 @@ import { QueryBuilder } from "@material-ui/icons";
 import { TEETIME_TIME_SELECTED } from "../constants";
 import { connect } from "react-redux";
 import { map } from "ramda";
+const uuid = require("uuid");
 
 const styles = {
   avatar: {
@@ -49,7 +50,7 @@ class TimePicker extends React.Component {
       <ListItem
         button
         onClick={() => this.handleListItemClick(time)}
-        key={time}
+        key={uuid.v4()}
       >
         <ListItemAvatar>
           <Avatar className={classes.avatar}>
@@ -69,10 +70,10 @@ class TimePicker extends React.Component {
         <DialogTitle id="time-picker">Select Time Window</DialogTitle>
         <div>
           <List>
-            {map(listTimes, teeTimeWindow)}
+            {map(listTimes, currentTeeTimeWindow)}
             <ListItem
               button
-              onClick={() => this.handleListItemClick("addAccount")}
+              onClick={() => this.handleListItemClick(currentTeeTimeWindow._id)}
             />
           </List>
         </div>
@@ -138,7 +139,6 @@ const mapStateToProps = state => ({
   teeTimes: state.courses.currentCourse.teeTimes,
   teeTimeWindow: state.courses.teeTimeWindow,
   currentTeeTimeWindow: state.courses.currentCourse.teeTimeWindow,
-  selectedValue: state.selectedValue,
   selectedTimeWindow: state.selectedTimeWindow
 });
 

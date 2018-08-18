@@ -55,22 +55,22 @@ DatePicker.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => ({
-  teeTimes: state.courses.currentCourse.teeTimes,
-  course: state.courses.currentCourse
-});
+// const mapStateToProps = state => ({
+//   teeTimes: state.courses.currentCourse.teeTimes,
+//   course: state.courses.currentCourse
+// });
 
-const mapActionsToProps = dispatch => {
-  return {
-    datePicked: date => {
-      dispatch({ type: TEETIME_DATE_SELECTED, payload: date });
-    }
-  };
-};
+// const mapActionsToProps = dispatch => {
+//   return {
+//     datePicked: date => {
+//       dispatch({ type: TEETIME_DATE_SELECTED, payload: date });
+//     }
+//   };
+// };
 
-const connector = connect(
-  mapStateToProps,
-  mapActionsToProps
-);
+// const connector = connect(
+//   mapStateToProps,
+//   mapActionsToProps
+// );
 
-export default connector(withStyles(styles)(DatePicker));
+export default withStyles(styles)(DatePicker);
