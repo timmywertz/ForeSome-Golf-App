@@ -7,6 +7,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
+import { NEW_TEETIME_SELECTED } from "../constants";
 
 const styles = theme => ({
   root: {
@@ -20,56 +21,58 @@ const styles = theme => ({
   }
 });
 
-class RadioButtonsGroup extends React.Component {
-  state = {
-    value: "female"
-  };
+// handleChange = event => {
+//   this.setState({ value: event.target.value });
+// };
 
-  handleChange = event => {
-    this.setState({ value: event.target.value });
-  };
+const SelectButtons = props => {
+  const { children, classes, value, onChange, label, handleChange } = props;
 
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <div className={classes.root}>
-        <FormControl component="fieldset" className={classes.formControl}>
-          <FormLabel component="legend">Select Golf Course</FormLabel>
-          <RadioGroup
-            aria-label="golf course"
-            name="golf course"
-            className={classes.group}
-            value={this.state.value}
-            onChange={this.handleChange}
+  // const handleChange = event => {
+  //   this.setState({ value: event.target.value });
+  // };
+  return (
+    <div className={classes.root}>
+      <FormControl component="fieldset" className={classes.formControl}>
+        <FormLabel component="legend">Now Pick Your Time</FormLabel>
+        <RadioGroup
+          row={true}
+          aria-label="golf course"
+          name="golf course"
+          className={classes.group}
+          value={value}
+          onChange={onChange}
+        >
+          <FormControlLabel
+            value={value}
+            control={<Radio />}
+            label={label}
+            onChange={onChange}
           >
-            <FormControlLabel
-              value="Patriots Point Links"
-              control={<Radio />}
-              label="Patriots Point Links"
-            />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-            <FormControlLabel
-              value="neither"
-              control={<Radio />}
-              label="Neither"
-            />
-          </RadioGroup>
-        </FormControl>
-        <FormControl component="fieldset" className={classes.formControl} />
-      </div>
-    );
-  }
-}
+            {children}
+          </FormControlLabel>
+          {/* <FormControlLabel
+            value="availableTeeTime2"
+            control={<Radio />}
+            label="Male"
+            onChange={onChange}
+          /> */}
+          {/* <FormControlLabel value="other" control={<Radio />} label="Other" />
+          <FormControlLabel value="female" control={<Radio />} label="Female" />
+          <FormControlLabel
+            value="neither"
+            control={<Radio />}
+            label="Neither"
+          /> */}
+        </RadioGroup>
+      </FormControl>
+      {/* <FormControl component="fieldset" className={classes.formControl} /> */}
+    </div>
+  );
+};
 
-RadioButtonsGroup.propTypes = {
+SelectButtons.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(RadioButtonsGroup);
+export default withStyles(styles)(SelectButtons);

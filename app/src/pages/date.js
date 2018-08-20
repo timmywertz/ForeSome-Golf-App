@@ -6,7 +6,11 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "../components/datepicker";
 import TimeSelector from "../components/timepicker";
-import { TEETIME_DATE_SELECTED, TEETIME_TIME_SELECTED } from "../constants";
+import {
+  TEETIME_DATE_SELECTED,
+  TEETIME_TIME_SELECTED,
+  TEETIME_WINDOW_SELECTED
+} from "../constants";
 import { connect } from "react-redux";
 import { isEmpty } from "ramda";
 
@@ -59,12 +63,17 @@ const mapStateToProps = state => ({
   currentCourse: state.courses.currentCourse,
   teeTimeWindow: state.courses.teeTimeWindow,
   teeTimes: state.courses.currentCourse.teeTimes,
-  teeTimeDate: state.courses.teeTimeDate
+  selectedTeeTimeDate: state.courses.selectedTeeTimeDate,
+  selectedTeeTimeWindow: state.courses.selectedTeeTimeWindow,
+  selectedTeeTime: state.courses.selectedTeeTime
 });
 
 const mapActionsToProps = dispatch => {
   return {
     selectedTimeWindow: teetime => {
+      dispatch({ type: TEETIME_WINDOW_SELECTED, payload: teetime });
+    },
+    selectedTeeTime: teetime => {
       dispatch({ type: TEETIME_TIME_SELECTED, payload: teetime });
     },
     onChange: value => dispatch({ type: TEETIME_DATE_SELECTED, payload: value })

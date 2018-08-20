@@ -9,7 +9,8 @@ import Select from "../components/select";
 import { map } from "ramda";
 import { connect } from "react-redux";
 import CourseCard from "../components/coursecard";
-import { GET_CURRENT_COURSE, CURRENT_COURSE_SELECTED } from "../constants";
+import { COURSES_ACQUIRED, CURRENT_COURSE_SELECTED } from "../constants";
+import Tracker from "../components/tracker";
 
 const tempCourse = {
   _id: "course_the-ocean-couse-kiawah-island-golf-resort",

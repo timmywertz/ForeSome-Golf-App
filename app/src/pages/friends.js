@@ -1,8 +1,6 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Component } from "react";
 import Tab from "@material-ui/core/Tab";
 import PhoneIcon from "@material-ui/icons/Phone";
 import FavoriteIcon from "@material-ui/icons/Favorite";
@@ -21,58 +19,60 @@ import {
   HANDICAP_RANGE_SELECTED
 } from "../constants";
 import { Paper, Tabs } from "@material-ui/core";
+
 const Friends = props => {
-  const {} = props;
+  const {
+    handleSizeChanged,
+    groupSize,
+    handleGenderChanged,
+    gender,
+    handleHcpRangeChanged,
+    hcpRange
+  } = props;
+
   return (
     <div>
       <center>
         <Typography
           style={{ marginTop: 20, marginBottom: 20 }}
-          variant="headline"
+          variant="display2"
         >
           Select Your Group's:
         </Typography>
-        <IconTabs
-          title="Size"
-          onChange={props.handleSizeChanged}
-          value={props.groupSize}
-        >
+        <IconTabs title="Size" onChange={handleSizeChanged} value={groupSize}>
           <Tab
-            value={"twosome"}
+            value={"Twosome"}
             icon={<ExposurePlus1TwoTone />}
             label="Twosome"
           />
           <Tab
-            value={"threesome"}
+            value={"Threesome"}
             icon={<ExposurePlus2TwoTone />}
             label="Threesome"
           />
-          <Tab value={"foursome"} icon={<PersonPinIcon />} label="ForeSome!" />{" "}
+          <Tab value={"Foursome"} icon={<PersonPinIcon />} label="ForeSome!" />{" "}
         </IconTabs>
-        <IconTabs
-          title="Gender"
-          onChange={props.handleGenderChanged}
-          value={props.gender}
-        >
-          <Tab value={"male"} icon={<PhoneIcon />} label="Male" />
-          <Tab value={"female"} icon={<FavoriteIcon />} label="Female" />
-          <Tab value={"both"} icon={<Wc />} label="Both" />{" "}
+        <IconTabs title="Gender" onChange={handleGenderChanged} value={gender}>
+          <Tab value={"Male"} icon={<PhoneIcon />} label="Male" />
+          <Tab value={"Female"} icon={<FavoriteIcon />} label="Female" />
+          <Tab value={"Both"} icon={<Wc />} label="Both" />{" "}
         </IconTabs>
 
         <IconTabs
+          style={{ width: 500 }}
           title="Handicap Range"
-          onChange={props.handleHcpRangeChanged}
-          value={props.hcpRange}
+          onChange={handleHcpRangeChanged}
+          value={hcpRange}
         >
           <Tab value={"10 and Lower"} label="10 and Lower" />
           <Tab value={"5 - 15"} label="5 - 15" />
           <Tab value={"10 - 20"} label="10 - 20" />
-          <Tab value={"10 - 20"} label="10 - 20" />
+          <Tab value={"15 - 25"} label="15 - 25" />
           <Tab value={"25 and Above"} label="25 and Above" />
           <Tab value={"Any Ability"} label="Any Ability" />{" "}
         </IconTabs>
         <Button
-          style={{ marginRight: 20, marginTop: 15, padding: 20 }}
+          style={{ marginRight: 20, marginTop: 30, padding: 20 }}
           component={Link}
           to="/teetime/new/date"
           variant="contained"
@@ -83,7 +83,7 @@ const Friends = props => {
         </Button>
         <Button
           component={Link}
-          style={{ marginTop: 15, padding: 20 }}
+          style={{ marginTop: 30, padding: 20 }}
           to="/teetime/new/final"
           variant="contained"
           size="large"

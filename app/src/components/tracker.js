@@ -18,6 +18,10 @@ class Tracker extends React.Component {
     activeStep: 0
   };
 
+  // const Tracker = props => {
+  //   const { handleNext, handleBack, classes, theme } = props
+  // }
+
   handleNext = () => {
     this.setState(state => ({
       activeStep: state.activeStep + 1
@@ -36,7 +40,7 @@ class Tracker extends React.Component {
     return (
       <MobileStepper
         variant="progress"
-        steps={6}
+        steps={4}
         position="static"
         activeStep={this.state.activeStep}
         className={classes.root}
@@ -44,7 +48,7 @@ class Tracker extends React.Component {
           <Button
             size="small"
             onClick={this.handleNext}
-            disabled={this.state.activeStep === 5}
+            disabled={this.state.activeStep === 3}
           >
             Next
             {theme.direction === "rtl" ? (

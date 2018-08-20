@@ -15,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import grey from "@material-ui/core/colors/grey";
 import { QueryBuilder } from "@material-ui/icons";
 
-import { TEETIME_WINDOW_SELECTED, TEETIME_TIME_SELECTED } from "../constants";
+import { NEW_TEETIME_CREATED } from "../constants";
 import { connect } from "react-redux";
 import { map } from "ramda";
 const uuid = require("uuid");
@@ -27,7 +27,7 @@ const styles = {
   }
 };
 
-class TimePicker extends React.Component {
+class TeeTimePicker extends React.Component {
   handleClose = () => {
     this.props.onClose(this.props.selectedValue);
   };
@@ -43,14 +43,14 @@ class TimePicker extends React.Component {
       selectedValue,
       teeTimeWindow,
       currentTeeTimeWindow,
-      selectedTeeTimeWindow,
+      availableTeeTimes,
       ...other
     } = this.props;
 
-    const listTimes = time => (
+    const listTeeTimes = list => (
       <ListItem
         button
-        onClick={() => this.handleListItemClick(time)}
+        onClick={() => this.handleListItemClick(list)}
         key={uuid.v4()}
       >
         <ListItemAvatar>
@@ -58,7 +58,8 @@ class TimePicker extends React.Component {
             <QueryBuilder />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary={time} />
+
+        <ListItemText primary={list.time} />
       </ListItem>
     );
 
@@ -71,10 +72,10 @@ class TimePicker extends React.Component {
         <DialogTitle id="time-picker">Select Time Window</DialogTitle>
         <div>
           <List>
-            {map(listTimes, currentTeeTimeWindow)}
+            {map(listTeeTimes, availableTeeTimes)}
             <ListItem
               button
-              onClick={() => this.handleListItemClick(currentTeeTimeWindow._id)}
+              onClick={() => this.handleListItemClick(availableTeeTimes._id)}
             />
           </List>
         </div>
@@ -83,7 +84,7 @@ class TimePicker extends React.Component {
   }
 }
 
-TimePicker.propTypes = {
+TeeTimePicker.propTypes = {
   classes: PropTypes.object.isRequired,
   onClose: PropTypes.func,
   selectedValue: PropTypes.string
@@ -91,18 +92,18 @@ TimePicker.propTypes = {
 
 const mapStateToPropsPicker = state => ({
   currentTeeTimeWindow: state.courses.currentCourse.teeTimeWindow,
-  selectedTeeTime: state.courses.currentCourse.selectedTeeTime,
-  teeTimeWindow: state.courses.teeTimeWindow
+  teeTimeWindow: state.courses.teeTimeWindow,
+  availableTeeTimes: state.courses.availableTeeTimes
 });
 
 const connectorPick = connect(mapStateToPropsPicker);
 
-const WrappedTimePicker = connectorPick(withStyles(styles)(TimePicker));
+const WrappedTeeTimePicker = connectorPick(withStyles(styles)(TeeTimePicker));
 
-class TimeSelector extends React.Component {
+class AvailableTeeTimeSelector extends React.Component {
   state = {
     open: false,
-    selectedTeeTime: this.props.selectedTeeTime[1]
+    teeTimeCreated: this.props.teeTimeCreated[1]
   };
 
   handleClickOpen = () => {
@@ -112,21 +113,21 @@ class TimeSelector extends React.Component {
   };
 
   handleClose = value => {
-    console.log(value);
-    this.props.selectedTeeTime(value);
-    this.setState({ selectedTeeTime: value, open: false });
+    console.log("VALUE", value);
+    this.props.teeTimeCreated(value.time);
+    this.setState({ teeTimeCreated: value.time, open: false });
   };
 
   render() {
     return (
       <div>
         <Typography variant="subheading">
-          Selected: {this.state.selectedTeeTime}
+          Selected: {this.state.teeTimeCreated}
         </Typography>
         <br />
-        <Button onClick={this.handleClickOpen}>Select Time</Button>
-        <WrappedTimePicker
-          selectedValue={this.state.selectedTeeTime}
+        <Button onClick={this.handleClickOpen}>Select Tee-Time</Button>
+        <WrappedTeeTimePicker
+          selectedValue={this.state.teeTimeCreated}
           open={this.state.open}
           onClose={this.handleClose}
         />
@@ -141,17 +142,16 @@ const mapStateToProps = state => ({
   teeTimes: state.courses.currentCourse.teeTimes,
   teeTimeWindow: state.courses.teeTimeWindow,
   currentTeeTimeWindow: state.courses.currentCourse.teeTimeWindow,
-  selectedTeeTimeWindow: state.courses.selectedTeeTimeWindow
+  selectedTeeTimeWindow: state.courses.selectedTeeTimeWindow,
+  teeTimeCreated: state.courses.teeTimeCreated,
+  availableTeeTimes: state.courses.availableTeeTimes
 });
 
 const mapActionsToProps = dispatch => {
   return {
-    selectedTeeTime: teetime => {
-      dispatch({ type: TEETIME_TIME_SELECTED, payload: teetime });
+    teeTimeCreated: teetime => {
+      dispatch({ type: NEW_TEETIME_CREATED, payload: teetime });
     }
-    // selectedTeeTime: teetime => {
-    //   dispatch({ type: TEETIME_WINDOW_SELECTED, payload: teetime });
-    // }
   };
 };
 
@@ -160,4 +160,4 @@ const connector = connect(
   mapActionsToProps
 );
 
-export default connector(TimeSelector);
+export default connector(AvailableTeeTimeSelector);
