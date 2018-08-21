@@ -6,7 +6,7 @@ import PhoneIcon from "@material-ui/icons/Phone";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import PersonPinIcon from "@material-ui/icons/PersonPin";
 import { Link } from "react-router-dom";
-import IconTabs from "../components/tabs";
+import IconTabs from "../../components/tabs";
 import { connect } from "react-redux";
 import {
   ExposurePlus1TwoTone,
@@ -17,7 +17,7 @@ import {
   GROUP_SIZE_SELECTED,
   GENDER_SELECTED,
   HANDICAP_RANGE_SELECTED
-} from "../constants";
+} from "../../constants";
 import { Paper, Tabs } from "@material-ui/core";
 
 const Friends = props => {
@@ -55,7 +55,7 @@ const Friends = props => {
         <IconTabs title="Gender" onChange={handleGenderChanged} value={gender}>
           <Tab value={"Male"} icon={<PhoneIcon />} label="Male" />
           <Tab value={"Female"} icon={<FavoriteIcon />} label="Female" />
-          <Tab value={"Both"} icon={<Wc />} label="Both" />{" "}
+          <Tab value={"Both"} icon={<Wc />} label="Both" />
         </IconTabs>
 
         <IconTabs
@@ -68,8 +68,8 @@ const Friends = props => {
           <Tab value={"5 - 15"} label="5 - 15" />
           <Tab value={"10 - 20"} label="10 - 20" />
           <Tab value={"15 - 25"} label="15 - 25" />
-          <Tab value={"25 and Above"} label="25 and Above" />
-          <Tab value={"Any Ability"} label="Any Ability" />{" "}
+          <Tab value={"25+"} label="25+" />
+          <Tab value={"Any Ability"} label="Any Ability" />
         </IconTabs>
         <Button
           style={{ marginRight: 20, marginTop: 30, padding: 20 }}

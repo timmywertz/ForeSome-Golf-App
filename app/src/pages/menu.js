@@ -14,15 +14,6 @@ const Menu = props => {
   return (
     <div>
       <center>
-        {/* <div>
-        <img
-          style={{ marginTop: 40, marginBottom: 5 }}
-          width="100"
-          height="200"
-          alt="line of golf balls"
-          src="/jpg-images/golf-2517685_1919.jpg"
-         />
-       </div> */}
         <Button
           // onClick={e => join === true}
           style={{ marginTop: 120, padding: 30 }}

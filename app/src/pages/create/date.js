@@ -4,15 +4,16 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { Component } from "react";
 import { Link } from "react-router-dom";
-import DatePicker from "../components/datepicker";
-import TimeSelector from "../components/timepicker";
+import DatePicker from "../../components/datepicker";
+import TimeSelector from "../../components/timepicker";
 import {
   TEETIME_DATE_SELECTED,
   TEETIME_TIME_SELECTED,
   TEETIME_WINDOW_SELECTED
-} from "../constants";
+} from "../../constants";
 import { connect } from "react-redux";
 import { isEmpty } from "ramda";
+import Paper from "@material-ui/core/Button";
 
 const Date = props => (
   <div>
@@ -31,10 +32,12 @@ const Date = props => (
           src="/png-images/clock-42655_1280.png"
         />
       </div>
-      <TimeSelector />
+      <Paper style={{ marginTop: 15, width: 300 }}>
+        <TimeSelector />
+      </Paper>
       <div>
         <Button
-          style={{ marginRight: 20, marginTop: 30, padding: 20 }}
+          style={{ marginRight: 20, marginTop: 20, padding: 20 }}
           component={Link}
           to="/teetime/new/location"
           variant="contained"
@@ -45,7 +48,7 @@ const Date = props => (
         </Button>
         <Button
           component={Link}
-          style={{ marginLeft: 20, marginTop: 30, padding: 20 }}
+          style={{ marginLeft: 20, marginTop: 20, padding: 20 }}
           to="/teetime/new/friends"
           variant="contained"
           size="large"

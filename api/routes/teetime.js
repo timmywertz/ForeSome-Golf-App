@@ -75,8 +75,10 @@ const missingFieldMsg = require("../lib/cleanObj");
 
 const reqFields = [
   "_id",
-  "date",
-  "time",
+  "type",
+  "_rev",
+  "teeTimeDate",
+  "teeTimeCreated",
   "courseId",
   "hcpRange",
   "groupSize",
@@ -109,9 +111,8 @@ const teeTimeRoutes = app => {
 
     const missingFields = checkRequiredFields(
       [
-        "_id",
-        "date",
-        "time",
+        "teeTimeDate",
+        "teeTimeCreated",
         "courseId",
         "hcpRange",
         "groupSize",
@@ -128,16 +129,15 @@ const teeTimeRoutes = app => {
     }
     const finalTeeTime = cleanObj(
       [
-        "_id",
-        "date",
-        "time",
+        "teeTimeDate",
+        "teeTimeCreated",
         "courseId",
         "hcpRange",
         "groupSize",
         "gender",
         "golfer_id"
       ],
-      newCategory
+      newTeeTime
     );
     addTeeTime(finalTeeTime)
       .then(addResult => {
@@ -156,8 +156,8 @@ const teeTimeRoutes = app => {
         "_id",
         "type",
         "_rev",
-        "date",
-        "time",
+        "teeTimeDate",
+        "teeTimeCreated",
         "courseId",
         "hcpRange",
         "groupSize",
@@ -177,8 +177,8 @@ const teeTimeRoutes = app => {
         "_id",
         "type",
         "_rev",
-        "date",
-        "time",
+        "teeTimeDate",
+        "teeTimeCreated",
         "courseId",
         "hcpRange",
         "groupSize",

@@ -15,7 +15,6 @@ const styles = theme => ({
     display: "flex",
     flexWrap: "wrap",
     justify: "center"
-
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -39,62 +38,59 @@ const Login = props => {
           noValidate
           autoComplete="off"
         >
-          <Grid container spacing={16}  direction="column-reverse" justify="center" alignItems="center">
-            <Grid item>
-            <TextField
-              required
-              id="firstName"
-              label="First Name"
-              className={classes.textField}
-              onChange={e => onTextFieldChange("firstName", e.target.value)}
-              margin="normal"
-            />
-            <TextField
-              required
-              id="lastName"
-              label="Last Name"
-              className={classes.textField}
-              onChange={e => onTextFieldChange("lastName", e.target.value)}
-              margin="normal"
-            />
-            <TextField
-              required
-              id="email"
-              label="Email"
-              className={classes.textField}
-              onChange={e => onTextFieldChange("lastName", e.target.value)}
-              margin="normal"
-            />
-            <TextField
-              required
-              id="password"
-              label="Password"
-              type="password"
-              onChange={e => onTextFieldChange("password", e.target.value)}
-              className={classes.textField}
-              margin="normal"
-            />
-            <TextField
-              id="gender"
-              label="Gender"
-              className={classes.textField}
-              onChange={e => onTextFieldChange("gender", e.target.value)}
-              autoComplete="current-password"
-              margin="normal"
-            />
-            <TextField
-              id="handicap"
-              label="handicap"
-              type="range"
-              defaultValue="36"
-              className={classes.textField}
-              onChange={e => onTextFieldChange("handicap", e.target.value)}
-              margin="normal"
-              InputProps={{
-                readOnly: true
-              }}
-            />
-          </Grid>
+          <TextField
+            required
+            id="firstName"
+            label="First Name"
+            className={classes.textField}
+            onChange={e => onTextFieldChange("firstName", e.target.value)}
+            margin="normal"
+          />
+          <TextField
+            required
+            id="lastName"
+            label="Last Name"
+            className={classes.textField}
+            onChange={e => onTextFieldChange("lastName", e.target.value)}
+            margin="normal"
+          />
+          <TextField
+            required
+            id="email"
+            label="Email"
+            className={classes.textField}
+            onChange={e => onTextFieldChange("lastName", e.target.value)}
+            margin="normal"
+          />
+          <TextField
+            required
+            id="password"
+            label="Password"
+            type="password"
+            onChange={e => onTextFieldChange("password", e.target.value)}
+            className={classes.textField}
+            margin="normal"
+          />
+          <TextField
+            id="gender"
+            label="Gender"
+            className={classes.textField}
+            onChange={e => onTextFieldChange("gender", e.target.value)}
+            autoComplete="current-password"
+            margin="normal"
+          />
+          <TextField
+            id="handicap"
+            label="handicap"
+            type="range"
+            defaultValue="36"
+            className={classes.textField}
+            onChange={e => onTextFieldChange("handicap", e.target.value)}
+            margin="normal"
+            InputProps={{
+              readOnly: true
+            }}
+          />
         </form>
         <Button
           variant="fab"

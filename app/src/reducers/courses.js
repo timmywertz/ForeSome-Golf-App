@@ -10,7 +10,10 @@ import {
   GENDER_SELECTED,
   HANDICAP_RANGE_SELECTED,
   NEW_TEETIME_CREATED,
-  TEETIME_WINDOW_SELECTED
+  TEETIME_WINDOW_SELECTED,
+  TEETIME_DATE_JOINED,
+  TEETIME_TIME_JOINED,
+  TEETIME_WINDOW_JOINED
 } from "../constants";
 import { contains, find, filter, merge, propEq } from "ramda";
 
@@ -53,8 +56,8 @@ const timeToNumber = timeRangeString => {
 };
 
 const timeToFloat = timeString => {
-  var newString = timeString.replace(":", ".");
-  var timeFloat = parseFloat(newString);
+  let newString = timeString.replace(":", ".");
+  let timeFloat = parseFloat(newString);
   if (timeFloat >= 1 && timeFloat <= 6) {
     timeFloat = timeFloat + 12;
   }
@@ -110,13 +113,13 @@ export const courses = (state = initialCourseState, action) => {
       console.log(action.payload);
       return merge(state, { courses: action.payload });
 
-    case TEETIME_JOINED:
-      console.log(action.payload);
-      return merge(state, { join: true });
+    // case TEETIME_JOINED:
+    //   console.log(action.payload);
+    //   return merge(state, { join: true });
 
-    case NEW_TEETIME_STARTED:
-      console.log(action.payload);
-      return merge(state, { join: action.payload });
+    // case NEW_TEETIME_STARTED:
+    //   console.log(action.payload);
+    //   return merge(state, { join: action.payload });
 
     case GET_CURRENT_COURSE:
       return state;
@@ -135,6 +138,25 @@ export const courses = (state = initialCourseState, action) => {
 
       console.log("courseObj", courseObj);
       return merge(state, { currentCourse: courseObj });
+
+    case TEETIME_DATE_JOINED:
+      console.log("state", state);
+      console.log("in reducer TEETIME DATE SELECTED", action.payload);
+      return merge(state, { teeTimeDate: action.payload });
+
+    case TEETIME_TIME_JOINED:
+      console.log("inReducerTEETIMESELECTED", action.payload);
+      console.log("stateTEETIMESELECT", state);
+      console.log(timeToNumber(action.payload));
+      return merge(state, {
+        selectedTeeTime: action.payload,
+        availableTeeTimes: availableTeeTimes
+      });
+
+    case TEETIME_WINDOW_JOINED:
+      console.log("state", state);
+      console.log("in reducer TEETIME DATE SELECTED", action.payload);
+      return merge(state, { selectedTeeTimeWindow: action.payload });
 
     case TEETIME_WINDOW_SELECTED:
       return merge(state, { selectedTeeTimeWindow: action.payload });
@@ -166,7 +188,7 @@ export const courses = (state = initialCourseState, action) => {
       return merge(state, {
         selectedTeeTime: timeToNumber(action.payload),
         availableTeeTimes: availableTeeTimes
-      }); //action.payload
+      });
 
     case GROUP_SIZE_SELECTED:
       console.log("GROUP_SIZE_SELECTED action.payload", action.payload);

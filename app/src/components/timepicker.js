@@ -149,9 +149,6 @@ const mapActionsToProps = dispatch => {
     selectedTeeTime: teetime => {
       dispatch({ type: TEETIME_TIME_SELECTED, payload: teetime });
     }
-    // selectedTeeTime: teetime => {
-    //   dispatch({ type: TEETIME_WINDOW_SELECTED, payload: teetime });
-    // }
   };
 };
 

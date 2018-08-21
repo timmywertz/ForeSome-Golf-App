@@ -1,7 +1,10 @@
 const NodeHTTPError = require("node-http-error");
-const { getGolfers, getGolfer } = require("../dal");
+const { getGolfers, getGolfer, addGolfer } = require("../dal");
 const bodyParser = require("body-parser");
-const { not, pathOr } = require("ramda");
+const { concat, isEmpty, not, pathOr, propOr } = require("ramda");
+const checkRequiredFields = require("../lib/checkRequiredFields");
+const cleanObj = require("../lib/cleanObj");
+const missingFieldMsg = require("../lib/missingFieldMsg");
 
 // {
 //     _id: "golfer_wertz_timmylwertz@gmail.com",
@@ -13,9 +16,9 @@ const { not, pathOr } = require("ramda");
 //     emailAddress: "timmylwertz@gmail.com"
 //   },
 
-const reqFields = ["_id", "lastName", "firstName", "emailAddress"];
+const reqFields = ["firstName", "lastName", "emailAddress"];
 
-const allowedFields = ["handicap", "gender"];
+const allowedFields = concat(["handicap", "gender", "password"], reqFields);
 
 const golferRoutes = app => {
   //app.get("/", (req, res) => res.send("Welcome to the ForeSome API"));
@@ -34,6 +37,60 @@ const golferRoutes = app => {
         next(new NodeHTTPError(err.status, err.message, err));
       });
   });
+  app.post("/golfers", (req, res, next) => {
+    const newGolfer = propOr({}, "body", req);
+    //   console.log(JSON.stringify(newTeeTime));
+
+    if (isEmpty(newGolfer)) {
+      next(
+        new NodeHTTPError(
+          400,
+          "No valid JSON document was provided in the request body."
+        )
+      );
+      return;
+    }
+
+    const missingFields = checkRequiredFields(reqFields, newGolfer);
+
+    if (not(isEmpty(missingFields))) {
+      next(new NodeHTTPError(400, missingFieldMsg(missingFields)));
+      return;
+    }
+    const cleanGolfer = cleanObj(allowedFields, newGolfer);
+
+    addGolfer(cleanGolfer)
+      .then(result => {
+        console.log({ result });
+        res.status(201).send(result);
+      })
+      .catch(err => new NodeHTTPError(err.status, err.message, err));
+  });
+
+  // const missingFields = checkRequiredFields(
+  //   ["firstName", "lastName", "email", "password", "gender", "handicap"],
+  //   newGolfer
+  // );
+
+  //     if (not(isEmpty(missingFields))) {
+  //       next(
+  //         new NodeHTTPError(400, `missing the following fields: ${missingFields}`)
+  //       );
+  //     }
+
+  //     const finalGolfer = cleanObj(
+  //       ["firstName", "lastName", "email", "password", "gender", "handicap"],
+  //       newGolfer
+  //     );
+  //     addGolfer(finalGolfer)
+  //       .then(addResult => {
+  //         console.log(addResult);
+  //         res.status(201).send(addResult);
+  //       })
+  //       .catch(err => {
+  //         next(new NodeHTTPError(err.status, err.message, err));
+  //       });
+  //   });
 };
 
 module.exports = golferRoutes;

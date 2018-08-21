@@ -1111,15 +1111,13 @@ const golfCourse = [
 const teeTimes = [
   {
     _id: "teetime_course_wild-dunes-harbor_2018-08-25T08:00",
-    date: "2018-08-25",
-    time: "8:00 AM",
-    courseId: "course_wild-dunes-harbor",
+    teeTimeDate: "2018-08-25",
+    teeTimeCreated: "8:00 AM",
+    course_id: "course_wild-dunes-harbor",
     type: "teetime",
-    size: 4,
-    hcpRange: {
-      low: 0,
-      high: 36
-    },
+    groupSize: 4,
+    hcpRange: "Any Ability",
+    gender: "both",
     foursome: [
       {
         _id: "golfer_wertz_timmylwertz@gmail.com",
@@ -1472,7 +1470,7 @@ const teeTimes = [
     time: "1:20 PM",
     courseId: "course_links-at-stono-ferry",
     type: "teetime",
-    size: 4,
+    groupSize: 4,
     hcpRange: {
       low: 10,
       high: 20

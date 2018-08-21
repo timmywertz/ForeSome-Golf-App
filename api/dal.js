@@ -1,6 +1,6 @@
 const PouchDB = require("pouchdb-core");
 PouchDB.plugin(require("pouchdb-adapter-http"));
-const { map, prop } = require("ramda");
+const { map, prop, merge } = require("ramda");
 const pkGen = require("./lib/pkGen");
 
 const COUCHDB_SERVER = process.env.COUCHDB_SERVER;
@@ -19,6 +19,18 @@ const getGolfers = () =>
       endkey: "golfer_\ufff0"
     })
     .then(docs => map(prop("doc"), docs.rows));
+
+const addGolfer = golferDoc => {
+  const newID = pkGen(
+    "golfer_",
+    `${prop("lastName", golferDoc)}_${prop("email", golferDoc)}`
+  );
+  const newGolfer = merge(golferDoc, {
+    type: "golfer",
+    _id: newID
+  });
+  return db.put(newGolfer);
+};
 
 const getCourse = id => db.get(id);
 
@@ -43,8 +55,14 @@ const getTeeTimes = () =>
     .then(docs => map(prop("doc"), docs.rows));
 
 const addTeeTime = teeTimeDoc => {
-  const newID = pkGen("teetime_", prop("name", teeTimeDoc));
-  const newTeeTime = merge(categoryDoc, {
+  const newID = pkGen(
+    "teetime_",
+    `${prop("courseId", teeTimeDoc)}_${prop("date", teeTimeDoc)}_${prop(
+      "time",
+      teeTimeDoc
+    )}`
+  );
+  const newTeeTime = merge(teeTimeDoc, {
     type: "teetime",
     _id: newID
   });
@@ -58,7 +76,7 @@ const putTeeTime = teeTime => {
 const joinTeeTime = id =>
   db.put(
     merge(id, {
-      type: "event",
+      type: "teetime",
       _id: pkGen("teetime_", prop("name", id))
     })
   );
@@ -66,6 +84,7 @@ const joinTeeTime = id =>
 module.exports = {
   getGolfers,
   getGolfer,
+  addGolfer,
   getCourses,
   getCourse,
   getTeeTimes,

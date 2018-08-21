@@ -72,57 +72,37 @@ export const teeTimes = (state = [], action) => {
 
 const initialNewTeeTime = {
   data: {
-    name: "",
-    shortDesc: "",
-    desc: "",
-    icon: ""
+    _id: "",
+    date: "",
+    time: "",
+    courseId: "",
+    hcpRange: "",
+    groupSize: "",
+    gender: "",
+    golfer_id: ""
   },
   isError: false,
   isSaving: false,
   errMessage: ""
 };
-export const newCategory = (state = initialNewCategory, action) => {
+
+export const newTeeTime = (state = initialNewTeeTime, action) => {
   switch (action.type) {
-    case NEW_CATEGORY_SAVE_FAILED:
+    case NEW_TEETIME_FORM_UPDATED:
+      return mergeDeepRight(state, { data: action.payload });
+    case NEW_TEETIME_SAVE_FAILED:
       return merge(state, {
         isError: true,
-        errMessage: "Failed to save new category to database",
+        errMessage: "Failed to save new teetime to database",
         isSaving: false
       });
-    case NEW_CATEGORY_SAVE_STARTED:
+    case NEW_TEETIME_SAVE_STARTED:
       return merge(state, { isSaving: true, isError: false, errMessage: "" });
-    case NEW_CATEGORY_SAVE_SUCCEEDED:
-      return initialNewCategory;
-    case NEW_CATEGORY_FORM_UPDATED:
-      return mergeDeepRight(state, { data: action.payload });
-    case NEW_CATEGORY_CLEARED:
-      return initialNewCategory;
+    case NEW_TEETIME_SAVE_SUCCEEDED:
+      return initialNewTeeTime;
+    case NEW_TEETIME_CLEARED:
+      return initialNewTeeTime;
     default:
       return state;
   }
 };
-
-// export const newTeeTime = (state = newInitialTeeTimeState, action) => {
-//   switch (action.type) {
-//     case NEW_TEETIME_FORM_UPDATED:
-//       return mergeDeepRight(state, { data: action.payload });
-//     case NEW_TEETIME_SAVE_FAILED:
-//       return merge(state, {
-//         isError: true,
-//         isSaving: false,
-//         errorMsg: action.payload
-//       });
-//     case NEW_TEETIME_SAVE_STARTED:
-//       return merge(state, {
-//         isError: false,
-//         isSaving: true,
-//         errorMsg: ""
-//       });
-//     case NEW_TEETIME_SAVE_SUCCEEDED:
-//       return newInitialTeeTimeState;
-//     case NEW_TEETIME_CLEARED:
-//       return newInitialTeeTimeState;
-//     default:
-//       return state;
-//   }
-// };
