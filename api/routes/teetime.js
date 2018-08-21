@@ -1,7 +1,26 @@
 const NodeHTTPError = require("node-http-error");
-const { getTeeTimes, getTeeTime } = require("../dal");
+const {
+  getTeeTimes,
+  getTeeTime,
+  addTeeTime,
+  putTeeTime,
+  joinTeeTime
+} = require("../dal");
 const bodyParser = require("body-parser");
-const { not, pathOr } = require("ramda");
+const { isEmpty, not, pathOr, propOr } = require("ramda");
+const checkRequiredFields = require("../lib/checkRequiredFields");
+const cleanObj = require("../lib/cleanObj");
+const missingFieldMsg = require("../lib/cleanObj");
+
+// const {
+//   getResources,
+//   getResource,
+//   postResource,
+//   putResource,
+//   deleteResource
+// } = require("../dal")
+// const { propOr, isEmpty, not, concat, pathOr } = require("ramda")
+// const missingFieldMsg = require("../lib/missingFieldMsg")
 
 // {
 //     _id: "teetime_course_wild-dunes-harbor_2018-08-25T08:00",
@@ -59,10 +78,10 @@ const reqFields = [
   "date",
   "time",
   "courseId",
-  "type",
   "hcpRange",
-  "foursome",
-  "primaryGolfer_id"
+  "groupSize",
+  "gender",
+  "golfer_id"
 ];
 
 const allowedFields = [];
@@ -84,6 +103,98 @@ const teeTimeRoutes = app => {
         next(new NodeHTTPError(err.status, err.message, err));
       });
   });
-};
+  app.post("/teetimes", (req, res, next) => {
+    const newTeeTime = propOr({}, "body", req);
+    console.log(JSON.stringify(newTeeTime));
 
+    const missingFields = checkRequiredFields(
+      [
+        "_id",
+        "date",
+        "time",
+        "courseId",
+        "hcpRange",
+        "groupSize",
+        "gender",
+        "golfer_id"
+      ],
+      newTeeTime
+    );
+
+    if (not(isEmpty(missingFields))) {
+      next(
+        new NodeHTTPError(400, `missing the following fields: ${missingFields}`)
+      );
+    }
+    const finalTeeTime = cleanObj(
+      [
+        "_id",
+        "date",
+        "time",
+        "courseId",
+        "hcpRange",
+        "groupSize",
+        "gender",
+        "golfer_id"
+      ],
+      newCategory
+    );
+    addTeeTime(finalTeeTime)
+      .then(addResult => {
+        console.log(addResult);
+        res.status(201).send(addResult);
+      })
+      .catch(err => {
+        next(new NodeHTTPError(err.status, err.message, err));
+      });
+  });
+  app.put("/teetimes/:id", (req, res, next) => {
+    const joinedTeeTime = propOr({}, "body", req);
+
+    const missingFields = checkRequiredFields(
+      [
+        "_id",
+        "type",
+        "_rev",
+        "date",
+        "time",
+        "courseId",
+        "hcpRange",
+        "groupSize",
+        "gender",
+        "golfer_id"
+      ],
+      joinedTeeTime
+    );
+
+    if (not(isEmpty(missingFields))) {
+      next(
+        new NodeHTTPError(400, `missing the following fields: ${missingFields}`)
+      );
+    }
+    const finalObj = cleanObj(
+      [
+        "_id",
+        "type",
+        "_rev",
+        "date",
+        "time",
+        "courseId",
+        "hcpRange",
+        "groupSize",
+        "gender",
+        "golfer_id"
+      ],
+      joinedTeeTime
+    );
+    joinTeeTime(finalObj)
+      .then(addResult => {
+        console.log(addResult);
+        res.status(201).send(addResult);
+      })
+      .catch(err => {
+        next(new NodeHTTPError(err.status, err.message, err));
+      });
+  });
+};
 module.exports = teeTimeRoutes;

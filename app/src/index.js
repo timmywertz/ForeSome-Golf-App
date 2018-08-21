@@ -7,6 +7,7 @@ import registerServiceWorker from "./registerServiceWorker";
 import store from "./store";
 import { Provider } from "react-redux";
 import { getCourses } from "./action-creators/courses";
+import { createNewGolfer } from "./action-creators/golfers";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -16,3 +17,4 @@ ReactDOM.render(
 );
 registerServiceWorker();
 store.dispatch(getCourses);
+store.dispatch(createNewGolfer);

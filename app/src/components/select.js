@@ -43,10 +43,13 @@ const SelectButtons = props => {
           value={value}
           onChange={onChange}
         >
+          {/* {options.map(option => (
+              <FormControlLabel value={option} key={option} control={<Radio />} label={option} />
+            ))} */}
           <FormControlLabel
             value={value}
             control={<Radio />}
-            label={label}
+            label={value}
             onChange={onChange}
           >
             {children}

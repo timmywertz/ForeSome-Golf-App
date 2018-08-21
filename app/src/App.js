@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import Home from "./pages/home";
 import Menu from "./pages/menu";
 import Date from "./pages/date";
-//import Login from "./pages/login";
+import Login from "./pages/login";
 import Location from "./pages/location";
 import Friends from "./pages/friends";
 import Final from "./pages/final";
@@ -19,7 +19,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={register} />
-          {/*<Route exact path="/login" component={Login} /> */}
+          <Route exact path="/login" component={Login} />
           <Route exact path="/menu" component={Menu} />
           <Route exact path="/teetime/new/date" component={Date} />
           <Route exact path="/teetime/join/date" component={Date} />

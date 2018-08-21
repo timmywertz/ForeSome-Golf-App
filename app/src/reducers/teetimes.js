@@ -70,7 +70,37 @@ export const teeTimes = (state = [], action) => {
   }
 };
 
-// const newInitialTeeTimeState = {};
+const initialNewTeeTime = {
+  data: {
+    name: "",
+    shortDesc: "",
+    desc: "",
+    icon: ""
+  },
+  isError: false,
+  isSaving: false,
+  errMessage: ""
+};
+export const newCategory = (state = initialNewCategory, action) => {
+  switch (action.type) {
+    case NEW_CATEGORY_SAVE_FAILED:
+      return merge(state, {
+        isError: true,
+        errMessage: "Failed to save new category to database",
+        isSaving: false
+      });
+    case NEW_CATEGORY_SAVE_STARTED:
+      return merge(state, { isSaving: true, isError: false, errMessage: "" });
+    case NEW_CATEGORY_SAVE_SUCCEEDED:
+      return initialNewCategory;
+    case NEW_CATEGORY_FORM_UPDATED:
+      return mergeDeepRight(state, { data: action.payload });
+    case NEW_CATEGORY_CLEARED:
+      return initialNewCategory;
+    default:
+      return state;
+  }
+};
 
 // export const newTeeTime = (state = newInitialTeeTimeState, action) => {
 //   switch (action.type) {
