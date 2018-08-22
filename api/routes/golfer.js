@@ -66,31 +66,6 @@ const golferRoutes = app => {
       })
       .catch(err => new NodeHTTPError(err.status, err.message, err));
   });
-
-  // const missingFields = checkRequiredFields(
-  //   ["firstName", "lastName", "email", "password", "gender", "handicap"],
-  //   newGolfer
-  // );
-
-  //     if (not(isEmpty(missingFields))) {
-  //       next(
-  //         new NodeHTTPError(400, `missing the following fields: ${missingFields}`)
-  //       );
-  //     }
-
-  //     const finalGolfer = cleanObj(
-  //       ["firstName", "lastName", "email", "password", "gender", "handicap"],
-  //       newGolfer
-  //     );
-  //     addGolfer(finalGolfer)
-  //       .then(addResult => {
-  //         console.log(addResult);
-  //         res.status(201).send(addResult);
-  //       })
-  //       .catch(err => {
-  //         next(new NodeHTTPError(err.status, err.message, err));
-  //       });
-  //   });
 };
 
 module.exports = golferRoutes;

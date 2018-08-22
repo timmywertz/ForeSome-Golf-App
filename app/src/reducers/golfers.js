@@ -25,7 +25,7 @@ import { merge, mergeDeepRight } from "ramda";
 
 // export const golfers = (state = [], action) => {
 //   switch (action.type) {
-//     case SET_COURSES:
+//     case GET_GOLFERS:
 //       return action.payload;
 //     default:
 //       return state;
@@ -34,11 +34,11 @@ import { merge, mergeDeepRight } from "ramda";
 
 const newGolferInitialState = {
   data: {
-    firstName: "Tim",
-    lastName: "Wertz",
-    emailAddress: "timmylwertz@gmail.com",
-    gender: "M",
-    handicap: 10
+    firstName: "",
+    lastName: "",
+    emailAddress: "",
+    gender: "",
+    handicap: ""
   },
   isError: false,
   isSaving: false,

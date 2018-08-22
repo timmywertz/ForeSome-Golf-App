@@ -13,7 +13,9 @@ import {
   TEETIME_WINDOW_SELECTED,
   TEETIME_DATE_JOINED,
   TEETIME_TIME_JOINED,
-  TEETIME_WINDOW_JOINED
+  TEETIME_WINDOW_JOINED,
+  NEW_TEETIME_SAVE_SUCCEEDED,
+  NEW_TEETIME_SAVE_FAILED
 } from "../constants";
 import { contains, find, filter, merge, propEq } from "ramda";
 
@@ -101,10 +103,13 @@ const initialCourseState = {
   groupSize: "Foursome",
   //selectedGroupSize: {}, //range 1-4,
   gender: "Both",
-  //selectedGenderPreferences: {},
+  golferId: "",
   hcpRangeOptions: [],
   hcpRange: "Any Ability",
-  teeTime: {}
+  teeTime: {},
+  isError: false,
+  isSaving: false,
+  errMessage: ""
 };
 
 export const courses = (state = initialCourseState, action) => {
@@ -205,6 +210,16 @@ export const courses = (state = initialCourseState, action) => {
       console.log("NEW_TEETIME_SELECTED", action.payload);
       console.log("NEW_TEETIME_STATE", state);
       return merge(state, { teeTimeCreated: action.payload });
+    case NEW_TEETIME_SAVE_SUCCEEDED:
+      return initialCourseState;
+
+    case NEW_TEETIME_SAVE_FAILED:
+      return merge(state, {
+        isError: true,
+        errMessage: "Failed to save new teetime to database",
+        isSaving: false
+      });
+
     default:
       return state;
   }

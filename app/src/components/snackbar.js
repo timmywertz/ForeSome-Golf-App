@@ -46,7 +46,7 @@ const styles1 = theme => ({
   }
 });
 
-const MySnackBarContent = props => {
+function MySnackbarContent(props) {
   const { classes, className, message, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
 
@@ -74,9 +74,9 @@ const MySnackBarContent = props => {
       {...other}
     />
   );
-};
+}
 
-MySnackBarContent.propTypes = {
+MySnackbarContent.propTypes = {
   classes: PropTypes.object.isRequired,
   className: PropTypes.string,
   message: PropTypes.node,
@@ -84,7 +84,7 @@ MySnackBarContent.propTypes = {
   variant: PropTypes.oneOf(["success", "warning", "error", "info"]).isRequired
 };
 
-const MySnackBarContentWrapper = withStyles(styles1)(MySnackBarContent);
+const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 const styles2 = theme => ({
   margin: {
@@ -92,35 +92,52 @@ const styles2 = theme => ({
   }
 });
 
-const MySnackBar = props => {
-  this.state = { open: true };
-  const { snackType, message } = props;
+class CustomSnackbar extends React.Component {
+  state = {
+    open: true
+  };
 
-  return (
-    <div>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center"
-        }}
-        open={this.state.open}
-        autoHideDuration={8000}
-        onClose={this.handleClose}
-      >
-        <MySnackBarContentWrapper
+  // handleClick = () => {
+  //   this.setState({ open: true });
+  // };
+
+  handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    this.setState({ open: false });
+  };
+
+  render() {
+    const { snackType, message } = this.props;
+
+    return (
+      <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center"
+          }}
+          open={this.state.open}
+          autoHideDuration={6000}
           onClose={this.handleClose}
-          variant={snackType}
-          message={message}
-        />
-      </Snackbar>
-    </div>
-  );
-};
+        >
+          <MySnackbarContentWrapper
+            onClose={this.handleClose}
+            variant={snackType}
+            message={message}
+          />
+        </Snackbar>
+      </div>
+    );
+  }
+}
 
-MySnackBar.propTypes = {
+CustomSnackbar.propTypes = {
   classes: PropTypes.object.isRequired,
   snackType: PropTypes.string,
   message: PropTypes.string
 };
 
-export default withStyles(styles2)(MySnackBar);
+export default withStyles(styles2)(CustomSnackbar);

@@ -14,7 +14,7 @@ import { map } from "ramda";
 import AvailableTeeTimeSelector from "../../components/teetimepicker";
 import { addTeeTime } from "../../action-creators/teetimes";
 import Paper from "@material-ui/core/Paper";
-import MySnackBar from "../../components/snackbar";
+import CustomSnackbar from "../../components/snackbar";
 
 // const listAvailableTeeTimes = availableTeeTimes => (
 //   <SelectButtons
@@ -45,61 +45,59 @@ const Final = props => {
   console.log("availableTeeTimes", availableTeeTimes);
   return (
     <div>
-      {/* <form autoComplete="off" onSubmit={createNewTeeTime(history)}> */}
-      <center>
-        <Typography style={{ marginTop: 50 }} variant="display3">
-          CONFIRM
-        </Typography>
-        <Paper style={{ marginTop: 15, width: 300 }}>
-          <AvailableTeeTimeSelector style={{ marginTop: 60 }} />
-        </Paper>
-        <Typography style={{ marginTop: 80 }} variant="title">
-          Settings:
-        </Typography>
-        <Typography style={{ marginTop: 20 }} variant="subheading">
-          <div> Course: {currentCourse.name} </div>
-          <div> Group Size: {groupSize} </div>
-          <div> Gender: {gender} </div>
-          <div> Handicap Range: {hcpRange} </div>
-          <div> Date: {teeTimeDate} </div>
-          {/* <div> Time Window: {selectedTeeTimeWindow} </div> */}
-        </Typography>
-        <Button
-          style={{ marginRight: 20, marginTop: 15, padding: 20 }}
-          component={Link}
-          to="/teetime/new/friends"
-          variant="contained"
-          size="large"
-          color="primary"
-        >
-          Go Back
-        </Button>
-        <div>
+      <form autoComplete="off" onSubmit={createNewTeeTime(history)}>
+        <center>
+          <Typography style={{ marginTop: 50 }} variant="display3">
+            CONFIRM
+          </Typography>
+          <Paper style={{ marginTop: 15, width: 300 }}>
+            <AvailableTeeTimeSelector style={{ marginTop: 60 }} />
+          </Paper>
+          <Typography style={{ marginTop: 80 }} variant="title">
+            Settings:
+          </Typography>
+          <Typography style={{ marginTop: 20 }} variant="subheading">
+            <div> Course: {currentCourse.name} </div>
+            <div> Group Size: {groupSize} </div>
+            <div> Gender: {gender} </div>
+            <div> Handicap Range: {hcpRange} </div>
+            <div> Date: {teeTimeDate} </div>
+            {/* <div> Time Window: {selectedTeeTimeWindow} </div> */}
+          </Typography>
           <Button
+            style={{ marginRight: 20, marginTop: 15, padding: 20 }}
             component={Link}
-            //onChange={teeTimeCreated(history)}
-            type="submit"
-            value="submit"
-            aria-label="add"
-            style={{ marginTop: 0, padding: 20 }}
-            to="/thankyou"
-            variant="extendedFab"
+            to="/teetime/new/friends"
+            variant="contained"
             size="large"
-            color="secondary"
+            color="primary"
           >
-            Submit New Tee-Time!
+            Go Back
           </Button>
-        </div>
-      </center>
-      {/* </form>
-      {/* {props.isError && ( */}
-      {/* //   <MySnackBar */}
-      {/* //     message="There has been an error uploading this teetime"
-      //     snackType="error"
-      //   />
-      // )}
-      // {props.isSaving && <MySnackBar message="Saving..." snackType="info" />} 
-      */}
+          <div>
+            <Button
+              // component={Link}
+              type="submit"
+              value="submit"
+              aria-label="add"
+              style={{ marginTop: 0, padding: 20 }}
+              // to="/thankyou"
+              variant="extendedFab"
+              size="large"
+              color="secondary"
+            >
+              Submit New Tee-Time!
+            </Button>
+          </div>
+        </center>
+      </form>
+      {isError && (
+        <CustomSnackbar
+          message="There has been an error uploading this teetime"
+          snackType="error"
+        />
+      )}
+      {isSaving && <CustomSnackbar message="Saving..." snackType="info" />}
     </div>
   );
 };
@@ -107,20 +105,18 @@ const Final = props => {
 const mapStateToProps = state => ({
   courses: state.courses,
   currentCourse: state.courses.currentCourse,
+  courseId: state.courses.currentCourse._id,
   groupSize: state.courses.groupSize,
   gender: state.courses.gender,
   hcpRange: state.courses.hcpRange,
   teeTimes: state.courses.currentCourse.teeTimes,
-  selectedTeeTimeDate: state.courses.teeTimeDate,
-  selectedTeeTimeWindow: state.courses.selectedTeeTimeWindow,
-  selectedTeeTime: state.courses.selectedTeeTime,
+  golferId: state.courses.golfer_id,
   teeTimeDate: state.courses.teeTimeDate,
   teeTimeCreated: state.courses.teeTimeCreated,
-  availableTeeTimes: state.courses.availableTeeTimes
-  // newTeeTimeData: state.newTeeTime.data,
-  // isSaving: state.newTeeTime.isSaving,
-  // isError: state.newTeeTime.isError,
-  // errMessage: state.newTeeTime.errMessage
+  availableTeeTimes: state.courses.availableTeeTimes,
+  isSaving: state.courses.isSaving,
+  isError: state.courses.isError,
+  errMessage: state.courses.errMessage
 });
 
 const mapActionsToProps = dispatch => {

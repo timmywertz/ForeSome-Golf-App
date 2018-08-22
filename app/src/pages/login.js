@@ -27,7 +27,15 @@ const styles = theme => ({
 });
 
 const Login = props => {
-  const { classes, onTextFieldChange, history, createGolfer } = props;
+  const {
+    classes,
+    onTextFieldChange,
+    history,
+    createGolfer,
+    isError,
+    isLoading,
+    errMsg
+  } = props;
 
   return (
     <div>
@@ -59,11 +67,10 @@ const Login = props => {
             id="email"
             label="Email"
             className={classes.textField}
-            onChange={e => onTextFieldChange("lastName", e.target.value)}
+            onChange={e => onTextFieldChange("emailAddress", e.target.value)}
             margin="normal"
           />
           <TextField
-            required
             id="password"
             label="Password"
             type="password"
@@ -87,44 +94,47 @@ const Login = props => {
             className={classes.textField}
             onChange={e => onTextFieldChange("handicap", e.target.value)}
             margin="normal"
-            InputProps={{
-              readOnly: true
-            }}
           />
+
+          <Button
+            variant="fab"
+            color="primary"
+            type="submit"
+            value="submit"
+            aria-label="add"
+            className="fab-button"
+            to="/menu"
+          >
+            <SaveIcon />
+          </Button>
+          <Button //type: submit? // or add tracker
+            component={Link}
+            style={{ marginLeft: 20, marginTop: 30, padding: 20 }}
+            to="/menu"
+            variant="contained"
+            aria-label="add"
+            size="large"
+            color="secondary"
+          >
+            Next
+          </Button>
         </form>
-        <Button
-          variant="fab"
-          color="primary"
-          type="submit"
-          aria-label="add"
-          className="fab-button"
-        >
-          <SaveIcon />
-        </Button>
-        <Button //type: submit? // or add tracker
-          component={Link}
-          style={{ marginLeft: 20, marginTop: 30, padding: 20 }}
-          to="/menu"
-          variant="contained"
-          aria-label="add"
-          size="large"
-          color="secondary"
-        >
-          Next
-        </Button>
       </center>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  newGolfers: state.newGolfers
+  newGolfers: state.newGolfer.data,
+  isError: state.newGolfer.isError,
+  isLoading: state.newGolfer.isLoading,
+  errMsg: state.newGolfer.errMsg
 });
 
 const mapActionsToProps = dispatch => {
   return {
-    onTextFieldChange: (key, value) => {
-      dispatch({ type: NEW_GOLFER_FORM_UPDATED, payload: { [key]: value } });
+    onTextFieldChange: (field, value) => {
+      dispatch({ type: NEW_GOLFER_FORM_UPDATED, payload: { [field]: value } });
     },
     createGolfer: history => e => {
       e.preventDefault();

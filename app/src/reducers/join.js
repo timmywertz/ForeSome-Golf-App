@@ -1,9 +1,15 @@
 import {
+  COURSES_ACQURIED,
   TEETIME_DATE_JOINED,
   TEETIME_TIME_JOINED,
   TEETIME_WINDOW_JOINED
 } from "../constants";
 import { merge } from "ramda";
+
+const now = new Date();
+const month =
+  now.getMonth() + 1 < 10 ? `0${now.getMonth() + 1}` : now.getMonth() + 1;
+const stringDate = `${now.getFullYear()}-${month}-${now.getDate()}`;
 
 const initialJoinTeeTimeState = {
   join: true, //if true, player is joining, if false, player is creating a new foursome
@@ -50,8 +56,7 @@ export const joinTeeTime = (state = initialJoinTeeTimeState, action) => {
       console.log("state", state);
       console.log("in reducer TEETIME DATE SELECTED", action.payload);
       return merge(state, {
-        selectedTeeTime: action.payload,
-        availableTeeTimes: availableTeeTimes
+        selectedTeeTime: action.payload
       });
 
     case TEETIME_WINDOW_JOINED:

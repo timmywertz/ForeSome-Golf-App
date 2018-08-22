@@ -45,7 +45,7 @@ const JoinFinal = props => {
   console.log("availableTeeTimes", availableTeeTimes);
   return (
     <div>
-      {/* <form autoComplete="off" onSubmit={createNewTeeTime(history)}> */}
+      {/* <form autoComplete="off">onSubmit={joinTeeTime(history)} */}
       <center>
         <Typography style={{ marginTop: 50 }} variant="display3">
           CONFIRM
@@ -74,7 +74,7 @@ const JoinFinal = props => {
         <div>
           <Button
             component={Link}
-            //onChange={teeTimeCreated(history)}
+            // onClick={}
             type="submit"
             value="submit"
             aria-label="add"
@@ -88,7 +88,7 @@ const JoinFinal = props => {
           </Button>
         </div>
       </center>
-      {/* </form>
+      {/* </form> */}
       {/* {props.isError && ( */}
       {/* //   <MySnackBar */}
       {/* //     message="There has been an error uploading this teetime"
@@ -104,37 +104,40 @@ const JoinFinal = props => {
 const mapStateToProps = state => ({
   courses: state.courses,
   currentCourse: state.courses.currentCourse,
+  courseId: state.courses.currentCourse._id,
   groupSize: state.courses.groupSize,
   gender: state.courses.gender,
   hcpRange: state.courses.hcpRange,
   teeTimes: state.courses.currentCourse.teeTimes,
-  selectedTeeTimeDate: state.courses.teeTimeDate,
-  selectedTeeTimeWindow: state.courses.selectedTeeTimeWindow,
-  selectedTeeTime: state.courses.selectedTeeTime,
+  golferId: state.courses.golfer_id,
+  //   selectedTeeTimeDate: state.courses.teeTimeDate,
+  //   selectedTeeTimeWindow: state.courses.selectedTeeTimeWindow,
+  //   selectedTeeTime: state.courses.selectedTeeTime,
   teeTimeDate: state.courses.teeTimeDate,
   teeTimeCreated: state.courses.teeTimeCreated,
   availableTeeTimes: state.courses.availableTeeTimes
+
   // newTeeTimeData: state.newTeeTime.data,
   // isSaving: state.newTeeTime.isSaving,
   // isError: state.newTeeTime.isError,
   // errMessage: state.newTeeTime.errMessage
 });
 
-const mapActionsToProps = dispatch => {
-  return {
-    teeTimeCreated: teetime => {
-      dispatch({ type: NEW_TEETIME_CREATED, payload: teetime });
-    },
-    createNewTeeTime: history => e => {
-      e.preventDefault();
-      dispatch(addTeeTime(history));
-    }
-  };
-};
+// const mapActionsToProps = dispatch => {
+//   return {
+//     teeTimeCreated: teetime => {
+//       dispatch({ type: NEW_TEETIME_CREATED, payload: teetime });
+//     },
+//     joinTeeTime: history => e => {
+//       e.preventDefault();
+//       dispatch(addTeeTime(history));
+//     }
+//   };
+// };
 
-const connector = connect(
-  mapStateToProps,
-  mapActionsToProps
-);
+// const connector = connect(
+//   mapStateToProps,
+//   mapActionsToProps
+// );
 
-export default connector(JoinFinal);
+export default JoinFinal;

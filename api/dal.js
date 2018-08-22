@@ -23,7 +23,7 @@ const getGolfers = () =>
 const addGolfer = golferDoc => {
   const newID = pkGen(
     "golfer_",
-    `${prop("lastName", golferDoc)}_${prop("email", golferDoc)}`
+    `${prop("lastName", golferDoc)}_${prop("emailAddress", golferDoc)}`
   );
   const newGolfer = merge(golferDoc, {
     type: "golfer",
@@ -57,8 +57,8 @@ const getTeeTimes = () =>
 const addTeeTime = teeTimeDoc => {
   const newID = pkGen(
     "teetime_",
-    `${prop("courseId", teeTimeDoc)}_${prop("date", teeTimeDoc)}_${prop(
-      "time",
+    `${prop("courseId", teeTimeDoc)}_${prop("teeTimeDate", teeTimeDoc)}_${prop(
+      "teeTimeCreated",
       teeTimeDoc
     )}`
   );
@@ -70,7 +70,7 @@ const addTeeTime = teeTimeDoc => {
 };
 
 const putTeeTime = teeTime => {
-  return db.put(event);
+  return db.put(teeTime);
 };
 
 const joinTeeTime = id =>

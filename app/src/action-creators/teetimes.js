@@ -1,5 +1,6 @@
 import {
   GET_TEETIMES,
+  SET_TEETIME,
   NEW_TEETIME_CREATED,
   NEW_TEETIME_SAVE_FAILED,
   NEW_TEETIME_SAVED,
@@ -17,22 +18,43 @@ export const getTeeTimes = async (dispatch, getState) => {
   dispatch({ type: GET_TEETIMES, payload: teeTimes });
 };
 
-export const addTeeTime = (teeTime, history) => async (dispatch, getState) => {
+export const setTeeTime = id => async (dispatch, getState) => {
+  const teeTime = await fetch(url + `/` + id)
+    .then(res => res.json())
+    .catch(err => console.log(err));
+
+  dispatch({ type: SET_TEETIME, payload: teeTime });
+};
+
+export const addTeeTime = history => async (dispatch, getState) => {
+  console.log("calledgetTeeTimes");
   dispatch({ type: NEW_TEETIME_SAVED });
+
+  const newTeeTime = {
+    courseId: getState().courses.currentCourse._id,
+    teeTimeDate: getState().courses.teeTimeDate,
+    teeTimeCreated: getState().courses.teeTimeCreated,
+    groupSize: getState().courses.groupSize,
+    hcpRange: getState().courses.hcpRange,
+    gender: getState().courses.gender,
+    golferId: getState().courses.golferId
+  };
 
   const result = await fetch(url, {
     headers: { "Content-Type": "application/json" },
     method: "POST",
-    body: JSON.stringify(getState().newTeeTime.data)
+    body: JSON.stringify(newTeeTime)
   })
     .then(res => res.json())
     .catch(err => dispatch({ type: NEW_TEETIME_SAVE_FAILED }));
+  console.log("RESULT", JSON.stringify(result));
   if (result.ok) {
     dispatch({ type: NEW_TEETIME_SAVE_SUCCEEDED });
     getTeeTimes(dispatch, getState);
-    history.push("/teetimes");
+    history.push("/final");
   } else {
-    dispatch({ NEW_TEETIME_SAVE_FAILED });
+    dispatch({ type: NEW_TEETIME_SAVE_FAILED });
+    alert("ERROR");
   }
 };
 

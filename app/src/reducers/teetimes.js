@@ -1,5 +1,5 @@
 import {
-  SET_TEETIMES,
+  GET_TEETIMES,
   NEW_TEETIME_FORM_UPDATED,
   NEW_TEETIME_SAVE_FAILED,
   NEW_TEETIME_SAVE_STARTED,
@@ -63,7 +63,7 @@ const initialTeeTimeState = {
 
 export const teeTimes = (state = [], action) => {
   switch (action.type) {
-    case SET_TEETIMES:
+    case GET_TEETIMES:
       return action.payload;
     default:
       return state;
@@ -90,16 +90,16 @@ export const newTeeTime = (state = initialNewTeeTime, action) => {
   switch (action.type) {
     case NEW_TEETIME_FORM_UPDATED:
       return mergeDeepRight(state, { data: action.payload });
-    case NEW_TEETIME_SAVE_FAILED:
-      return merge(state, {
-        isError: true,
-        errMessage: "Failed to save new teetime to database",
-        isSaving: false
-      });
+    // case NEW_TEETIME_SAVE_FAILED:
+    //   return merge(state, {
+    //     isError: true,
+    //     errMessage: "Failed to save new teetime to database",
+    //     isSaving: false
+    //   });
     case NEW_TEETIME_SAVE_STARTED:
       return merge(state, { isSaving: true, isError: false, errMessage: "" });
-    case NEW_TEETIME_SAVE_SUCCEEDED:
-      return initialNewTeeTime;
+    // case NEW_TEETIME_SAVE_SUCCEEDED:
+    // return initialNewTeeTime;
     case NEW_TEETIME_CLEARED:
       return initialNewTeeTime;
     default:

@@ -83,7 +83,7 @@ const reqFields = [
   "hcpRange",
   "groupSize",
   "gender",
-  "golfer_id"
+  "golferId"
 ];
 
 const allowedFields = [];
@@ -117,12 +117,13 @@ const teeTimeRoutes = app => {
         "hcpRange",
         "groupSize",
         "gender",
-        "golfer_id"
+        "golferId"
       ],
       newTeeTime
     );
 
     if (not(isEmpty(missingFields))) {
+      console.log("missingFields", missingFields);
       next(
         new NodeHTTPError(400, `missing the following fields: ${missingFields}`)
       );
@@ -135,13 +136,13 @@ const teeTimeRoutes = app => {
         "hcpRange",
         "groupSize",
         "gender",
-        "golfer_id"
+        "golferId"
       ],
       newTeeTime
     );
     addTeeTime(finalTeeTime)
       .then(addResult => {
-        console.log(addResult);
+        console.log("ADDRESULT", addResult);
         res.status(201).send(addResult);
       })
       .catch(err => {
@@ -162,7 +163,7 @@ const teeTimeRoutes = app => {
         "hcpRange",
         "groupSize",
         "gender",
-        "golfer_id"
+        "golferId"
       ],
       joinedTeeTime
     );
@@ -183,7 +184,7 @@ const teeTimeRoutes = app => {
         "hcpRange",
         "groupSize",
         "gender",
-        "golfer_id"
+        "golferId"
       ],
       joinedTeeTime
     );
