@@ -1,5 +1,6 @@
 import {
   NEW_TEETIME_STARTED,
+  NEW_TEETIME_BOOKED,
   TEETIME_JOINED,
   COURSES_ACQUIRED,
   GET_CURRENT_COURSE,
@@ -15,7 +16,10 @@ import {
   TEETIME_TIME_JOINED,
   TEETIME_WINDOW_JOINED,
   NEW_TEETIME_SAVE_SUCCEEDED,
-  NEW_TEETIME_SAVE_FAILED
+  NEW_TEETIME_SAVE_FAILED,
+  NEW_TEETIME_CLEARED,
+  NEW_TEETIME_SAVE_STARTED,
+  NEW_TEETIME_FORM_UPDATED
 } from "../constants";
 import { contains, find, filter, merge, propEq } from "ramda";
 
@@ -101,7 +105,7 @@ const initialCourseState = {
   availableTeeTimes: [], //once you know window, players, and join/create, loop trhough currentCourse and save in here the available tee times
   teeTimeCreated: "", //{course, numberplayers, final_tee_time,etc....} basically all the info u will show in confirmation page
   groupSize: "Foursome",
-  //selectedGroupSize: {}, //range 1-4,
+  currentGolfers: 1,
   gender: "Both",
   golferId: "",
   hcpRangeOptions: [],
@@ -109,7 +113,9 @@ const initialCourseState = {
   teeTime: {},
   isError: false,
   isSaving: false,
-  errMessage: ""
+  errMessage: "",
+  isBooked: false,
+  isFull: false
 };
 
 export const courses = (state = initialCourseState, action) => {
@@ -153,6 +159,7 @@ export const courses = (state = initialCourseState, action) => {
       console.log("inReducerTEETIMESELECTED", action.payload);
       console.log("stateTEETIMESELECT", state);
       console.log(timeToNumber(action.payload));
+
       return merge(state, {
         selectedTeeTime: action.payload,
         availableTeeTimes: availableTeeTimes
@@ -210,8 +217,15 @@ export const courses = (state = initialCourseState, action) => {
       console.log("NEW_TEETIME_SELECTED", action.payload);
       console.log("NEW_TEETIME_STATE", state);
       return merge(state, { teeTimeCreated: action.payload });
+
+    case NEW_TEETIME_FORM_UPDATED:
+      return merge(state, action.payload);
+
+    case NEW_TEETIME_SAVE_STARTED:
+      return merge(state, { isSaving: true, isError: false, errMessage: "" });
+
     case NEW_TEETIME_SAVE_SUCCEEDED:
-      return initialCourseState;
+      return merge(state, { isBooked: true });
 
     case NEW_TEETIME_SAVE_FAILED:
       return merge(state, {
@@ -220,13 +234,13 @@ export const courses = (state = initialCourseState, action) => {
         isSaving: false
       });
 
+    case NEW_TEETIME_CLEARED:
+      return initialCourseState;
+
+    case NEW_TEETIME_BOOKED:
+      return merge(state, { isBooked: true });
+
     default:
       return state;
   }
 };
-
-//do mapStatetoprops in teetime showing page
-//access it with state.courses.availableTeeTimes
-//display the times
-//allow user to select one
-//dispatch an action that send that time to reducer

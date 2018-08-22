@@ -53,7 +53,7 @@ const JoinLocation = props => {
         </Typography>
         <CourseCard />
         <Paper style={{ marginTop: 15, width: 300 }}>
-          <CourseSelector />
+          <CourseSelector join />
         </Paper>
         <Button
           style={{ marginRight: 20, marginTop: 30, padding: 20 }}

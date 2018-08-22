@@ -119,6 +119,18 @@ const Login = props => {
             Next
           </Button>
         </form>
+        {props.isError && (
+          <CustomSnackBar message={props.errMessage} snackType="error" />
+        )}
+        {props.isSaving && (
+          <CustomSnackBar message="Golfer Loading..." snackType="info" />
+        )}
+        {props.isAdded && (
+          <CustomSnackBar
+            message="Successfully Added Golfer"
+            snackType="success"
+          />
+        )}
       </center>
     </div>
   );
@@ -128,7 +140,8 @@ const mapStateToProps = state => ({
   newGolfers: state.newGolfer.data,
   isError: state.newGolfer.isError,
   isLoading: state.newGolfer.isLoading,
-  errMsg: state.newGolfer.errMsg
+  errMsg: state.newGolfer.errMsg,
+  isAdded: state.newGolfer.isAdded
 });
 
 const mapActionsToProps = dispatch => {

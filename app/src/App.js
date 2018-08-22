@@ -8,7 +8,8 @@ import Date from "./pages/create/date";
 // import Login from "./pages/login";
 import Location from "./pages/create/location";
 import Friends from "./pages/create/friends";
-import Final from "./pages//create/final";
+import Final from "./pages/create/final";
+import ThankYou from "./pages/create/thanks";
 import JoinDate from "./pages/join/date";
 import JoinLocation from "./pages/join/location";
 import JoinFinal from "./pages/join/final";
@@ -31,6 +32,7 @@ class App extends Component {
           <Route exact path="/teetime/new/friends" component={Friends} />
           <Route exact path="/teetime/join/final" component={JoinFinal} />
           <Route exact path="/teetime/new/final" component={Final} />
+          <Route exact path="/thankyou" component={ThankYou} />
         </Switch>
       </BrowserRouter>
     );

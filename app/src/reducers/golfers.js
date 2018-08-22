@@ -42,7 +42,8 @@ const newGolferInitialState = {
   },
   isError: false,
   isSaving: false,
-  errorMsg: ""
+  errorMsg: "",
+  isAdded: false
 };
 
 export const newGolfer = (state = newGolferInitialState, action) => {
@@ -59,7 +60,7 @@ export const newGolfer = (state = newGolferInitialState, action) => {
         errorMsg: action.payload
       });
     case NEW_GOLFER_FORM_SAVE_SUCCEEDED:
-      return newGolferInitialState;
+      return merge(state, { isAdded: true });
     case NEW_GOLFER_FORM_CLEARED:
       return newGolferInitialState;
     default:

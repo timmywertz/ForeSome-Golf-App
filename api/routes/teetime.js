@@ -82,6 +82,8 @@ const reqFields = [
   "courseId",
   "hcpRange",
   "groupSize",
+  "currentGolfers",
+  "isFull",
   "gender",
   "golferId"
 ];
@@ -116,6 +118,8 @@ const teeTimeRoutes = app => {
         "courseId",
         "hcpRange",
         "groupSize",
+        "currentGolfers",
+        "isFull",
         "gender",
         "golferId"
       ],
@@ -135,6 +139,8 @@ const teeTimeRoutes = app => {
         "courseId",
         "hcpRange",
         "groupSize",
+        "currentGolfers",
+        "isFull",
         "gender",
         "golferId"
       ],
@@ -162,6 +168,8 @@ const teeTimeRoutes = app => {
         "courseId",
         "hcpRange",
         "groupSize",
+        "currentGolfers",
+        "isFull",
         "gender",
         "golferId"
       ],
@@ -183,6 +191,8 @@ const teeTimeRoutes = app => {
         "courseId",
         "hcpRange",
         "groupSize",
+        "currentGolfers",
+        "isFull",
         "gender",
         "golferId"
       ],

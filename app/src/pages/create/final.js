@@ -6,7 +6,11 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import SelectButtons from "../../components/select";
 import { connect } from "react-redux";
-import { NEW_TEETIME_CREATED, TEETIME_TIME_SELECTED } from "../../constants";
+import {
+  NEW_TEETIME_CREATED,
+  TEETIME_TIME_SELECTED,
+  NEW_TEETIME_SAVE_STARTED
+} from "../../constants";
 import { FormControlLabel } from "@material-ui/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -15,14 +19,6 @@ import AvailableTeeTimeSelector from "../../components/teetimepicker";
 import { addTeeTime } from "../../action-creators/teetimes";
 import Paper from "@material-ui/core/Paper";
 import CustomSnackbar from "../../components/snackbar";
-
-// const listAvailableTeeTimes = availableTeeTimes => (
-//   <SelectButtons
-//     value={availableTeeTimes.time}
-//     // onChange={handleTeeTimeSelected}
-//     label={availableTeeTimes.time}
-//   />
-// );
 
 const Final = props => {
   const {
@@ -78,6 +74,7 @@ const Final = props => {
             <Button
               // component={Link}
               type="submit"
+              onChange={teeTimeCreated}
               value="submit"
               aria-label="add"
               style={{ marginTop: 0, padding: 20 }}
@@ -91,13 +88,18 @@ const Final = props => {
           </div>
         </center>
       </form>
-      {isError && (
+      {props.isError && (
         <CustomSnackbar
           message="There has been an error uploading this teetime"
           snackType="error"
         />
       )}
-      {isSaving && <CustomSnackbar message="Saving..." snackType="info" />}
+      {props.isSaving && (
+        <CustomSnackbar message="Saving..." snackType="info" />
+      )}
+      {props.isBooked && (
+        <CustomSnackbar message="Tee-Time Booked!" snackType="success" />
+      )}
     </div>
   );
 };
@@ -116,13 +118,14 @@ const mapStateToProps = state => ({
   availableTeeTimes: state.courses.availableTeeTimes,
   isSaving: state.courses.isSaving,
   isError: state.courses.isError,
-  errMessage: state.courses.errMessage
+  errMessage: state.courses.errMessage,
+  isBooked: state.courses.isBooked
 });
 
 const mapActionsToProps = dispatch => {
   return {
     teeTimeCreated: teetime => {
-      dispatch({ type: NEW_TEETIME_CREATED, payload: teetime });
+      dispatch({ type: NEW_TEETIME_SAVE_STARTED, payload: teetime });
     },
     createNewTeeTime: history => e => {
       e.preventDefault();

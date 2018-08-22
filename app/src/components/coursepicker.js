@@ -15,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import grey from "@material-ui/core/colors/grey";
 import { GolfCourse } from "@material-ui/icons";
 import { connect } from "react-redux";
+import filterCourses from "../lib/joinCoursesHelper";
 
 import { getCourses } from "../action-creators/courses";
 import { GET_CURRENT_COURSE, CURRENT_COURSE_SELECTED } from "../constants";
@@ -48,6 +49,7 @@ class CoursePicker extends React.Component {
       // currentCourse,
       getCurrentCourse,
       handleListItemClick,
+      join,
       ...other
     } = this.props;
 
@@ -78,7 +80,9 @@ class CoursePicker extends React.Component {
         <DialogTitle id="course-picker">Select Course</DialogTitle>
         <div>
           <List>
-            {map(listCourses, courses)}
+            {this.props.join
+              ? map(listCourses, filterCourses(courses))
+              : map(listCourses, courses)}
             <ListItem
               button
               onClick={() => {
@@ -152,7 +156,8 @@ const mapActionsToProps = dispatch => {
   return {
     selectedValue: name => {
       dispatch({ type: CURRENT_COURSE_SELECTED, payload: name });
-    }
+    },
+    filterCourses: courses => dispatch(filterCourses(courses))
   };
 };
 

@@ -3,7 +3,7 @@ import {
   SET_TEETIME,
   NEW_TEETIME_CREATED,
   NEW_TEETIME_SAVE_FAILED,
-  NEW_TEETIME_SAVED,
+  NEW_TEETIME_SAVE_STARTED,
   NEW_TEETIME_SAVE_SUCCEEDED
 } from "../constants";
 import fetch from "isomorphic-fetch";
@@ -28,7 +28,7 @@ export const setTeeTime = id => async (dispatch, getState) => {
 
 export const addTeeTime = history => async (dispatch, getState) => {
   console.log("calledgetTeeTimes");
-  dispatch({ type: NEW_TEETIME_SAVED });
+  dispatch({ type: NEW_TEETIME_SAVE_STARTED });
 
   const newTeeTime = {
     courseId: getState().courses.currentCourse._id,
@@ -37,7 +37,9 @@ export const addTeeTime = history => async (dispatch, getState) => {
     groupSize: getState().courses.groupSize,
     hcpRange: getState().courses.hcpRange,
     gender: getState().courses.gender,
-    golferId: getState().courses.golferId
+    currentGolfers: getState().courses.currentGolfers,
+    golferId: getState().courses.golferId,
+    isFull: getState().courses.isFull
   };
 
   const result = await fetch(url, {
@@ -51,7 +53,7 @@ export const addTeeTime = history => async (dispatch, getState) => {
   if (result.ok) {
     dispatch({ type: NEW_TEETIME_SAVE_SUCCEEDED });
     getTeeTimes(dispatch, getState);
-    history.push("/final");
+    history.push("/thankyou");
   } else {
     dispatch({ type: NEW_TEETIME_SAVE_FAILED });
     alert("ERROR");
