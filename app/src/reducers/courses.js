@@ -101,6 +101,7 @@ const initialCourseState = {
   selectedTeeTimeWindow: "",
   teeTimeDateAndTime: {}, //{time: "some time", date: "some date"  }
   selectedTeeTime: "",
+  selectedValue: "",
   join: false, //if true, player is joining, if false, player is creating a new foursome
   availableTeeTimes: [], //once you know window, players, and join/create, loop trhough currentCourse and save in here the available tee times
   teeTimeCreated: "", //{course, numberplayers, final_tee_time,etc....} basically all the info u will show in confirmation page

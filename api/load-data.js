@@ -20,6 +20,105 @@ db.bulkDocs([
     emailAddress: "timmylwertz@gmail.com"
   },
   {
+    _id: "golfer_wertz_dlwertz@me.com",
+    type: "golfer",
+    lastName: "Wertz",
+    firstName: "David",
+    handicap: 7,
+    gender: "M",
+    emailAddress: "dlwertz@me.com"
+  },
+  {
+    _id: "golfer_adkins_wkadki01@gmail.com",
+    type: "golfer",
+    lastName: "Adkins",
+    firstName: "Will",
+    handicap: 30,
+    gender: "M",
+    emailAddress: "wkadki01@gmail.com"
+  },
+  {
+    _id: "golfer_estes_peternigelestes@gmail.com",
+    type: "golfer",
+    lastName: "Estes",
+    firstName: "Peter",
+    handicap: 30,
+    gender: "M",
+    emailAddress: "peternigelestes@gmail.com"
+  },
+  {
+    _id: "golfer_liotti_bliotti@protonmail.com",
+    type: "golfer",
+    lastName: "Liotti",
+    firstName: "Brian",
+    handicap: 18,
+    gender: "M",
+    emailAddress: "bliotti@protonmail.com"
+  },
+  {
+    _id: "golfer_hethcox_josh.hethcox@gmail.com",
+    type: "golfer",
+    lastName: "Hethcox",
+    firstName: "Josh",
+    handicap: 14,
+    gender: "M",
+    emailAddress: "josh.hethcox@gmail.com"
+  },
+  {
+    _id: "golfer_paulsen_joshua@dynepic.com",
+    type: "golfer",
+    lastName: "Paulsen",
+    firstName: "Josh",
+    handicap: 10,
+    gender: "M",
+    emailAddress: "joshua@dynepic.com"
+  },
+  {
+    _id: "golfer_boettcher_mvboettcher@gmail.com",
+    type: "golfer",
+    lastName: "Boettcher",
+    firstName: "Max",
+    handicap: 8,
+    gender: "M",
+    emailAddress: "mvboettcher@gmail.com"
+  },
+  {
+    _id: "golfer_malley_laurenymalley@gmail.com",
+    type: "golfer",
+    lastName: "Malley",
+    firstName: "Lauren",
+    handicap: 12,
+    gender: "F",
+    emailAddress: "laurenymalley@gmail.com"
+  },
+  {
+    _id: "golfer_wertz_kristinlwertz@gmail.com",
+    type: "golfer",
+    lastName: "Wertz",
+    firstName: "Krist",
+    handicap: 15,
+    gender: "F",
+    emailAddress: "kristinlwertz@gmail.com"
+  },
+  {
+    _id: "golfer_wertz_jackie.wertz@gmail.com",
+    type: "golfer",
+    lastName: "Wertz",
+    firstName: "Jackie",
+    handicap: 20,
+    gender: "F",
+    emailAddress: "jackie.wertz@gmail.com"
+  },
+  {
+    _id: "golfer_wertz_mldlwertz@aol.com",
+    type: "golfer",
+    lastName: "Wertz",
+    firstName: "Mary Lou",
+    handicap: 28,
+    gender: "F",
+    emailAddress: "mldlwertz@aol.com"
+  },
+  {
     _id: "course_patriots-point-links",
     name: "Patriots Point Links",
     type: "course",
@@ -1016,15 +1115,16 @@ db.bulkDocs([
     ]
   },
   {
-    _id: "teetime_course_wild-dunes-harbor_2018-08-25T08:00",
-    date: "2018-08-25",
-    time: "8:00 AM",
+    _id: "teetime_course_wild-dunes-harbor_2018-08-25_08:00-am",
+    teeTimeDate: "2018-08-25",
+    teeTimeCreated: "8:00 AM",
     courseId: "course_wild-dunes-harbor",
     type: "teetime",
-    hcpRange: {
-      low: 0,
-      high: 36
-    },
+    groupSize: 4,
+    currentGolfers: 4,
+    isFull: true,
+    hcpRange: "Any Ability",
+    gender: "both",
     foursome: [
       {
         _id: "golfer_wertz_timmylwertz@gmail.com",
@@ -1064,6 +1164,414 @@ db.bulkDocs([
       }
     ],
     primaryGolfer_id: "golfer_wertz_timmylwertz@gmail.com"
+  },
+  {
+    _id: "teetime_course_wild-dunes-harbor_2018-08-25_10:00-am",
+    teeTimeDate: "2018-08-25",
+    teeTimeCreated: "10:00 AM",
+    courseId: "course_wild-dunes-harbor",
+    type: "teetime",
+    groupSize: 4,
+    currentGolfers: 4,
+    isFull: true,
+    hcpRange: "10 - 20",
+    gender: "both",
+    foursome: [
+      {
+        _id: "golfer_liotti_bliotti@protonmail.com",
+        type: "golfer",
+        lastName: "Liotti",
+        firstName: "Brian",
+        handicap: 18,
+        gender: "M",
+        emailAddress: "bliotti@protonmail.com"
+      },
+      {
+        _id: "golfer_hethcox_josh.hethcox@gmail.com",
+        type: "golfer",
+        lastName: "Hethcox",
+        firstName: "Josh",
+        handicap: 14,
+        gender: "M",
+        emailAddress: "josh.hethcox@gmail.com"
+      },
+      {
+        _id: "golfer_paulsen_joshua@dynepic.com",
+        type: "golfer",
+        lastName: "Paulsen",
+        firstName: "Josh",
+        handicap: 10,
+        gender: "M",
+        emailAddress: "joshua@dynepic.com"
+      },
+      {
+        _id: "golfer_wertz_jackie.wertz@gmail.com",
+        type: "golfer",
+        lastName: "Wertz",
+        firstName: "Jackie",
+        handicap: 20,
+        gender: "F",
+        emailAddress: "jackie.wertz@gmail.com"
+      }
+    ],
+    primaryGolfer_id: "golfer_liotti_bliotti@protonmail.com"
+  },
+  {
+    _id: "teetime_course_wild-dunes-harbor-2018-08-25_2:20-pm",
+    teeTimeDate: "2018-08-25",
+    teeTimeCreated: "2:20 PM",
+    courseId: "course_wild-dunes-harbor",
+    type: "teetime",
+    groupSize: 4,
+    currentGolfers: 4,
+    isFull: true,
+    hcpRange: "5 - 15",
+    gender: "both",
+    foursome: [
+      {
+        _id: "golfer_boettcher_mvboettcher@gmail.com",
+        type: "golfer",
+        lastName: "Boettcher",
+        firstName: "Max",
+        handicap: 8,
+        gender: "M",
+        emailAddress: "mvboettcher@gmail.com"
+      },
+      {
+        _id: "golfer_malley_laurenymalley@gmail.com",
+        type: "golfer",
+        lastName: "Malley",
+        firstName: "Lauren",
+        handicap: 12,
+        gender: "F",
+        emailAddress: "laurenymalley@gmail.com"
+      },
+      {
+        _id: "golfer_wertz_kristinlwertz@gmail.com",
+        type: "golfer",
+        lastName: "Wertz",
+        firstName: "Krist",
+        handicap: 15,
+        gender: "F",
+        emailAddress: "kristinlwertz@gmail.com"
+      },
+      {
+        _id: "golfer_malley_laurenymalley@gmail.com",
+        type: "golfer",
+        lastName: "Malley",
+        firstName: "Lauren",
+        handicap: 12,
+        gender: "F",
+        emailAddress: "laurenymalley@gmail.com"
+      }
+    ],
+    primaryGolfer_id: "golfer_boettcher_mvboettcher@gmail.com"
+  },
+  {
+    _id: "teetime_course_city-of-charleston-golf-course_2018-08-26_8:40-am",
+    teeTimeDate: "2018-08-26",
+    teeTimeCreated: "8:40 AM",
+    courseId: "course_city-of-charleston-golf-course",
+    type: "teetime",
+    groupSize: 4,
+    currentGolfers: 4,
+    isFull: true,
+    hcpRange: "Any Ability",
+    gender: "both",
+    foursome: [
+      {
+        _id: "golfer_wertz_timmylwertz@gmail.com",
+        type: "golfer",
+        lastName: "Wertz",
+        firstName: "Tim",
+        handicap: 10,
+        gender: "M",
+        emailAddress: "timmylwertz@gmail.com"
+      },
+      {
+        _id: "golfer_adkins_wkadki01@gmail.com",
+        type: "golfer",
+        lastName: "Adkins",
+        firstName: "Will",
+        handicap: 30,
+        gender: "M",
+        emailAddress: "wkadki01@gmail.com"
+      },
+      {
+        _id: "golfer_estes_peternigelestes@gmail.com",
+        type: "golfer",
+        lastName: "Estes",
+        firstName: "Peter",
+        handicap: 30,
+        gender: "M",
+        emailAddress: "peternigelestes@gmail.com"
+      },
+      {
+        _id: "golfer_malley_laurenymalley@gmail.com",
+        type: "golfer",
+        lastName: "Malley",
+        firstName: "Lauren",
+        handicap: 12,
+        gender: "F",
+        emailAddress: "laurenymalley@gmail.com"
+      }
+    ],
+    primaryGolfer_id: "golfer_wertz_timmylwertz@gmail.com"
+  },
+  {
+    _id: "teetime_course_city-of-charleston-golf-course-2018-08-26_01:20-pm",
+    teeTimeDate: "2018-08-26",
+    teeTimeCreated: "1:20 PM",
+    courseId: "course_city-of-charleston-golf-course",
+    type: "teetime",
+    groupSize: 4,
+    currentGolfers: 4,
+    isFull: true,
+    hcpRange: "10 - 20",
+    gender: "both",
+    foursome: [
+      {
+        _id: "golfer_liotti_bliotti@protonmail.com",
+        type: "golfer",
+        lastName: "Liotti",
+        firstName: "Brian",
+        handicap: 18,
+        gender: "M",
+        emailAddress: "bliotti@protonmail.com"
+      },
+      {
+        _id: "golfer_hethcox_josh.hethcox@gmail.com",
+        type: "golfer",
+        lastName: "Hethcox",
+        firstName: "Josh",
+        handicap: 14,
+        gender: "M",
+        emailAddress: "josh.hethcox@gmail.com"
+      },
+      {
+        _id: "golfer_paulsen_joshua@dynepic.com",
+        type: "golfer",
+        lastName: "Paulsen",
+        firstName: "Josh",
+        handicap: 10,
+        gender: "M",
+        emailAddress: "joshua@dynepic.com"
+      },
+      {
+        _id: "golfer_wertz_jackie.wertz@gmail.com",
+        type: "golfer",
+        lastName: "Wertz",
+        firstName: "Jackie",
+        handicap: 20,
+        gender: "F",
+        emailAddress: "jackie.wertz@gmail.com"
+      }
+    ],
+    primaryGolfer_id: "golfer_liotti_bliotti@protonmail.com"
+  },
+  {
+    _id: "teetime_course_city-of-charleston-golf-course-2018-08-26_03:20-pm",
+    teeTimeDate: "2018-08-26",
+    teeTimeCreated: "3:20 PM",
+    courseId: "course_city-of-charleston-golf-course",
+    type: "teetime",
+    groupSize: 4,
+    currentGolfers: 4,
+    isFull: true,
+    hcpRange: "5 - 15",
+    gender: "both",
+    foursome: [
+      {
+        _id: "golfer_boettcher_mvboettcher@gmail.com",
+        type: "golfer",
+        lastName: "Boettcher",
+        firstName: "Max",
+        handicap: 8,
+        gender: "M",
+        emailAddress: "mvboettcher@gmail.com"
+      },
+      {
+        _id: "golfer_malley_laurenymalley@gmail.com",
+        type: "golfer",
+        lastName: "Malley",
+        firstName: "Lauren",
+        handicap: 12,
+        gender: "F",
+        emailAddress: "laurenymalley@gmail.com"
+      },
+      {
+        _id: "golfer_wertz_kristinlwertz@gmail.com",
+        type: "golfer",
+        lastName: "Wertz",
+        firstName: "Krist",
+        handicap: 15,
+        gender: "F",
+        emailAddress: "kristinlwertz@gmail.com"
+      },
+      {
+        _id: "golfer_malley_laurenymalley@gmail.com",
+        type: "golfer",
+        lastName: "Malley",
+        firstName: "Lauren",
+        handicap: 12,
+        gender: "F",
+        emailAddress: "laurenymalley@gmail.com"
+      }
+    ],
+    primaryGolfer_id: "golfer_boettcher_mvboettcher@gmail.com"
+  },
+  {
+    _id: "teetime_course_links-at-stono-ferry_2018-08-27_11:00-am",
+    teeTimeDate: "2018-08-27",
+    teeTimeCreated: "11:00 AM",
+    courseId: "course_links-at-stono-ferry",
+    type: "teetime",
+    groupSize: 4,
+    currentGolfers: 4,
+    isFull: true,
+    hcpRange: "Any Ability",
+    gender: "both",
+    foursome: [
+      {
+        _id: "golfer_wertz_timmylwertz@gmail.com",
+        type: "golfer",
+        lastName: "Wertz",
+        firstName: "Tim",
+        handicap: 10,
+        gender: "M",
+        emailAddress: "timmylwertz@gmail.com"
+      },
+      {
+        _id: "golfer_adkins_wkadki01@gmail.com",
+        type: "golfer",
+        lastName: "Adkins",
+        firstName: "Will",
+        handicap: 30,
+        gender: "M",
+        emailAddress: "wkadki01@gmail.com"
+      },
+      {
+        _id: "golfer_estes_peternigelestes@gmail.com",
+        type: "golfer",
+        lastName: "Estes",
+        firstName: "Peter",
+        handicap: 30,
+        gender: "M",
+        emailAddress: "peternigelestes@gmail.com"
+      },
+      {
+        _id: "golfer_malley_laurenymalley@gmail.com",
+        type: "golfer",
+        lastName: "Malley",
+        firstName: "Lauren",
+        handicap: 12,
+        gender: "F",
+        emailAddress: "laurenymalley@gmail.com"
+      }
+    ],
+    primaryGolfer_id: "golfer_wertz_timmylwertz@gmail.com"
+  },
+  {
+    _id: "teetime_course_links-at-stono-ferry_2018-08-27_1:20-pm",
+    teeTimeDate: "2018-08-27",
+    teeTimeCreated: "1:20 PM",
+    courseId: "course_links-at-stono-ferry",
+    type: "teetime",
+    groupSize: 4,
+    currentGolfers: 4,
+    isFull: true,
+    hcpRange: "10 - 20",
+    gender: "both",
+    foursome: [
+      {
+        _id: "golfer_liotti_bliotti@protonmail.com",
+        type: "golfer",
+        lastName: "Liotti",
+        firstName: "Brian",
+        handicap: 18,
+        gender: "M",
+        emailAddress: "bliotti@protonmail.com"
+      },
+      {
+        _id: "golfer_hethcox_josh.hethcox@gmail.com",
+        type: "golfer",
+        lastName: "Hethcox",
+        firstName: "Josh",
+        handicap: 14,
+        gender: "M",
+        emailAddress: "josh.hethcox@gmail.com"
+      },
+      {
+        _id: "golfer_paulsen_joshua@dynepic.com",
+        type: "golfer",
+        lastName: "Paulsen",
+        firstName: "Josh",
+        handicap: 10,
+        gender: "M",
+        emailAddress: "joshua@dynepic.com"
+      },
+      {
+        _id: "golfer_wertz_jackie.wertz@gmail.com",
+        type: "golfer",
+        lastName: "Wertz",
+        firstName: "Jackie",
+        handicap: 20,
+        gender: "F",
+        emailAddress: "jackie.wertz@gmail.com"
+      }
+    ],
+    primaryGolfer_id: "golfer_liotti_bliotti@protonmail.com"
+  },
+  {
+    _id: "teetime_course_links-at-stono-ferry_2018-08-27_2:00-pm",
+    teeTimeDate: "2018-08-27",
+    teeTimeCreated: "2:00 PM",
+    courseId: "course_links-at-stono-ferry",
+    type: "teetime",
+    groupSize: 4,
+    currentGolfers: 4,
+    isFull: true,
+    hcpRange: "5 - 15",
+    gender: "both",
+    foursome: [
+      {
+        _id: "golfer_boettcher_mvboettcher@gmail.com",
+        type: "golfer",
+        lastName: "Boettcher",
+        firstName: "Max",
+        handicap: 8,
+        gender: "M",
+        emailAddress: "mvboettcher@gmail.com"
+      },
+      {
+        _id: "golfer_malley_laurenymalley@gmail.com",
+        type: "golfer",
+        lastName: "Malley",
+        firstName: "Lauren",
+        handicap: 12,
+        gender: "F",
+        emailAddress: "laurenymalley@gmail.com"
+      },
+      {
+        _id: "golfer_wertz_kristinlwertz@gmail.com",
+        type: "golfer",
+        lastName: "Wertz",
+        firstName: "Krist",
+        handicap: 15,
+        gender: "F",
+        emailAddress: "kristinlwertz@gmail.com"
+      },
+      {
+        _id: "golfer_malley_laurenymalley@gmail.com",
+        type: "golfer",
+        lastName: "Malley",
+        firstName: "Lauren",
+        handicap: 12,
+        gender: "F",
+        emailAddress: "laurenymalley@gmail.com"
+      }
+    ],
+    primaryGolfer_id: "golfer_boettcher_mvboettcher@gmail.com"
   }
 ])
   .then(result => console.log("success", JSON.stringify(result, null, 2)))

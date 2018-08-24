@@ -6,17 +6,19 @@ import SaveIcon from "@material-ui/icons/Save";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
+import CustomSnackbar from "../components/snackbar";
 
 import { createNewGolfer } from "../action-creators/golfers";
-import { NEW_GOLFER_FORM_UPDATED } from "../constants";
+import { NEW_GOLFER_FORM_SAVE_STARTED } from "../constants";
 
 const styles = theme => ({
   container: {
     display: "flex",
     flexWrap: "wrap",
-    justify: "center"
+    justifyContent: "center"
   },
   textField: {
+    marginTop: 20,
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
     width: 200
@@ -83,7 +85,6 @@ const Login = props => {
             label="Gender"
             className={classes.textField}
             onChange={e => onTextFieldChange("gender", e.target.value)}
-            autoComplete="current-password"
             margin="normal"
           />
           <TextField
@@ -103,7 +104,7 @@ const Login = props => {
             value="submit"
             aria-label="add"
             className="fab-button"
-            to="/menu"
+            // to="/menu"
           >
             <SaveIcon />
           </Button>
@@ -120,13 +121,13 @@ const Login = props => {
           </Button>
         </form>
         {props.isError && (
-          <CustomSnackBar message={props.errMessage} snackType="error" />
+          <CustomSnackbar message={props.errMessage} snackType="error" />
         )}
         {props.isSaving && (
-          <CustomSnackBar message="Golfer Loading..." snackType="info" />
+          <CustomSnackbar message="Golfer Loading..." snackType="info" />
         )}
         {props.isAdded && (
-          <CustomSnackBar
+          <CustomSnackbar
             message="Successfully Added Golfer"
             snackType="success"
           />
@@ -147,7 +148,10 @@ const mapStateToProps = state => ({
 const mapActionsToProps = dispatch => {
   return {
     onTextFieldChange: (field, value) => {
-      dispatch({ type: NEW_GOLFER_FORM_UPDATED, payload: { [field]: value } });
+      dispatch({
+        type: NEW_GOLFER_FORM_SAVE_STARTED,
+        payload: { [field]: value }
+      });
     },
     createGolfer: history => e => {
       e.preventDefault();

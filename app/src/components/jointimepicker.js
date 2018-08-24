@@ -14,9 +14,9 @@ import Typography from "@material-ui/core/Typography";
 import grey from "@material-ui/core/colors/grey";
 import { QueryBuilder } from "@material-ui/icons";
 
-import { NEW_TEETIME_CREATED } from "../constants";
+import { TEETIME_JOINED } from "../constants";
 import { connect } from "react-redux";
-import { map } from "ramda";
+import { filter, map } from "ramda";
 const uuid = require("uuid");
 
 const styles = {
@@ -26,14 +26,14 @@ const styles = {
   }
 };
 
-class TeeTimePicker extends React.Component {
+class JoinTeeTimePicker extends React.Component {
   handleClose = () => {
     this.props.onClose(this.props.selectedValue);
   };
 
-  // handleListItemClick = value => {
-  //   this.props.onClose(value);
-  // };
+  handleListItemClick = value => {
+    this.props.onClose(value);
+  };
 
   render() {
     const {
@@ -43,13 +43,16 @@ class TeeTimePicker extends React.Component {
       teeTimeWindow,
       currentTeeTimeWindow,
       availableTeeTimes,
+      teeTimes,
+      currentTeeTimes,
+      currentCourse,
       ...other
     } = this.props;
 
-    const listTeeTimes = list => (
+    const listAvailableTeeTimes = teeTimes => (
       <ListItem
         button
-        onClick={() => this.handleListItemClick(list)}
+        onClick={() => this.handleListItemClick(teeTimes._id)}
         key={uuid.v4()}
       >
         <ListItemAvatar>
@@ -58,7 +61,13 @@ class TeeTimePicker extends React.Component {
           </Avatar>
         </ListItemAvatar>
 
-        <ListItemText primary={list.time} />
+        <ListItemText
+          primary={`Date: ${teeTimes.teeTimeDate}
+                    Time: ${teeTimes.teeTimeCreated}
+                    Gender Preferences: ${teeTimes.gender}
+                    Handicap Range: ${teeTimes.hcpRange}
+                    Desired Group Size: ${teeTimes.groupSize}`}
+        />
       </ListItem>
     );
 
@@ -68,13 +77,15 @@ class TeeTimePicker extends React.Component {
         aria-labelledby="time-picker"
         {...other}
       >
-        <DialogTitle id="time-picker">Select Time Window</DialogTitle>
+        <DialogTitle id="time-picker">Select Tee-Time</DialogTitle>
         <div>
           <List>
-            {map(listTeeTimes, availableTeeTimes)}
+            {map(listAvailableTeeTimes, currentTeeTimes)}
             <ListItem
               button
-              onClick={() => this.handleListItemClick(availableTeeTimes._id)}
+              onClick={() =>
+                this.handleListItemClick(listAvailableTeeTimes._id)
+              }
             />
           </List>
         </div>
@@ -84,19 +95,32 @@ class TeeTimePicker extends React.Component {
 }
 
 const mapStateToPropsPicker = state => ({
-  currentTeeTimeWindow: state.courses.currentCourse.teeTimeWindow,
-  teeTimeWindow: state.courses.teeTimeWindow,
-  availableTeeTimes: state.courses.availableTeeTimes
+  courses: state.courses,
+  currentCourse: state.courses.currentCourse,
+  currentTeeTimes: filter(
+    t => t.courseId === state.courses.currentCourse._id,
+    state.teeTimes
+  ),
+  listAvailableTeeTimes: filter(t => !t.isFull, state.teeTimes),
+  teeTimes: state.teeTimes
 });
+
+// const mapActionsToPropsPicker = dispatch => {
+//   return {
+//     filterTeeTimes
+//   };
+// };
 
 const connectorPick = connect(mapStateToPropsPicker);
 
-const WrappedTeeTimePicker = connectorPick(withStyles(styles)(TeeTimePicker));
+const WrappedJoinTeeTimePicker = connectorPick(
+  withStyles(styles)(JoinTeeTimePicker)
+);
 
-class AvailableTeeTimeSelector extends React.Component {
+class JoinAvailableTeeTimeSelector extends React.Component {
   state = {
     open: false,
-    teeTimeCreated: this.props.teeTimeCreated[1]
+    teeTimeCreated: this.props.teeTimeJoined[1]
   };
 
   handleClickOpen = () => {
@@ -107,20 +131,21 @@ class AvailableTeeTimeSelector extends React.Component {
 
   handleClose = value => {
     console.log("VALUE", value);
-    this.props.teeTimeCreated(value.time);
-    this.setState({ teeTimeCreated: value.time, open: false });
+    this.props.teeTimeJoined(value);
+    this.setState({ teeTimeJoined: value, open: false });
   };
 
   render() {
+    const { teeTimes } = this.props;
     return (
       <div>
         <Typography variant="subheading">
-          Selected: {this.state.teeTimeCreated}
+          Selected: {this.state.teeTimeJoined}
         </Typography>
         <br />
         <Button onClick={this.handleClickOpen}>Select Tee-Time</Button>
-        <WrappedTeeTimePicker
-          selectedValue={this.state.teeTimeCreated}
+        <WrappedJoinTeeTimePicker
+          selectedValue={this.state.teeTimeJoined}
           open={this.state.open}
           onClose={this.handleClose}
         />
@@ -136,14 +161,15 @@ const mapStateToProps = state => ({
   teeTimeWindow: state.courses.teeTimeWindow,
   currentTeeTimeWindow: state.courses.currentCourse.teeTimeWindow,
   selectedTeeTimeWindow: state.courses.selectedTeeTimeWindow,
-  teeTimeCreated: state.courses.teeTimeCreated,
-  availableTeeTimes: state.courses.availableTeeTimes
+  teeTimeJoined: state.teeTimes._id,
+  teeTimes: state.teeTimes,
+  listAvailableTeeTimes: filter(t => !t.isFull, state.teeTimes)
 });
 
 const mapActionsToProps = dispatch => {
   return {
-    teeTimeCreated: teetime => {
-      dispatch({ type: NEW_TEETIME_CREATED, payload: teetime });
+    teeTimeJoined: teetime => {
+      dispatch({ type: TEETIME_JOINED, payload: teetime });
     }
   };
 };
@@ -153,4 +179,4 @@ const connector = connect(
   mapActionsToProps
 );
 
-export default connector(AvailableTeeTimeSelector);
+export default connector(JoinAvailableTeeTimeSelector);

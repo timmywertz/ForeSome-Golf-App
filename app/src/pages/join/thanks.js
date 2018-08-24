@@ -1,39 +1,31 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Component } from "react";
 import { Link } from "react-router-dom";
-import SelectButtons from "../../components/select";
 import { connect } from "react-redux";
 import {
-  NEW_TEETIME_CREATED,
-  TEETIME_TIME_SELECTED,
-  NEW_TEETIME_BOOKED
+  TEETIME_JOIN_BOOKED,
+  TEETIME_JOIN_SAVE_STARTED
 } from "../../constants";
-import { FormControlLabel } from "@material-ui/core";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import { map } from "ramda";
-import AvailableTeeTimeSelector from "../../components/teetimepicker";
-import { addTeeTime } from "../../action-creators/teetimes";
 import Paper from "@material-ui/core/Paper";
 import CustomSnackbar from "../../components/snackbar";
 
-const ThankYou = props => {
+const JoinThankYou = props => {
   const {
     courses,
     currentCourse,
     groupSize,
     gender,
     hcpRange,
-    selectedTeeTimeWindow,
+    selectedTeeTime,
     teeTimeDate,
     teeTimeCreated,
     availableTeeTimes,
     listAvailableTeeTimes,
     history,
     createNewTeeTime,
+    teeTimeJoined,
+    teeTimes,
     isError,
     isSaving,
     errMsg,
@@ -43,17 +35,18 @@ const ThankYou = props => {
   return (
     <div>
       <center>
-        <CustomSnackbar message="Tee-Time Booked!" snackType="success" />
+        <CustomSnackbar message="Tee-Time Joined!" snackType="success" />
         <Typography style={{ marginTop: 50 }} variant="display3">
           THANK YOU FOR USING FORESOME!
         </Typography>
         <Paper>
           <Typography style={{ marginTop: 20 }} variant="subheading">
             <div> Course: {currentCourse.name} </div>
-            <div> Group Size: {groupSize} </div>
-            <div> Gender: {gender} </div>
-            <div> Handicap Range: {hcpRange} </div>
-            <div> Date: {teeTimeDate} </div>
+            <div> Group Size: {selectedTeeTime.groupSize} </div>
+            <div> Gender: {selectedTeeTime.gender} </div>
+            <div> Handicap Range: {selectedTeeTime.hcpRange} </div>
+            <div> Date: {selectedTeeTime.teeTimeDate} </div>
+            <div> Time: {selectedTeeTime.teeTimeCreated} </div>
           </Typography>
         </Paper>
         <Button
@@ -67,32 +60,43 @@ const ThankYou = props => {
           Return To Main Menu
         </Button>
       </center>
+      {isError && (
+        <CustomSnackbar
+          message="There has been an error uploading this teetime"
+          snackType="error"
+        />
+      )}
+      {isSaving && <CustomSnackbar message="Saving..." snackType="info" />}
+      {isBooked && (
+        <CustomSnackbar message="Tee-Time Booked!" snackType="success" />
+      )}
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  courses: state.courses,
   currentCourse: state.courses.currentCourse,
-  courseId: state.courses.currentCourse._id,
-  groupSize: state.courses.groupSize,
-  gender: state.courses.gender,
-  hcpRange: state.courses.hcpRange,
-  teeTimes: state.courses.currentCourse.teeTimes,
-  golferId: state.courses.golfer_id,
-  teeTimeDate: state.courses.teeTimeDate,
-  teeTimeCreated: state.courses.teeTimeCreated,
-  availableTeeTimes: state.courses.availableTeeTimes,
-  isSaving: state.courses.isSaving,
-  isError: state.courses.isError,
-  errMessage: state.courses.errMessage,
-  isBooked: state.courses.isBooked
+  groupSize: state.teeTimes.groupSize,
+  gender: state.teeTimes.gender,
+  hcpRange: state.teeTimes.hcpRange,
+  teeTimeDate: state.teeTimes.teeTimeDate,
+  teeTimeCreated: state.teeTimes.teeTimeCreated,
+  teeTimes: state.teeTimes,
+  teeTimeJoined: state.teeTimeJoined,
+  selectedTeeTime: state.selectedTeeTime,
+  isSaving: state.teeTimes.isSaving,
+  isError: state.teeTimes.isError,
+  errMessage: state.teeTimes.errMessage,
+  isBooked: state.teeTimes.isBooked
 });
 
 const mapActionsToProps = dispatch => {
   return {
     teeTimeBooked: teetime => {
-      dispatch({ type: NEW_TEETIME_BOOKED, payload: teetime });
+      dispatch({ type: TEETIME_JOIN_BOOKED, payload: teetime });
+    },
+    teeTimeJoined: teetime => {
+      dispatch({ type: TEETIME_JOIN_SAVE_STARTED, payload: teetime });
     }
   };
 };
@@ -102,4 +106,4 @@ const connector = connect(
   mapActionsToProps
 );
 
-export default connector(ThankYou);
+export default connector(JoinThankYou);

@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -59,6 +59,7 @@ function CourseCard(props) {
               {currentCourse.name}
             </Typography>
             <Typography component="p">{currentCourse.location}</Typography>
+            <Typography component="p">{currentCourse.phoneNumber}</Typography>
           </CardContent>
           <CardActions />
         </Card>
@@ -66,11 +67,6 @@ function CourseCard(props) {
     </div>
   );
 }
-
-CourseCard.propTypes = {
-  classes: PropTypes.object.isRequired
-  //course: PropTypes.object.isRequired
-};
 
 const mapStateToProps = state => ({
   courses: state.courses.courses,

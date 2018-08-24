@@ -63,22 +63,20 @@ const Final = props => {
           <Button
             style={{ marginRight: 20, marginTop: 15, padding: 20 }}
             component={Link}
-            to="/teetime/new/friends"
-            variant="contained"
+            to="/menu"
+            variant="extendedFab"
             size="large"
             color="primary"
           >
-            Go Back
+            Back to Main Menu
           </Button>
           <div>
             <Button
-              // component={Link}
               type="submit"
               onChange={teeTimeCreated}
               value="submit"
               aria-label="add"
-              style={{ marginTop: 0, padding: 20 }}
-              // to="/thankyou"
+              style={{ marginTop: 20, padding: 20 }}
               variant="extendedFab"
               size="large"
               color="secondary"

@@ -10,50 +10,63 @@ import { map } from "ramda";
 import { connect } from "react-redux";
 import CourseCard from "../../components/coursecard";
 import { COURSES_ACQUIRED, CURRENT_COURSE_SELECTED } from "../../constants";
-import Tracker from "../../components/tracker";
 import Paper from "@material-ui/core/Paper";
+import { cyan } from "@material-ui/core/colors";
 
-const tempCourse = {
-  _id: "course_the-ocean-couse-kiawah-island-golf-resort",
-  name: "The Ocean Course, Kiawah Island Golf Resort",
-  type: "course",
-  phoneNumber: "(843) 768-2121",
-  location: "1000 Ocean Course Drive, Johns Island, SC 29455",
-  image: "oceancourse.jpg",
-  address: {
-    street: "1000 Ocean Course Drive",
-    city: "Johns Island",
-    state: "SC",
-    zip: "29455"
-  },
-  latitude: 32.612,
-  longitude: 80.0233,
-  teeTimes: []
-};
-
-const styles = {
+const styles = theme => ({
   card: {
     maxWidth: 354
+  },
+  buttons: {
+    marginRight: 20,
+    marginLeft: 20,
+    marginTop: 20,
+    padding: 20,
+    marginBottom: 40
   }
-};
+  // buttons: {
+  //   justifyContent: "flex-end",
+  //   flexDirection: "reverse-column",
+  //   // bottom: 20,
+  //   // width: 100,
+  //   // height: 50,
+  //   // marginLeft: 20,
+  //   // marginRight: 20,
+  //   order: 1,
+  //   flexGrow: 2,
+  //   flexDirection: "column"
+  // }
+});
 
 const Location = props => {
+  const { classes } = props;
+
   return (
     <div>
       <center>
         <Typography
-          style={{ marginTop: 50, marginBottom: 30 }}
+          style={{ marginTop: 40, marginBottom: 20 }}
           variant="display1"
         >
           Destination
         </Typography>
         <CourseCard />
-        <Paper style={{ marginTop: 15, width: 300 }}>
-          <CourseSelector />
-        </Paper>
+        <div>
+          <Paper
+            style={{
+              backgroundColor: cyan[500],
+              marginTop: 40,
+              width: 300,
+              height: 80
+            }}
+          >
+            <CourseSelector />
+          </Paper>
+        </div>
         <Button
-          style={{ marginRight: 20, marginTop: 30, padding: 20 }}
+          //style={{ marginRight: 20, marginLeft: 20, marginTop: 40, padding: 20, marginBottom: 40 }}
           component={Link}
+          className={classes.buttons}
           to="/menu"
           variant="contained"
           size="large"
@@ -63,7 +76,8 @@ const Location = props => {
         </Button>
         <Button
           component={Link}
-          style={{ marginTop: 30, padding: 20 }}
+          className={classes.buttons}
+          //style={{ marginRight: 20, marginLeft: 20, marginTop: 20, padding: 20, marginBottom }}
           to="/teetime/new/date"
           variant="contained"
           size="large"
@@ -79,8 +93,6 @@ const Location = props => {
 const mapStateToProps = state => ({
   coursesFromState: state.courses,
   currentCourse: state.courses.currentCourse
-  // name: state.courses.name
-  // getCurrentCourse: state.courses.currentCourse
 });
 
 const mapActionsToProps = dispatch => {

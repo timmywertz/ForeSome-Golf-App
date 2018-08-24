@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
@@ -26,7 +25,7 @@ const styles = theme => ({
 // };
 
 const SelectButtons = props => {
-  const { children, classes, value, onChange, label, handleChange } = props;
+  const { classes, value, onChange, label, handleChange } = props;
 
   // const handleChange = event => {
   //   this.setState({ value: event.target.value });
@@ -52,7 +51,7 @@ const SelectButtons = props => {
             label={value}
             onChange={onChange}
           >
-            {children}
+            {/* {children} */}
           </FormControlLabel>
           {/* <FormControlLabel
             value="availableTeeTime2"
@@ -72,10 +71,6 @@ const SelectButtons = props => {
       {/* <FormControl component="fieldset" className={classes.formControl} /> */}
     </div>
   );
-};
-
-SelectButtons.propTypes = {
-  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(SelectButtons);

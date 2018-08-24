@@ -155,7 +155,7 @@ const teeTimeRoutes = app => {
         next(new NodeHTTPError(err.status, err.message, err));
       });
   });
-  app.put("/teetimes/:id", (req, res, next) => {
+  app.put("/teetimes", (req, res, next) => {
     const joinedTeeTime = propOr({}, "body", req);
 
     const missingFields = checkRequiredFields(

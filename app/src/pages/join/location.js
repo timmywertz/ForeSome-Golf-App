@@ -6,16 +6,18 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 import CourseSelector from "../../components/coursepicker";
 import Select from "../../components/select";
-import { map } from "ramda";
+import { filter, map } from "ramda";
 import { connect } from "react-redux";
 import CourseCard from "../../components/coursecard";
 import {
   COURSES_ACQUIRED,
   CURRENT_COURSE_JOINED,
-  CURRENT_COURSE_SELECTED
+  CURRENT_COURSE_SELECTED,
+  GET_TEETIMES
 } from "../../constants";
 import Tracker from "../../components/tracker";
 import Paper from "@material-ui/core/Paper";
+import filterCourses from "../../lib/joinCoursesHelper";
 
 const tempCourse = {
   _id: "course_the-ocean-couse-kiawah-island-golf-resort",
@@ -42,6 +44,7 @@ const styles = {
 };
 
 const JoinLocation = props => {
+  const { courses, getCurrentCourse, teeTimes } = props;
   return (
     <div>
       <center>
@@ -68,7 +71,7 @@ const JoinLocation = props => {
         <Button
           component={Link}
           style={{ marginTop: 30, padding: 20 }}
-          to="/teetime/join/date"
+          to="/teetime/join/group"
           variant="contained"
           size="large"
           color="secondary"
@@ -84,14 +87,20 @@ const mapStateToProps = state => ({
   // coursesFromState: state.joinTeeTime,
   // currentCourse: state.joinTeeTime.currentCourse,
   courses: state.courses,
-  getCurrentCourse: state.courses.currentCourse
+  getCurrentCourse: state.courses.currentCourse,
+  availableTeeTimes: filter(t => !t.isFull, state.teeTimes),
+  teeTimes: state.teeTimes
 });
 
 const mapActionsToProps = dispatch => {
   return {
     selectedValue: name => {
       dispatch({ type: CURRENT_COURSE_SELECTED, payload: name });
-    }
+    },
+    setTeeTimes: teeTimes => {
+      dispatch({ type: GET_TEETIMES, payload: teeTimes });
+    },
+    filterCourses: courses => dispatch(filterCourses(courses))
   };
 };
 

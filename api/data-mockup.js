@@ -1519,10 +1519,7 @@ const teeTimes = [
     groupSize: 4,
     currentGolfers: 4,
     isFull: true,
-    hcpRange: {
-      low: 5,
-      high: 15
-    },
+    hcpRange: "5 - 15",
     foursome: [
       {
         _id: "golfer_boettcher_mvboettcher@gmail.com",

@@ -13,7 +13,18 @@ import {
 } from "../../constants";
 import { connect } from "react-redux";
 import { isEmpty } from "ramda";
-import Paper from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+
+const style = {
+  background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
+  marginTop: 30,
+  height: 200,
+  color: "primary",
+  width: 300,
+  borderRadius: 3,
+  padding: "0 30px",
+  boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
+};
 
 const Date = props => (
   <div>
@@ -32,7 +43,7 @@ const Date = props => (
           src="/png-images/clock-42655_1280.png"
         />
       </div>
-      <Paper style={{ marginTop: 15, width: 300 }}>
+      <Paper style={{ style }}>
         <TimeSelector />
       </Paper>
       <div>

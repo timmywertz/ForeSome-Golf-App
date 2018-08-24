@@ -1,7 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 
 import React from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
@@ -82,12 +81,6 @@ class TimePicker extends React.Component {
     );
   }
 }
-
-TimePicker.propTypes = {
-  classes: PropTypes.object.isRequired,
-  onClose: PropTypes.func,
-  selectedValue: PropTypes.string
-};
 
 const mapStateToPropsPicker = state => ({
   currentTeeTimeWindow: state.courses.currentCourse.teeTimeWindow,

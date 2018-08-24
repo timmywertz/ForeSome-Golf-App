@@ -40,17 +40,9 @@ const Friends = props => {
           Select Your Group's:
         </Typography>
         <IconTabs title="Size" onChange={handleSizeChanged} value={groupSize}>
-          <Tab
-            value={"Twosome"}
-            icon={<ExposurePlus1TwoTone />}
-            label="Twosome"
-          />
-          <Tab
-            value={"Threesome"}
-            icon={<ExposurePlus2TwoTone />}
-            label="Threesome"
-          />
-          <Tab value={"Foursome"} icon={<PersonPinIcon />} label="ForeSome!" />{" "}
+          <Tab value={2} icon={<ExposurePlus1TwoTone />} label="Twosome" />
+          <Tab value={3} icon={<ExposurePlus2TwoTone />} label="Threesome" />
+          <Tab value={4} icon={<PersonPinIcon />} label="ForeSome!" />
         </IconTabs>
         <IconTabs title="Gender" onChange={handleGenderChanged} value={gender}>
           <Tab value={"Male"} icon={<PhoneIcon />} label="Male" />

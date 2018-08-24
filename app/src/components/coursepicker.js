@@ -1,9 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 
 import React from "react";
-import PropTypes from "prop-types";
+
 import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -11,22 +10,21 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
-import Typography from "@material-ui/core/Typography";
-import grey from "@material-ui/core/colors/grey";
+import { cyan, grey } from "@material-ui/core/colors";
 import { GolfCourse } from "@material-ui/icons";
 import { connect } from "react-redux";
 import filterCourses from "../lib/joinCoursesHelper";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
-import { getCourses } from "../action-creators/courses";
-import { GET_CURRENT_COURSE, CURRENT_COURSE_SELECTED } from "../constants";
-import { currentCourse } from "../reducers/courses";
-import { map } from "ramda";
+import { CURRENT_COURSE_SELECTED } from "../constants";
+import { filter, map } from "ramda";
 const uuid = require("uuid");
 
 const styles = {
   avatar: {
-    backgroundColor: grey[100],
-    color: grey[600]
+    backgroundColor: cyan[100],
+    color: cyan[600]
   }
 };
 
@@ -46,10 +44,12 @@ class CoursePicker extends React.Component {
       selectedValue,
       courses,
       name,
-      // currentCourse,
+      availableTeeTimes,
       getCurrentCourse,
       handleListItemClick,
       join,
+      filterCourses,
+      teeTimes,
       ...other
     } = this.props;
 
@@ -57,7 +57,6 @@ class CoursePicker extends React.Component {
       <ListItem
         button
         onClick={() => {
-          // this.props.getCurrentCourse("test");
           this.handleListItemClick(course.name);
         }}
         key={uuid.v4()}
@@ -79,14 +78,14 @@ class CoursePicker extends React.Component {
       >
         <DialogTitle id="course-picker">Select Course</DialogTitle>
         <div>
+          {console.log(availableTeeTimes)}
           <List>
             {this.props.join
-              ? map(listCourses, filterCourses(courses))
+              ? map(listCourses, filterCourses(courses, availableTeeTimes))
               : map(listCourses, courses)}
             <ListItem
               button
               onClick={() => {
-                // this.props.getCurrentCourse(courses._id);
                 this.handleListItemClick(courses._id);
               }}
             />
@@ -98,20 +97,34 @@ class CoursePicker extends React.Component {
 }
 
 const mapStateToPropsPicker = state => ({
-  courses: state.courses.courses
+  courses: state.courses.courses,
+  availableTeeTimes: filter(t => !t.isFull, state.teeTimes),
+  teeTimes: state.teeTimes
 });
 
+const mapActionsToPropsPicker = dispatch => {
+  return {
+    filterCourses: (courses, teeTimes) =>
+      dispatch(filterCourses(courses, teeTimes))
+  };
+};
+
 const connectorPick = connect(
-  mapStateToPropsPicker
-  //mapActionsToPropsPicker
+  mapStateToPropsPicker,
+  mapActionsToPropsPicker
 );
 
 const WrappedCoursePicker = connectorPick(withStyles(styles)(CoursePicker));
 
+////////
+///////
+///////
+///////
+
 class CourseSelector extends React.Component {
   state = {
     open: false,
-    selectedValue: this.props.courses[1]
+    selectedValue: this.props.courses[1] || ""
   };
 
   handleClickOpen = () => {
@@ -120,28 +133,36 @@ class CourseSelector extends React.Component {
     });
   };
 
+  select = `PRESS HERE TO SELECT COURSE`;
+
   handleClose = value => {
     console.log("value", value);
 
     this.props.selectedValue(value);
-    // this.props.getCurrentCourse(value);
     this.setState({ selectedValue: value, open: false });
   };
 
   render() {
+    const { select, selectedValue, join } = this.props;
     return (
-      <div>
+      <React.Fragment>
         <Typography variant="subheading">
-          Selected: {this.state.selectedValue}
+          {`${
+            typeof this.state.selectedValue === typeof {}
+              ? ""
+              : this.state.selectedValue
+          }`}
         </Typography>
-        <br />
-        <Button onClick={this.handleClickOpen}>Select Course</Button>
+        <Button onClick={this.handleClickOpen}>
+          PRESS HERE TO SELECT COURSE
+        </Button>
         <WrappedCoursePicker
           selectedValue={this.state.selectedValue}
           open={this.state.open}
           onClose={this.handleClose}
+          join={join || false}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -149,7 +170,9 @@ class CourseSelector extends React.Component {
 const mapStateToProps = state => ({
   courses: state.courses.courses,
   name: state.courses.name,
-  selectedValue: state.selectedValue
+  selectedValue: state.selectedValue,
+  teeTimes: state.teeTimes,
+  select: `PRESS HERE TO SELECT COURSE`
 });
 
 const mapActionsToProps = dispatch => {

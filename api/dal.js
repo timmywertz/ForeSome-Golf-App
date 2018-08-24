@@ -73,11 +73,11 @@ const putTeeTime = teeTime => {
   return db.put(teeTime);
 };
 
-const joinTeeTime = id =>
+const joinTeeTime = teeTime =>
   db.put(
-    merge(id, {
-      type: "teetime",
-      _id: pkGen("teetime_", prop("name", id))
+    merge(teeTime, {
+      currentGolfers: teeTime.currentGolfers + 1,
+      isFull: teeTime.currentGolfers + 1 === teeTime.groupSize
     })
   );
 
