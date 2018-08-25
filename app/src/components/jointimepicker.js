@@ -14,7 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import grey from "@material-ui/core/colors/grey";
 import { QueryBuilder } from "@material-ui/icons";
 
-import { TEETIME_JOINED } from "../constants";
+import { JOINED_TEETIME_TIME } from "../constants";
 import { connect } from "react-redux";
 import { filter, map } from "ramda";
 const uuid = require("uuid");
@@ -66,7 +66,8 @@ class JoinTeeTimePicker extends React.Component {
                     Time: ${teeTimes.teeTimeCreated}
                     Gender Preferences: ${teeTimes.gender}
                     Handicap Range: ${teeTimes.hcpRange}
-                    Desired Group Size: ${teeTimes.groupSize}`}
+                    Desired Group Size: ${teeTimes.groupSize}
+                    Current Number of Players: ${teeTimes.currentGolfers}`}
         />
       </ListItem>
     );
@@ -99,19 +100,24 @@ const mapStateToPropsPicker = state => ({
   currentCourse: state.courses.currentCourse,
   currentTeeTimes: filter(
     t => t.courseId === state.courses.currentCourse._id,
-    state.teeTimes
+    state.teeTimes.teeTimes
   ),
-  listAvailableTeeTimes: filter(t => !t.isFull, state.teeTimes),
-  teeTimes: state.teeTimes
+  listAvailableTeeTimes: filter(t => !t.isFull, state.teeTimes.teeTimes),
+  teeTimes: state.teeTimes.teeTimes
 });
 
-// const mapActionsToPropsPicker = dispatch => {
-//   return {
-//     filterTeeTimes
-//   };
-// };
+const mapActionsToPropsPicker = dispatch => {
+  return {
+    filterTeeTimes: teeTimes => {
+      dispatch({ type: JOINED_TEETIME_TIME, payload: teeTimes });
+    }
+  };
+};
 
-const connectorPick = connect(mapStateToPropsPicker);
+const connectorPick = connect(
+  mapStateToPropsPicker,
+  mapActionsToPropsPicker
+);
 
 const WrappedJoinTeeTimePicker = connectorPick(
   withStyles(styles)(JoinTeeTimePicker)
@@ -120,7 +126,7 @@ const WrappedJoinTeeTimePicker = connectorPick(
 class JoinAvailableTeeTimeSelector extends React.Component {
   state = {
     open: false,
-    teeTimeCreated: this.props.teeTimeJoined[1]
+    teeTimeJoined: this.props.joinedTeeTimeTime[1]
   };
 
   handleClickOpen = () => {
@@ -131,25 +137,24 @@ class JoinAvailableTeeTimeSelector extends React.Component {
 
   handleClose = value => {
     console.log("VALUE", value);
-    this.props.teeTimeJoined(value);
-    this.setState({ teeTimeJoined: value, open: false });
+    this.props.joinedTeeTimeTime(value);
+    this.setState({ joinedTeeTimeTime: value, open: false });
   };
 
   render() {
-    const { teeTimes } = this.props;
+    const { teeTimes, joinedTeeTimeTime } = this.props;
     return (
-      <div>
-        <Typography variant="subheading">
-          Selected: {this.state.teeTimeJoined}
-        </Typography>
-        <br />
-        <Button onClick={this.handleClickOpen}>Select Tee-Time</Button>
+      <React.Fragment>
+        {/* <Typography variant="subheading">{this.state.teeTimeJoined}</Typography> */}
+        <Button onClick={this.handleClickOpen}>
+          {this.state.joinedTeeTimeTime || `PRESS HERE TO SELECT TEE-TIME`}
+        </Button>
         <WrappedJoinTeeTimePicker
-          selectedValue={this.state.teeTimeJoined}
+          selectedValue={this.state.joinedTeeTimeTime}
           open={this.state.open}
           onClose={this.handleClose}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -157,19 +162,20 @@ class JoinAvailableTeeTimeSelector extends React.Component {
 const mapStateToProps = state => ({
   courses: state.courses,
   course: state.courses.currentCourse,
-  teeTimes: state.courses.currentCourse.teeTimes,
+  courseTeeTimes: state.courses.currentCourse.teeTimes,
   teeTimeWindow: state.courses.teeTimeWindow,
   currentTeeTimeWindow: state.courses.currentCourse.teeTimeWindow,
   selectedTeeTimeWindow: state.courses.selectedTeeTimeWindow,
-  teeTimeJoined: state.teeTimes._id,
+  joinedTeeTimeTime: state.teeTimes.joinedTeeTimeTime,
+  joinedTeeTimeDate: state.teeTimes.joinedTeeTimeDate,
   teeTimes: state.teeTimes,
   listAvailableTeeTimes: filter(t => !t.isFull, state.teeTimes)
 });
 
 const mapActionsToProps = dispatch => {
   return {
-    teeTimeJoined: teetime => {
-      dispatch({ type: TEETIME_JOINED, payload: teetime });
+    joinedTeeTimeTime: teetime => {
+      dispatch({ type: JOINED_TEETIME_TIME, payload: teetime });
     }
   };
 };

@@ -1,7 +1,5 @@
 import {
-  NEW_TEETIME_STARTED,
   NEW_TEETIME_BOOKED,
-  TEETIME_JOINED,
   COURSES_ACQUIRED,
   GET_CURRENT_COURSE,
   CURRENT_COURSE_SELECTED,
@@ -21,32 +19,7 @@ import {
   NEW_TEETIME_SAVE_STARTED,
   NEW_TEETIME_FORM_UPDATED
 } from "../constants";
-import { contains, find, filter, merge, propEq } from "ramda";
-
-// {
-//     _id: "course_patriots-point-links",
-//     name: "Patriots Point Links",
-//     type: "course",
-//     phoneNumber: "(843) 881-0042",
-//     location: "1 Patriots Point Road, Mt Pleasant, SC 29464",
-//     image: "/courses-images/patriotspointlinks.jpg"
-//     address: {
-//       street: "1 Patriots Point Road",
-//       city: "Mt Pleasant",
-//       state: "SC",
-//       zip: "29464"
-//     },
-//     latitude: 32.7922,
-//     longitude: 79.8953,
-//     teeTimes: []
-//   }
-
-//write a function that takes in TEETIME_TIME_SELECTED action.payload
-//11:00am - 1:00pm
-//returns two ints
-//returns [11,1]
-//if int is 1 <= x <= 6 add 12
-//returns [11,13]
+import { find, merge } from "ramda";
 
 const timeToNumber = timeRangeString => {
   var stringSplit = timeRangeString.split("-");
@@ -69,14 +42,6 @@ const timeToFloat = timeString => {
   }
   return timeFloat;
 };
-//8:10am -> 8.10am -> 8.1
-
-//function taht takes in times from teeTimes list and returns an int
-//8:10am in
-//8.1 out
-
-//loop through state.currentCourse.teeTimes
-//
 
 const now = new Date();
 const month =
@@ -84,7 +49,7 @@ const month =
 const stringDate = `${now.getFullYear()}-${month}-${now.getDate()}`;
 
 const initialCourseState = {
-  join: true, //if true, player is joining, if false, player is creating a new foursome
+  join: true,
   currentCourse: {},
   courses: [],
   teeTimeWindow: [
@@ -99,13 +64,11 @@ const initialCourseState = {
   ],
   TeeTimeDate: stringDate,
   selectedTeeTimeWindow: "",
-  teeTimeDateAndTime: {}, //{time: "some time", date: "some date"  }
+  teeTimeDateAndTime: {},
   selectedTeeTime: "",
   selectedValue: "",
-  join: false, //if true, player is joining, if false, player is creating a new foursome
-  availableTeeTimes: [], //once you know window, players, and join/create, loop trhough currentCourse and save in here the available tee times
-  teeTimeCreated: "", //{course, numberplayers, final_tee_time,etc....} basically all the info u will show in confirmation page
-  groupSize: "Foursome",
+  join: false,
+  teeTimeCreated: "",
   currentGolfers: 1,
   gender: "Both",
   golferId: "",
@@ -124,14 +87,6 @@ export const courses = (state = initialCourseState, action) => {
     case COURSES_ACQUIRED:
       console.log(action.payload);
       return merge(state, { courses: action.payload });
-
-    // case TEETIME_JOINED:
-    //   console.log(action.payload);
-    //   return merge(state, { join: true });
-
-    // case NEW_TEETIME_STARTED:
-    //   console.log(action.payload);
-    //   return merge(state, { join: action.payload });
 
     case GET_CURRENT_COURSE:
       return state;

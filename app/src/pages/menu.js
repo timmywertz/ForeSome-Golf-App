@@ -1,11 +1,6 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import { Component } from "react";
 import { Link } from "react-router-dom";
-import Tracker from "../components/tracker";
-import { connect } from "react-redux";
 import { NEW_TEETIME_STARTED, TEETIME_JOINED } from "../constants";
 
 const Menu = props => {
@@ -15,7 +10,6 @@ const Menu = props => {
     <div>
       <center>
         <Button
-          // onClick={e => join === true}
           style={{ marginTop: 120, padding: 30 }}
           component={Link}
           to="/teetime/new/location"
@@ -50,23 +44,5 @@ const Menu = props => {
     </div>
   );
 };
-
-// const mapStateToProps = state => ({
-//   courses: state.courses,
-//   join: state.courses.join
-// });
-
-// const mapActionsToProps = dispatch => {
-//   return {
-//     teeTimeStarted: (event, join) => {
-//       dispatch({ type: NEW_TEETIME_STARTED, payload: join });
-//     }
-//   };
-// };
-
-// const connector = connect(
-//   mapStateToProps,
-//   mapActionsToProps
-// );
 
 export default Menu;

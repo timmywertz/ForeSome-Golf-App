@@ -6,22 +6,11 @@ const checkRequiredFields = require("../lib/checkRequiredFields");
 const cleanObj = require("../lib/cleanObj");
 const missingFieldMsg = require("../lib/missingFieldMsg");
 
-// {
-//     _id: "golfer_wertz_timmylwertz@gmail.com",
-//     type: "golfer",
-//     lastName: "Wertz",
-//     firstName: "Tim",
-//     handicap: 10,
-//     gender: "M",
-//     emailAddress: "timmylwertz@gmail.com"
-//   },
-
 const reqFields = ["firstName", "lastName", "emailAddress"];
 
 const allowedFields = concat(["handicap", "gender", "password"], reqFields);
 
 const golferRoutes = app => {
-  //app.get("/", (req, res) => res.send("Welcome to the ForeSome API"));
   app.get("/golfers", (req, res, next) => {
     getGolfers()
       .then(golfers => res.status(200).send(golfers))
@@ -39,7 +28,6 @@ const golferRoutes = app => {
   });
   app.post("/golfers", (req, res, next) => {
     const newGolfer = propOr({}, "body", req);
-    //   console.log(JSON.stringify(newTeeTime));
 
     if (isEmpty(newGolfer)) {
       next(

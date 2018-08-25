@@ -5,7 +5,7 @@ import App from "./App";
 import registerServiceWorker from "./registerServiceWorker";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { CssBaseline } from "@material-ui/core";
-import { deepPurple, amber, green, teal, cyan } from "@material-ui/core/colors";
+import { green, cyan } from "@material-ui/core/colors";
 
 import store from "./store";
 import { Provider } from "react-redux";
@@ -17,7 +17,8 @@ const theme = createMuiTheme({
   palette: {
     type: "dark",
     primary: { main: green[700] },
-    secondary: { main: green[300] }
+    secondary: { main: green[300] },
+    Typography: { main: cyan[500] }
   }
 });
 

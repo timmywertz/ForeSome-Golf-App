@@ -25,7 +25,7 @@ const Home = () => (
       <Button
         style={{ marginTop: 20, padding: 30 }}
         component={Link}
-        to="/menu"
+        to="/login"
         variant="contained"
         size="large"
         color="primary"
@@ -45,7 +45,7 @@ const Home = () => (
         <Button
           component={Link}
           style={{ marginTop: 0, padding: 30 }}
-          to="/login"
+          to="/menu"
           variant="contained"
           size="large"
           color="secondary"

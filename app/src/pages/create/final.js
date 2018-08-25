@@ -1,52 +1,56 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Component } from "react";
 import { Link } from "react-router-dom";
-import SelectButtons from "../../components/select";
 import { connect } from "react-redux";
-import {
-  NEW_TEETIME_CREATED,
-  TEETIME_TIME_SELECTED,
-  NEW_TEETIME_SAVE_STARTED
-} from "../../constants";
-import { FormControlLabel } from "@material-ui/core";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import { map } from "ramda";
+import { NEW_TEETIME_SAVE_STARTED } from "../../constants";
 import AvailableTeeTimeSelector from "../../components/teetimepicker";
 import { addTeeTime } from "../../action-creators/teetimes";
 import Paper from "@material-ui/core/Paper";
+import { cyan } from "@material-ui/core/colors";
 import CustomSnackbar from "../../components/snackbar";
+import { Home } from "@material-ui/icons";
 
 const Final = props => {
   const {
-    courses,
     currentCourse,
     groupSize,
     gender,
     hcpRange,
-    selectedTeeTimeWindow,
     teeTimeDate,
     teeTimeCreated,
     availableTeeTimes,
-    listAvailableTeeTimes,
     history,
     createNewTeeTime,
     isError,
     isSaving,
-    errMsg
+    errMsg,
+    isBooked
   } = props;
   console.log("availableTeeTimes", availableTeeTimes);
   return (
     <div>
+      <Button
+        style={{ marginRight: 20, marginTop: 0, padding: 20 }}
+        component={Link}
+        to="/menu"
+        variant="extendedFab"
+        size="small"
+        color="secondary"
+      >
+        <Home />
+      </Button>
       <form autoComplete="off" onSubmit={createNewTeeTime(history)}>
         <center>
-          <Typography style={{ marginTop: 50 }} variant="display3">
+          <Typography
+            style={{ marginTop: 50, color: cyan[500] }}
+            variant="display3"
+          >
             CONFIRM
           </Typography>
-          <Paper style={{ marginTop: 15, width: 300 }}>
+          <Paper
+            style={{ backgroundColor: cyan[500], marginTop: 15, width: 300 }}
+          >
             <AvailableTeeTimeSelector style={{ marginTop: 60 }} />
           </Paper>
           <Typography style={{ marginTop: 80 }} variant="title">
@@ -58,18 +62,7 @@ const Final = props => {
             <div> Gender: {gender} </div>
             <div> Handicap Range: {hcpRange} </div>
             <div> Date: {teeTimeDate} </div>
-            {/* <div> Time Window: {selectedTeeTimeWindow} </div> */}
           </Typography>
-          <Button
-            style={{ marginRight: 20, marginTop: 15, padding: 20 }}
-            component={Link}
-            to="/menu"
-            variant="extendedFab"
-            size="large"
-            color="primary"
-          >
-            Back to Main Menu
-          </Button>
           <div>
             <Button
               type="submit"
@@ -79,23 +72,21 @@ const Final = props => {
               style={{ marginTop: 20, padding: 20 }}
               variant="extendedFab"
               size="large"
-              color="secondary"
+              color="primary"
             >
               Submit New Tee-Time!
             </Button>
           </div>
         </center>
       </form>
-      {props.isError && (
+      {isError && (
         <CustomSnackbar
           message="There has been an error uploading this teetime"
           snackType="error"
         />
       )}
-      {props.isSaving && (
-        <CustomSnackbar message="Saving..." snackType="info" />
-      )}
-      {props.isBooked && (
+      {isSaving && <CustomSnackbar message="Saving..." snackType="info" />}
+      {isBooked && (
         <CustomSnackbar message="Tee-Time Booked!" snackType="success" />
       )}
     </div>

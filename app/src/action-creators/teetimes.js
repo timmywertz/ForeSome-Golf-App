@@ -1,12 +1,10 @@
 import {
   GET_TEETIMES,
   SET_TEETIME,
-  NEW_TEETIME_CREATED,
   NEW_TEETIME_SAVE_FAILED,
   NEW_TEETIME_SAVE_STARTED,
   NEW_TEETIME_SAVE_SUCCEEDED,
   TEETIME_JOIN_SAVE_STARTED,
-  TEETIME_JOIN_SAVE_SUCCEEDED,
   TEETIME_JOIN_SAVE_FAILED
 } from "../constants";
 import fetch from "isomorphic-fetch";
@@ -81,7 +79,7 @@ export const joinTeeTime = history => async (dispatch, getState) => {
     .catch(err => dispatch({ type: TEETIME_JOIN_SAVE_FAILED }));
   console.log("RESULT", JSON.stringify(result));
   if (result.ok) {
-    dispatch({ type: TEETIME_JOIN_SAVE_SUCCEEDED });
+    //dispatch({ type: TEETIME_JOIN_SAVE_SUCCEEDED });
     getTeeTimes(dispatch, getState);
     history.push("/join/thankyou");
   } else {
@@ -89,30 +87,3 @@ export const joinTeeTime = history => async (dispatch, getState) => {
     alert("ERROR");
   }
 };
-
-// export const updateEvent = history => (dispatch, getState) => {
-//   const updatedEvent = getState().editEvent.data;
-//   const eventId = updatedEvent._id;
-
-//   dispatch({ type: EDIT_EVENT_SAVE_STARTED });
-//   fetch(`${url}/events/${eventId}`, {
-//     headers: { "Content-Type": "application/json" },
-//     method: "POST",
-//     body: JSON.stringify(newEvent)
-//   })
-//     .then(res => res.json())
-//     .then(saveResponse => {
-//       if (!saveResponse.ok) {
-//         dispatch({ type: EDIT_EVENT_SAVE_FAILED });
-//       } else {
-//         dispatch({ type: EDIT_EVENT_SAVE_SUCCEEDED });
-//         history.push(`${url}/events/${eventId}/view`);
-//       }
-//     })
-//     .catch(err =>
-//       dispatch({
-//         type: EDIT_EVENT_SAVE_FAILED,
-//         payload: "Unexpected error prevented us from saving the event."
-//       })
-//     );
-// };

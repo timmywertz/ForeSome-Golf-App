@@ -2,40 +2,16 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Component } from "react";
 import { Link } from "react-router-dom";
 import CourseSelector from "../../components/coursepicker";
-import Select from "../../components/select";
-import { filter, map } from "ramda";
+import { filter } from "ramda";
 import { connect } from "react-redux";
 import CourseCard from "../../components/coursecard";
-import {
-  COURSES_ACQUIRED,
-  CURRENT_COURSE_JOINED,
-  CURRENT_COURSE_SELECTED,
-  GET_TEETIMES
-} from "../../constants";
-import Tracker from "../../components/tracker";
+import { CURRENT_COURSE_SELECTED, GET_TEETIMES } from "../../constants";
+
 import Paper from "@material-ui/core/Paper";
 import filterCourses from "../../lib/joinCoursesHelper";
-
-const tempCourse = {
-  _id: "course_the-ocean-couse-kiawah-island-golf-resort",
-  name: "The Ocean Course, Kiawah Island Golf Resort",
-  type: "course",
-  phoneNumber: "(843) 768-2121",
-  location: "1000 Ocean Course Drive, Johns Island, SC 29455",
-  image: "oceancourse.jpg",
-  address: {
-    street: "1000 Ocean Course Drive",
-    city: "Johns Island",
-    state: "SC",
-    zip: "29455"
-  },
-  latitude: 32.612,
-  longitude: 80.0233,
-  teeTimes: []
-};
+import { cyan } from "@material-ui/core/colors";
 
 const styles = {
   card: {
@@ -44,18 +20,19 @@ const styles = {
 };
 
 const JoinLocation = props => {
-  const { courses, getCurrentCourse, teeTimes } = props;
   return (
     <div>
       <center>
         <Typography
-          style={{ marginTop: 50, marginBottom: 30 }}
+          style={{ marginTop: 50, marginBottom: 30, color: cyan[500] }}
           variant="display1"
         >
-          Destination
+          DESTINATION
         </Typography>
         <CourseCard />
-        <Paper style={{ marginTop: 15, width: 300 }}>
+        <Paper
+          style={{ marginTop: 15, width: 300, backgroundColor: cyan[500] }}
+        >
           <CourseSelector join />
         </Paper>
         <Button
@@ -84,8 +61,6 @@ const JoinLocation = props => {
 };
 
 const mapStateToProps = state => ({
-  // coursesFromState: state.joinTeeTime,
-  // currentCourse: state.joinTeeTime.currentCourse,
   courses: state.courses,
   getCurrentCourse: state.courses.currentCourse,
   availableTeeTimes: filter(t => !t.isFull, state.teeTimes),

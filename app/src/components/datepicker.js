@@ -20,7 +20,7 @@ const styles = theme => ({
 class DatePicker extends React.Component {
   state = {
     open: false,
-    selectedDate: this.props.datePicked
+    selectedDate: this.props.datePicked || new Date()
   };
 
   handleDate = event => {

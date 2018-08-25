@@ -98,8 +98,8 @@ class CoursePicker extends React.Component {
 
 const mapStateToPropsPicker = state => ({
   courses: state.courses.courses,
-  availableTeeTimes: filter(t => !t.isFull, state.teeTimes),
-  teeTimes: state.teeTimes
+  availableTeeTimes: filter(t => !t.isFull, state.teeTimes.teeTimes),
+  teeTimes: state.teeTimes.teeTimes
 });
 
 const mapActionsToPropsPicker = dispatch => {
@@ -133,7 +133,7 @@ class CourseSelector extends React.Component {
     });
   };
 
-  select = `PRESS HERE TO SELECT COURSE`;
+  // select = `PRESS HERE TO SELECT COURSE`;
 
   handleClose = value => {
     console.log("value", value);

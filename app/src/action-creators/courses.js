@@ -1,4 +1,4 @@
-import { COURSES_ACQUIRED, GET_CURRENT_COURSE } from "../constants";
+import { COURSES_ACQUIRED } from "../constants";
 import fetch from "isomorphic-fetch";
 const url = process.env.REACT_APP_BASE_URL + "/courses";
 

@@ -1,8 +1,7 @@
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
+
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Component } from "react";
 import { Link } from "react-router-dom";
 import DatePicker from "../../components/datepicker";
 import TimeSelector from "../../components/timepicker";
@@ -12,38 +11,38 @@ import {
   TEETIME_WINDOW_SELECTED
 } from "../../constants";
 import { connect } from "react-redux";
-import { isEmpty } from "ramda";
 import Paper from "@material-ui/core/Paper";
-
-const style = {
-  background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)",
-  marginTop: 30,
-  height: 200,
-  color: "primary",
-  width: 300,
-  borderRadius: 3,
-  padding: "0 30px",
-  boxShadow: "0 3px 5px 2px rgba(255, 105, 135, .3)"
-};
+import { cyan } from "@material-ui/core/colors";
 
 const Date = props => (
   <div>
     <center>
-      <Typography style={{ marginTop: 50 }} variant="display1">
-        What day would you like to play?
+      <Typography
+        style={{ marginTop: 50, color: cyan[500] }}
+        variant="display1"
+      >
+        NOW PICK YOUR DATE AND TIME
       </Typography>
 
       <DatePicker onChange={props.onChange} value={props.teeTimeDate} />
       <div>
         <img
-          style={{ marginTop: 30, marginBottom: 0 }}
+          style={{ marginTop: 20, marginBottom: 0 }}
           width="250"
           height="250"
           alt="logo"
           src="/png-images/clock-42655_1280.png"
         />
       </div>
-      <Paper style={{ style }}>
+      <Paper
+        style={{
+          backgroundColor: cyan[500],
+          marginTop: 20,
+          width: 300,
+          height: 80,
+          borderRadius: 3
+        }}
+      >
         <TimeSelector />
       </Paper>
       <div>

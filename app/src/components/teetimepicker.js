@@ -10,8 +10,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
-import Typography from "@material-ui/core/Typography";
-import grey from "@material-ui/core/colors/grey";
+import { cyan } from "@material-ui/core/colors";
 import { QueryBuilder } from "@material-ui/icons";
 
 import { NEW_TEETIME_CREATED } from "../constants";
@@ -21,8 +20,8 @@ const uuid = require("uuid");
 
 const styles = {
   avatar: {
-    backgroundColor: grey[100],
-    color: grey[600]
+    backgroundColor: cyan[100],
+    color: cyan[600]
   }
 };
 
@@ -31,9 +30,9 @@ class TeeTimePicker extends React.Component {
     this.props.onClose(this.props.selectedValue);
   };
 
-  // handleListItemClick = value => {
-  //   this.props.onClose(value);
-  // };
+  handleListItemClick = value => {
+    this.props.onClose(value);
+  };
 
   render() {
     const {
@@ -112,19 +111,18 @@ class AvailableTeeTimeSelector extends React.Component {
   };
 
   render() {
+    const { teeTimeCreated } = this.props;
     return (
-      <div>
-        <Typography variant="subheading">
-          Selected: {this.state.teeTimeCreated}
-        </Typography>
-        <br />
-        <Button onClick={this.handleClickOpen}>Select Tee-Time</Button>
+      <React.Fragment>
+        <Button onClick={this.handleClickOpen}>
+          {this.state.teeTimeCreated || `PRESS HERE TO SELECT TEE-TIME`}
+        </Button>
         <WrappedTeeTimePicker
           selectedValue={this.state.teeTimeCreated}
           open={this.state.open}
           onClose={this.handleClose}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }

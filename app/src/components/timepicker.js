@@ -10,19 +10,18 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
-import Typography from "@material-ui/core/Typography";
-import grey from "@material-ui/core/colors/grey";
+import { cyan } from "@material-ui/core/colors";
 import { QueryBuilder } from "@material-ui/icons";
 
-import { TEETIME_WINDOW_SELECTED, TEETIME_TIME_SELECTED } from "../constants";
+import { TEETIME_TIME_SELECTED } from "../constants";
 import { connect } from "react-redux";
 import { map } from "ramda";
 const uuid = require("uuid");
 
 const styles = {
   avatar: {
-    backgroundColor: grey[100],
-    color: grey[600]
+    backgroundColor: cyan[100],
+    color: cyan[600]
   }
 };
 
@@ -111,19 +110,18 @@ class TimeSelector extends React.Component {
   };
 
   render() {
+    const { selectedTeeTime } = this.props;
     return (
-      <div>
-        <Typography variant="subheading">
-          Selected: {this.state.selectedTeeTime}
-        </Typography>
-        <br />
-        <Button onClick={this.handleClickOpen}>Select Time</Button>
+      <React.Fragment>
+        <Button onClick={this.handleClickOpen}>
+          {this.state.selectedTeeTime || `PRESS HERE TO SELECT TIME-WINDOW`}
+        </Button>
         <WrappedTimePicker
           selectedValue={this.state.selectedTeeTime}
           open={this.state.open}
           onClose={this.handleClose}
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -134,7 +132,8 @@ const mapStateToProps = state => ({
   teeTimes: state.courses.currentCourse.teeTimes,
   teeTimeWindow: state.courses.teeTimeWindow,
   currentTeeTimeWindow: state.courses.currentCourse.teeTimeWindow,
-  selectedTeeTimeWindow: state.courses.selectedTeeTimeWindow
+  selectedTeeTimeWindow: state.courses.selectedTeeTimeWindow,
+  selectedTeeTime: state.courses.selectedTeeTime
 });
 
 const mapActionsToProps = dispatch => {

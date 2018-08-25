@@ -5,7 +5,8 @@ import {
   // NEW_TEETIME_SAVE_STARTED,
   // NEW_TEETIME_SAVE_SUCCEEDED,
   // NEW_TEETIME_CLEARED,
-  TEETIME_DATE_JOINED,
+  JOINED_TEETIME_TIME,
+  JOINED_TEETIME_DATE,
   TEETIME_JOIN_BOOKED,
   COURSES_ACQUIRED,
   TEETIME_TIME_JOINED,
@@ -14,28 +15,23 @@ import {
   TEETIME_JOIN_SAVE_FAILED,
   TEETIME_JOIN_CLEARED
 } from "../constants";
-import { filter, merge, mergeDeepRight } from "ramda";
-import filterCourses from "../lib/joinCoursesHelper";
+import { find, merge, mergeDeepRight, propEq } from "ramda";
 
 const initialTeeTimeState = {
   teeTimes: [],
-  data: {
-    _id: "",
-    date: "",
-    time: "",
-    courseId: "",
-    hcpRange: "",
-    groupSize: "",
-    gender: "",
-    golfer_id: ""
-  },
-  selectedTeeTime: {
-    groupSize: "",
-    gender: "",
-    hcpRange: "",
-    date: "",
-    time: ""
-  },
+  // data: {
+  //   _id: "",
+  //   date: "",
+  //   time: "",
+  //   courseId: "",
+  //   hcpRange: "",
+  //   groupSize: "",
+  //   gender: "",
+  //   golfer_id: ""
+  // },
+  reservedTeeTime: {},
+  joinedTeeTimeTime: "",
+  // joinedTeeTimeDate: "",
   isError: false,
   isSaving: false,
   errMessage: "",
@@ -45,35 +41,47 @@ const initialTeeTimeState = {
 export const teeTimes = (state = initialTeeTimeState, action) => {
   switch (action.type) {
     case GET_TEETIMES:
-      return action.payload;
+      console.log("GET_TEETIMES", action.payload);
+      return merge(state, { teeTimes: action.payload });
     case COURSES_ACQUIRED:
-      console.log(action.payload);
+      console.log("COURSES_ACQUIRED", action.payload);
       return merge(state, { courses: action.payload });
 
-    case TEETIME_DATE_JOINED:
+    case JOINED_TEETIME_DATE:
       console.log("state", state);
-      console.log("in reducer TEETIME DATE SELECTED", action.payload);
+      console.log("in reducer JOINED_TEETIME_DATE", action.payload);
       return merge(state, { teeTimeDate: action.payload });
 
-    case TEETIME_TIME_JOINED:
+    case JOINED_TEETIME_TIME:
       console.log("state", state);
-      console.log("in reducer TEETIME DATE SELECTED", action.payload);
-      return mergeDeepRight(state, {
-        selectedTeeTime: action.payload
+      console.log("in reducer JOINED_TEETIME_TIME", action.payload);
+
+      // const selectedTeeTime = teeTime => {
+      //   if (course._id === action.payload) {
+      //     return true
+      //   }
+      // }
+
+      const teeTimeObj = teeTime => {
+        find(propEq(teeTime._id, state.teeTimes));
+      };
+
+      console.log("in reducer JOINED_TEETIME_TIME", action.payload);
+      console.log("in reducer teeTimeObj in teetimes");
+      return merge(state, {
+        joinedTeeTimeTime: action.payload
       });
 
-    // case TEETIME_WINDOW_JOINED:
-    //   console.log("state", state);
-    //   console.log("in reducer TEETIME DATE SELECTED", action.payload);
-    //   return merge(state, { selectedTeeTimeWindow: action.payload });
-
     case TEETIME_JOIN_SAVE_STARTED:
+      console.log("in reducer EETIME_JOIN_SAVE_STARTED", action.payload);
       return merge(state, { isSaving: true, isError: false, errMessage: "" });
 
     case TEETIME_JOIN_SAVE_SUCCEEDED:
+      console.log("in reducer TEETIME_JOIN_SAVE_SUCCEEDED", action.payload);
       return merge(state, { isBooked: true });
 
     case TEETIME_JOIN_SAVE_FAILED:
+      console.log("in reducer TEETIME_JOIN_SAVE_FAILED", action.payload);
       return merge(state, {
         isError: true,
         errMessage: "Failed to save new teetime to database",
@@ -89,40 +97,3 @@ export const teeTimes = (state = initialTeeTimeState, action) => {
       return state;
   }
 };
-
-// const initialNewTeeTime = {
-//   data: {
-//     _id: "",
-//     date: "",
-//     time: "",
-//     courseId: "",
-//     hcpRange: "",
-//     groupSize: "",
-//     gender: "",
-//     golfer_id: ""
-//   },
-//   isError: false,
-//   isSaving: false,
-//   errMessage: ""
-// };
-
-// export const newTeeTime = (state = initialNewTeeTime, action) => {
-//   switch (action.type) {
-//     case NEW_TEETIME_FORM_UPDATED:
-//       return mergeDeepRight(state, { data: action.payload });
-//     // case NEW_TEETIME_SAVE_FAILED:
-//     //   return merge(state, {
-//     //     isError: true,
-//     //     errMessage: "Failed to save new teetime to database",
-//     //     isSaving: false
-//     //   });
-//     case NEW_TEETIME_SAVE_STARTED:
-//       return merge(state, { isSaving: true, isError: false, errMessage: "" });
-//     // case NEW_TEETIME_SAVE_SUCCEEDED:
-//     // return initialNewTeeTime;
-//     case NEW_TEETIME_CLEARED:
-//       return initialNewTeeTime;
-//     default:
-//       return state;
-//   }
-// };

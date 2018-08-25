@@ -5,10 +5,13 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   TEETIME_JOIN_BOOKED,
-  TEETIME_JOIN_SAVE_STARTED
+  TEETIME_JOIN_SAVE_STARTED,
+  TEETIME_TIME_JOINED
 } from "../../constants";
 import Paper from "@material-ui/core/Paper";
 import CustomSnackbar from "../../components/snackbar";
+import { filter } from "ramda";
+import { cyan } from "@material-ui/core/colors";
 
 const JoinThankYou = props => {
   const {
@@ -29,24 +32,29 @@ const JoinThankYou = props => {
     isError,
     isSaving,
     errMsg,
-    isBooked
+    isBooked,
+    reservedTeeTime
   } = props;
   console.log("availableTeeTimes", availableTeeTimes);
   return (
     <div>
       <center>
         <CustomSnackbar message="Tee-Time Joined!" snackType="success" />
-        <Typography style={{ marginTop: 50 }} variant="display3">
+        <Typography
+          style={{ marginTop: 50, color: cyan[500] }}
+          variant="display3"
+        >
           THANK YOU FOR USING FORESOME!
         </Typography>
         <Paper>
+          {console.log(JSON.stringify(groupSize))}
           <Typography style={{ marginTop: 20 }} variant="subheading">
             <div> Course: {currentCourse.name} </div>
-            <div> Group Size: {selectedTeeTime.groupSize} </div>
-            <div> Gender: {selectedTeeTime.gender} </div>
-            <div> Handicap Range: {selectedTeeTime.hcpRange} </div>
-            <div> Date: {selectedTeeTime.teeTimeDate} </div>
-            <div> Time: {selectedTeeTime.teeTimeCreated} </div>
+            <div> Group Size: {reservedTeeTime.groupSize} </div>
+            <div> Gender: {reservedTeeTime.gender} </div>
+            <div> Handicap Range: {reservedTeeTime.hcpRange} </div>
+            <div> Date: {reservedTeeTime.teeTimeDate} </div>
+            <div> Time: {reservedTeeTime.teeTimeCreated} </div>
           </Typography>
         </Paper>
         <Button
@@ -75,29 +83,40 @@ const JoinThankYou = props => {
 };
 
 const mapStateToProps = state => ({
+  state: state,
   currentCourse: state.courses.currentCourse,
-  groupSize: state.teeTimes.groupSize,
-  gender: state.teeTimes.gender,
-  hcpRange: state.teeTimes.hcpRange,
-  teeTimeDate: state.teeTimes.teeTimeDate,
-  teeTimeCreated: state.teeTimes.teeTimeCreated,
+  groupSize: state.teeTimes.teeTimes.groupSize,
+  gender: state.teeTimes.teeTimes.gender,
+  hcpRange: state.teeTimes.teeTimes.hcpRange,
+  teeTimeDate: state.teeTimes.teeTimes.teeTimeDate,
+  teeTimeCreated: state.teeTimes.teeTimes.teeTimeCreated,
   teeTimes: state.teeTimes,
-  teeTimeJoined: state.teeTimeJoined,
-  selectedTeeTime: state.selectedTeeTime,
+  joinedTeeTimeTime: state.teeTimes.joinedTeeTimeTime,
+  reservedTeeTime: filter(
+    t => t._id === state.teeTimes.joinedTeeTimeTime,
+    state.teeTimes.teeTimes
+  ),
   isSaving: state.teeTimes.isSaving,
   isError: state.teeTimes.isError,
   errMessage: state.teeTimes.errMessage,
-  isBooked: state.teeTimes.isBooked
+  isBooked: state.teeTimes.isBooked,
+  courses: state.courses,
+  currentTeeTimes: filter(
+    t => t.courseId === state.courses.currentCourse._id,
+    state.teeTimes.teeTimes
+  ),
+  listAvailableTeeTimes: filter(t => !t.isFull, state.teeTimes.teeTimes),
+  teeTimes: state.teeTimes.teeTimes
 });
 
 const mapActionsToProps = dispatch => {
   return {
     teeTimeBooked: teetime => {
       dispatch({ type: TEETIME_JOIN_BOOKED, payload: teetime });
-    },
-    teeTimeJoined: teetime => {
-      dispatch({ type: TEETIME_JOIN_SAVE_STARTED, payload: teetime });
     }
+    // joinedTeeTimeTime: teetime => {
+    //   dispatch({ type: TEETIME_JOIN_SAVE_STARTED, payload: teetime });
+    // }
   };
 };
 
