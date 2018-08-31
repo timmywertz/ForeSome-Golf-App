@@ -6,12 +6,14 @@ import { connect } from "react-redux";
 import {
   TEETIME_JOIN_BOOKED,
   TEETIME_JOIN_SAVE_STARTED,
-  TEETIME_TIME_JOINED
+  TEETIME_TIME_JOINED,
+  JOINED_TEETIME_TIME
 } from "../../constants";
 import Paper from "@material-ui/core/Paper";
 import CustomSnackbar from "../../components/snackbar";
-import { filter } from "ramda";
+import { map, filter, find, propEq } from "ramda";
 import { cyan } from "@material-ui/core/colors";
+import filterCourses from "../../lib/joinCoursesHelper";
 
 const JoinThankYou = props => {
   const {
@@ -33,12 +35,18 @@ const JoinThankYou = props => {
     isSaving,
     errMsg,
     isBooked,
-    reservedTeeTime
+    joinedTeeTimeTime,
+    reservedTeeTime,
+    currentTeeTimes
   } = props;
-  console.log("availableTeeTimes", availableTeeTimes);
+  console.log("listAvailableTeeTimes", listAvailableTeeTimes);
+  console.log("reservedTeeTime", reservedTeeTime);
+  console.log("currentTeeTimes", currentTeeTimes);
+  console.log("joinedTeeTimeTime", joinedTeeTimeTime);
   return (
     <div>
       <center>
+        {console.log("reservedTeeTime", reservedTeeTime)}
         <CustomSnackbar message="Tee-Time Joined!" snackType="success" />
         <Typography
           style={{ marginTop: 50, color: cyan[500] }}
@@ -90,12 +98,25 @@ const mapStateToProps = state => ({
   hcpRange: state.teeTimes.teeTimes.hcpRange,
   teeTimeDate: state.teeTimes.teeTimes.teeTimeDate,
   teeTimeCreated: state.teeTimes.teeTimes.teeTimeCreated,
-  teeTimes: state.teeTimes,
-  joinedTeeTimeTime: state.teeTimes.joinedTeeTimeTime,
-  reservedTeeTime: filter(
-    t => t._id === state.teeTimes.joinedTeeTimeTime,
-    state.teeTimes.teeTimes
+  // teeTimes: state.teeTimes,
+  joinedTeeTimeTime: state.teeTimes.teeTimes.joinedTeeTimeTime,
+  reservedTeeTime: find(
+    propEq(
+      t => t._id === state.teeTimes.teeTimes.joinedTeeTimeTime,
+      state.teeTimes.teeTimes.listAvailableTeeTimes
+    )
   ),
+  //   t => t.teeTimes._id === state.teeTimes.joinedTeeTimeTime,
+  //   state.teeTimes
+  // ),
+  //   state.teeTimes.teeTimes
+
+  // find(
+  //   propEq(state.teeTimes.joinedTeeTimeTime, state.teeTimes.teeTimes._id)
+  // ),
+  //   t => t._id === state.teeTimes.joinedTeeTimeTime,
+  //   state.teeTimes.teeTimes
+  // ),
   isSaving: state.teeTimes.isSaving,
   isError: state.teeTimes.isError,
   errMessage: state.teeTimes.errMessage,
@@ -113,10 +134,11 @@ const mapActionsToProps = dispatch => {
   return {
     teeTimeBooked: teetime => {
       dispatch({ type: TEETIME_JOIN_BOOKED, payload: teetime });
-    }
-    // joinedTeeTimeTime: teetime => {
-    //   dispatch({ type: TEETIME_JOIN_SAVE_STARTED, payload: teetime });
-    // }
+    },
+    joinedTeeTimeTime: teetime => {
+      dispatch({ type: JOINED_TEETIME_TIME, payload: teetime });
+    },
+    filterCourses: courses => dispatch(filterCourses(courses))
   };
 };
 

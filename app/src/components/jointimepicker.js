@@ -14,6 +14,7 @@ import Typography from "@material-ui/core/Typography";
 import grey from "@material-ui/core/colors/grey";
 import { QueryBuilder } from "@material-ui/icons";
 
+import filterCourses from "../lib/joinCoursesHelper";
 import { JOINED_TEETIME_TIME } from "../constants";
 import { connect } from "react-redux";
 import { filter, map } from "ramda";
@@ -108,15 +109,15 @@ const mapStateToPropsPicker = state => ({
 
 const mapActionsToPropsPicker = dispatch => {
   return {
-    filterTeeTimes: teeTimes => {
+    joinedTeeTimeTime: teeTimes => {
       dispatch({ type: JOINED_TEETIME_TIME, payload: teeTimes });
     }
   };
 };
 
 const connectorPick = connect(
-  mapStateToPropsPicker,
-  mapActionsToPropsPicker
+  mapStateToPropsPicker
+  // mapActionsToPropsPicker
 );
 
 const WrappedJoinTeeTimePicker = connectorPick(

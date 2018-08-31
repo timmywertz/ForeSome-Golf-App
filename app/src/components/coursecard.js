@@ -20,32 +20,13 @@ const styles = {
   }
 };
 
-// {
-//     _id: "course_the-ocean-couse-kiawah-island-golf-resort",
-//     name: "The Ocean Course, Kiawah Island Golf Resort",
-//     type: "course",
-//     phoneNumber: "(843) 768-2121",
-//     location: "1000 Ocean Course Drive, Johns Island, SC 29455",
-//     image: "/oceancourse.jpg",
-//     address: {
-//       street: "1000 Ocean Course Drive",
-//       city: "Johns Island",
-//       state: "SC",
-//       zip: "29455"
-//     },
-//     latitude: 32.612,
-//     longitude: 80.0233,
-//     teeTimes: [],
-//      img: "course1kiawia.png"
-//   },
-
 const NoCourseSelected = () => <div />;
 
 function CourseCard(props) {
   const { classes, course, currentCourse } = props;
   return (
     <div>
-      {isEmpty(props.currentCourse) ? (
+      {isEmpty(currentCourse) ? (
         <NoCourseSelected />
       ) : (
         <Card className={classes.card}>

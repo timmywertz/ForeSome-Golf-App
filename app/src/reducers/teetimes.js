@@ -19,18 +19,8 @@ import { find, merge, mergeDeepRight, propEq } from "ramda";
 
 const initialTeeTimeState = {
   teeTimes: [],
-  // data: {
-  //   _id: "",
-  //   date: "",
-  //   time: "",
-  //   courseId: "",
-  //   hcpRange: "",
-  //   groupSize: "",
-  //   gender: "",
-  //   golfer_id: ""
-  // },
   reservedTeeTime: {},
-  joinedTeeTimeTime: "",
+  joinedTeeTimeTime: {},
   // joinedTeeTimeDate: "",
   isError: false,
   isSaving: false,
@@ -55,7 +45,7 @@ export const teeTimes = (state = initialTeeTimeState, action) => {
     case JOINED_TEETIME_TIME:
       console.log("state", state);
       console.log("in reducer JOINED_TEETIME_TIME", action.payload);
-
+      console.log("state.teetimes.teetimes", state.teeTimes);
       // const selectedTeeTime = teeTime => {
       //   if (course._id === action.payload) {
       //     return true
@@ -63,8 +53,13 @@ export const teeTimes = (state = initialTeeTimeState, action) => {
       // }
 
       const teeTimeObj = teeTime => {
-        find(propEq(teeTime._id, state.teeTimes));
+        find(
+          teeTime => teeTime.teeTimes._id === action.payload,
+          state.teeTimes.teeTimes
+        );
       };
+
+      console.log(teeTimeObj);
 
       console.log("in reducer JOINED_TEETIME_TIME", action.payload);
       console.log("in reducer teeTimeObj in teetimes");

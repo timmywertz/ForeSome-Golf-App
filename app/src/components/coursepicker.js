@@ -146,15 +146,15 @@ class CourseSelector extends React.Component {
     const { select, selectedValue, join } = this.props;
     return (
       <React.Fragment>
-        <Typography variant="subheading">
+        {/* <Typography variant="subheading">
           {`${
             typeof this.state.selectedValue === typeof {}
               ? ""
               : this.state.selectedValue
           }`}
-        </Typography>
+        </Typography> */}
         <Button onClick={this.handleClickOpen}>
-          PRESS HERE TO SELECT COURSE
+          {this.state.selectedValue || `PRESS HERE TO SELECT GOLF COURSE`}
         </Button>
         <WrappedCoursePicker
           selectedValue={this.state.selectedValue}
@@ -171,8 +171,7 @@ const mapStateToProps = state => ({
   courses: state.courses.courses,
   name: state.courses.name,
   selectedValue: state.selectedValue,
-  teeTimes: state.teeTimes,
-  select: `PRESS HERE TO SELECT COURSE`
+  teeTimes: state.teeTimes
 });
 
 const mapActionsToProps = dispatch => {

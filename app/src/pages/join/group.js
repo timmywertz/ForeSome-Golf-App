@@ -87,7 +87,7 @@ const JoinGroup = props => {
           >
             Next
           </Button>
-          {props.isError && (
+          {/* {props.isError && (
             <CustomSnackbar
               message="There has been an error joining this teetime"
               snackType="error"
@@ -98,7 +98,7 @@ const JoinGroup = props => {
           )}
           {props.isBooked && (
             <CustomSnackbar message="Tee-Time Joined!" snackType="success" />
-          )}
+          )} */}
         </div>
       </center>
     </div>
@@ -123,9 +123,9 @@ const mapActionsToProps = dispatch => {
     joinedTeeTimeTime: teetime => {
       dispatch({ type: TEETIME_JOIN_SAVE_STARTED, payload: teetime });
     },
-    // selectedTeeTime: teetime => {
-    //   dispatch({ type: TEETIME_TIME_JOINED, payload: teetime });
-    // },
+    selectedTeeTime: teetime => {
+      dispatch({ type: TEETIME_TIME_JOINED, payload: teetime });
+    },
     teeTimeJoinedInDatabase: history => e => {
       e.preventDefault();
       dispatch(joinTeeTime(history));
